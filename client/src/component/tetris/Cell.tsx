@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { StyledCell } from '../styles/StyledCell';
-import { TETROMINOS } from '../../tetrominos';
+import { TETROMINOS } from '../../helpers/tetrominos';
 
 // React.memo makes sure we only re-render the changed cells
 const Cell = ({ type }:{type:string}) => (

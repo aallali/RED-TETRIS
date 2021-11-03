@@ -7,26 +7,11 @@ import {
 } from './reducers/player.reducer';
 import {useAppSelector} from "./app/hooks";
 import PlayBoard from "./pages/playboard";
-import io from "socket.io-client"
-
-const socket:any = io("http://localhost:4242")
-socket.on("connection", function (result:any) {
-   console.log(result)
-  });
-//:LEAVE:Client Supplied Room
-socket.on('unsubscribe', function(room:any){  
-	try{
-	  console.log('[socket]','leave room :', room);
-	  socket.leave(room);
-	  socket.to(room).emit('user left', socket.id);
-	}catch(e){
-	  console.log('[error]','leave room :', e);
-	  socket.emit('error','couldnt perform requested action');
-	}
-  })
+ 
   
 function App() {
     const player = useAppSelector(getPlayer)
+	if (player.nickname) {}
     return (
 
 

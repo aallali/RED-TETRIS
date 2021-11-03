@@ -1,6 +1,6 @@
 import {useState} from 'react';
 
-import {createStage, checkCollision} from '../../gameHelpers';
+import {createStage, checkCollision} from '../../helpers/gameHelpers';
 import {StyledTetrisWrapper, StyledTetris} from '../styles/StyledTetris';
 // Custom Hooks
 import {useInterval} from '../../app/TetrisHooks/useInterval';
