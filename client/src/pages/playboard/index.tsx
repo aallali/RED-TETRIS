@@ -1,19 +1,19 @@
 
 import ProfileCard from "../../component/profileCard";
 import { getStage } from "../../reducers/stage.reducer";
-import Tetris from "../../component/tetris/board";
-import Stage from "../../component/tetris/Stage";
+import Tetris from "../../component/tetris";
+import Stage from "../../component/tetris/Stage/Stage";
 import { useAppSelector, socket } from "../../app/hooks";
 import { ComponentProps, useEffect, useState } from "react";
-import { getPlayer } from "../../reducers/player.reducer";
-
+// import { getPlayer } from "../../reducers/player.reducer";
 function Opponent(props: ComponentProps<any>) {
 	const miniStage = useAppSelector(getStage)
+
 	return (<div className="sm:w-1/4 p-0">
-		<div className="bg-white p-1 rounded-lg shadow-lg text-center">
+		<div className="bg-white p-0 rounded-lg shadow-lg text-center">
 			<h2 className="text-md font-bold text-gray-700">#{props.name}</h2>
-			<div className="">
-				{miniStage ? <Stage gridSize={10} stage={miniStage} /> : null}
+			<div className="flex flex-row  justify-center items-center">
+				{miniStage ? <Stage stage={miniStage} CELL_SIZE={11} /> : null}
 			</div>
 			<span className="text-red-500 font-bold block mb-1">LOST</span>
 		</div>
@@ -29,28 +29,44 @@ export const HashParser = (window_hash: string) => {
 	return false;
 };
 
-export default function Playboard() {
-	const player = useAppSelector(getPlayer).nickname
-	console.log("Rerender mini stage")
-	const checkHash: any | boolean = HashParser(window.location.hash.substring(1));
-	const [canJoin, setCJoin] = useState(false)
-	const [msg, setMsg] = useState("Wait...")
 
+export default function Playboard() {
+	window.addEventListener('hashchange', function () {
+		join()
+		window.location.reload()
+	}, true);
+	// const player = useAppSelector(getPlayer).nickname
+
+	const [canJoin, setCJoin] = useState(false)
+	const [msg, setMsg] = useState<any>("")
+	const [error, setError] = useState<string>("")
+	const [checkHash, setHash] = useState<any>(HashParser(window.location.hash.substring(1)))
 	function join() {
+		setHash(HashParser(window.location.hash.substring(1)))
 		if (checkHash && checkHash.groups)
-			socket.emit('join', { room: checkHash.groups.roomname, playerName: checkHash.groups.username });
-		socket.on('join', function (res: any) {
-			console.log(res)
-			if (res.status ==true)
+			socket.emit('JOIN_ROOM', { room: checkHash.groups.roomname, playerName: checkHash.groups.username });
+		socket.on('JOIN_ROOM', function (res: any) {
+
+			if (res.status === true)
 				setCJoin(true)
 			setMsg(res.msg)
+		})
+		socket.on('ROOM_INFOS', function (res: any) {
+			console.log("ROOM_INFOS")
+			console.log(res)
+			setError("")
+			setMsg(res)
+		})
+		socket.on('ROOM_ERROR', function (res: any) {
+			console.log("[ROOM_ERROR]")
+			setError(res)
 		})
 		return
 	}
 	useEffect(() => {
 		if (checkHash)
 			join()
-	})
+	}, [])
 	if (checkHash === false)
 		return (
 
@@ -122,5 +138,22 @@ export default function Playboard() {
 			</div>
 		)
 	else
-		return (<h1>{msg}</h1>)
+		return (
+			<div>
+
+				{!error ? (<b>:::</b>) : (<h1>{error}</h1>)}
+
+				{msg ? (<div>
+					<p>Title : {msg.title}</p>
+					<p>Admin : {msg.admin.name}</p>
+					<p>players : </p>
+					<ul>
+					{msg.players.map((el: any) => {
+						return (<li key={el.id}><i> * {el.name}</i></li>)
+					})}
+					</ul>
+				</div>) : (<b>;;;;</b>) }
+			</div>
+
+		)
 }
