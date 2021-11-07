@@ -1,27 +1,17 @@
-import { useState, useEffect, useCallback } from 'react';
+import React from 'react';
+import { ROWPOINTS } from '../../helpers/tetrominos';
 
 export const useGameStatus = (rowsCleared: number) => {
-    const [score, setScore] = useState(0);
-    const [rows, setRows] = useState(0);
-    const [level, setLevel] = useState(0);
-	const [linePoints]= useState([40, 100, 300, 1200]);
+  const [score, setScore] = React.useState(0);
+  const [rows, setRows] = React.useState(0);
+  const [level, setLevel] = React.useState(1);
 
+  React.useEffect(() => {
+    if (rowsCleared > 0) {
+      setScore(prev => prev + ROWPOINTS[rowsCleared - 1] * level);
+      setRows(prev => prev + rowsCleared);
+    }
+  }, [rowsCleared, level]);
 
-    const calcScore = useCallback(() => {
-		
-        // We have score
-        if (rowsCleared > 0) {
-            // This is how original Tetris score is calculated
-            setScore(prev => prev + linePoints[rowsCleared - 1] * (level + 1));
-            setRows(prev => prev + rowsCleared);
-        }
-    }, [level, linePoints, rowsCleared]);
-
-    useEffect(() => {
-        calcScore();
-    }, [calcScore, rowsCleared, score]);
-
-// Use throughout your app instead of plain `useDispatch` and `useSelector`
-
-    return [score, setScore, rows, setRows, level, setLevel] as const;
+  return { score, setScore, rows, setRows, level, setLevel };
 };

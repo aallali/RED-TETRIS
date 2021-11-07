@@ -6,11 +6,12 @@ import { store } from './app/store';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
 
-window.addEventListener('hashchange', function () {
-    const hash = window.location.hash.substring(1)
-    console.log(hash)
+// window.addEventListener('hashchange', function () {
+//     const hash = window.location.hash.substring(1)
+// 	console.log(hash)
+// 	window.location.reload()
+// }, true);
 
-}, false);
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
