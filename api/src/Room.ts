@@ -16,21 +16,23 @@ export default class ROOM {
 		this.title = title
 		this.mode = mode
 		this.players = []
-
 		this.io = io
 		this.started = false
 		this.size = this.mode == ROOM_MODE.SOLO ? 1 : size || 5
-		this.admin = this.JOIN(admin)
-		this.players = [this.admin]
-		this.emit("ROOM_INFOS", this.INFO())
+		this.admin = admin
+		this.players = []
+		this.JOIN(admin)
 	}
 	emit(event: string, pyld: any) {
-
 		this.io.in(this.title).emit(event, pyld)
 	}
 	START() {
 		this.started = true
 		this.winner = null
+		console.log("EMITING START GAME")
+		// this.REFRESH_ROOM()
+		this.emit("GAME_START", true)
+		// this.io.in(this.title).emit("START_GAME", { start: true })
 	}
 	INFO() {
 		const { winner, title, mode, players, size, admin, started } = this
@@ -45,30 +47,26 @@ export default class ROOM {
 		}
 	}
 	JOIN(player_instance: IPlayer) {
-		if (this.players.length >= this.size) {
+		if (this.started === true)
+			throw "Game Already Started"
+		if (this.players.length >= this.size)
 			throw "ROOM IS FULL"
-		}
 		if (this.players.filter(p => p.name == player_instance.name).length > 0)
 			throw 'Name already exists'
+
 		player_instance.room = this.title
 		this.players.push(player_instance)
 		console.log(`[ ${player_instance.name} ] has joined the room [${this.title}] ${this.players.length == 1 ? 'as Admin' : ''}`)
-		// player_instance.socket.join(this.title)
-		// TODO: emit new list of player to room
-		if (this.players.length !== 1)
-			this.emit("ROOM_INFOS", this.INFO())
+		if (this.players.length == 1)
+			this.admin = player_instance
+		this.REFRESH_ROOM()
 		return player_instance
 	}
 	QUIT(player_id: string) {
-		// console.log("****=====>")
-		// console.log(this.players)
 		this.players = this.players.filter(p => p.id !== player_id)
-		// console.log("**=====>")
-		// console.log(this.players)
 		this.admin = this.players[0]
 		this.REFRESH_ROOM()
 		return
-		// TODO: emit room info to   
 	}
 	DISTRIBUTE_FUCKING_TETROMINOS() {
 		this.tetrominos = ['I', 'J', 'L', 'I', 'O', 'S', 'I', 'T', 'Z']  // TODO: replace with random generator function
@@ -81,15 +79,12 @@ export default class ROOM {
 		return false
 	}
 	REFRESH_ROOM() {
-		// // console.log(`ROOM "${this.title}" REFRESHED FROM PLAYER Inst.`)
 		if (this.started === true)
 			if (this.players.length > 1 && this.players.filter(p => p.lost === false).length == 1 || this.players.length == 1) {
 				this.winner = this.players.filter(p => p.lost === false)[0]
 				this.started = false
 			}
-
-
-		// // console.log(this.INFO())
+		console.log("emit infos -----------------------------")
 		this.emit("ROOM_INFOS", this.INFO())
 		return this.INFO()
 	}

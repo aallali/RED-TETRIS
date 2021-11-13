@@ -13,6 +13,7 @@ export const StyledDisplay = styled.div<Props>`
   border: 2px solid #777;
   min-height: 20px;
   width: 120px;
+  height:1%;
   border-radius: 10px;
   color: ${props => (props.gameOver ? 'red' : '#999')};
   background: #000;

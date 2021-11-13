@@ -8,72 +8,92 @@ export default class Game {
 	public rooms = new Map()
 	public players = new Map()
 	public io: Socket
-	public events: string[] = ['JOIN_ROOM', 'LEAVE_ROOM', 'START_GAME', 'GET_TETROS', 'disconnect']
+	public events: string[] = ['JOIN_ROOM', 'LEAVE_ROOM', 'START_GAME', 'GET_TETROS', 'disconnect', 'PLAYER_STAGE', 'PLAYER_LOST']
 	constructor(io: Socket) {
 		this.io = io
 		this.INIT_LISTERNERS()
 	}
 
 	INIT_LISTERNERS() {
+
 		this.io.on("connection", function (socket: any) {
-			// // console.log(socket.id)
 			this.events.forEach((event: string) => {
 				socket.on(event, (pyld: any) => {
-					// console.log(event)
-					// console.log("ROOMS :: ")
-					// console.log(this.rooms.keys())
-					switch (event) {
-						case 'JOIN_ROOM':
-							// // console.log(`Event [JOIN_ROOM] fired`)
-							const player = new PLAYER(socket.id, pyld.playerName)
-							socket.join(pyld.room)
-							if (!this.rooms.get(pyld.room)) {
-								console.log("----CREATED NEW ROOM ----")
-								const room = new ROOM({
-									title: pyld.room,
-									mode: ROOM_MODE.MULTIPLAYER,
-									admin: player,
-									size: 3,
-									io: this.io
-								})
-								this.rooms.set(pyld.room, room)
-							}
-							try {
-								
-								if (this.rooms.get(pyld.room).admin.id !== player.id)
-									this.rooms.get(pyld.room).JOIN(player)
-								this.ADD_PLAYER(player)
-								// console.log("=>" + Array.from(this.players).map((l: IPlayer) => l.name))
-								
-								// console.log(this.io.sockets.adapter.rooms)
-							} catch (error) {
-								console.log(error)
-								// // console.log(error,this.rooms.get(pyld.room).players.map(p => p.name))
-								socket.emit("ROOM_ERROR", error)
-								socket.leave(pyld.room)
-							}
+					const ft_player_left = () => {
+						if (this.players.get(socket.id) && this.players.get(socket.id).room) {
+							const playerRoom = this.players.get(socket.id).room
+							this.rooms.get(playerRoom).QUIT(socket.id)
+							if (this.rooms.get(playerRoom).players.length == 0)
+								this.rooms.delete(playerRoom)
 
-							break
-						case 'START_GAME':
-							// // console.log(`Event [START_GAME] fired`)
-							break
-						case 'disconnect':
-							// console.log(Array.from(this.players).map((l: IPlayer) => l.name))
-							if (this.players.get(socket.id) && this.players.get(socket.id).room) {
-								const playerRoom = this.players.get(socket.id).room
-								// console.log("PLAYER DISCONNECTED ::" + this.players.get(socket.id).name)
- 								
-								this.rooms.get(playerRoom).QUIT(socket.id)
+						}
+						this.players.delete(socket.id)
+						socket.leave(pyld.room)
 
-								if (this.rooms.get(playerRoom).players.length == 0)
-									this.rooms.delete(playerRoom)
-							}
-							this.players.delete(socket.id)
-							break
-						default:
-							// console.log(`Event [DEFAULT:${event}] fired`)
-							break
 					}
+					const ft_start_game = (sid: string) => {
+						const playerRoom = this.players.get(sid).room
+						console.log("=========>", playerRoom)
+						if (playerRoom) {
+							this.rooms.get(playerRoom).START()
+						}
+					}
+
+					if (this.players.get(socket.id) || event == "JOIN_ROOM")
+						switch (event) {
+							case 'JOIN_ROOM':
+								const player = new PLAYER(socket.id, pyld.playerName)
+								socket.join(pyld.room)
+								if (!this.rooms.get(pyld.room)) {
+									console.log("----CREATED NEW ROOM ----")
+									const room = new ROOM({
+										title: pyld.room,
+										mode: ROOM_MODE.MULTIPLAYER,
+										admin: player,
+										size: 3,
+										io: this.io
+									})
+									this.rooms.set(pyld.room, room)
+								}
+								try {
+
+									if (this.rooms.get(pyld.room).admin.id !== player.id)
+										this.rooms.get(pyld.room).JOIN(player)
+									this.ADD_PLAYER(player)
+									socket.emit("JOIN_ROOM", { name: pyld.playerName, room: pyld.room })
+
+									// console.log(this.io.sockets.adapter.rooms)
+								} catch (error) {
+									socket.emit("ERROR", { title: "JOIN ROOM ERROR", message: error })
+									socket.leave(pyld.room)
+								}
+
+								break
+							case 'START_GAME':
+								console.log("------>")
+								ft_start_game(socket.id)
+
+								break
+							case 'PLAYER_STAGE':
+								const new_pyld = this.players.get(socket.id).NEW_SCORE(pyld.score, pyld.level, pyld.rows, pyld.stage)
+								const playerRoom = this.players.get(socket.id).room
+								if (this.rooms.get(playerRoom)) {
+									socket.broadcast.to(playerRoom).emit('ADD_ROW', new_pyld.new_roows);
+									this.rooms.get(playerRoom).REFRESH_ROOM()
+								}
+								break
+							case 'PLAYER_LOST':
+								this.players.get(socket.id).LOOSE()
+								break
+							case 'PLAYER_LEFT':
+								ft_player_left()
+							case 'disconnect':
+								ft_player_left()
+								break
+							default:
+								console.log(`Event [DEFAULT:${event}] fired`)
+								break
+						}
 				})
 			})
 
