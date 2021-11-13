@@ -1,18 +1,20 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import playerReducer from "../reducers/player.reducer";
-import stageReducer from "../reducers/stage.reducer"
+import opponentReducer from "../reducers/opponent.reducer"
+import errorReducer from "../reducers/error.reducer"
 export const store = configureStore({
-  reducer: {
-    player: playerReducer,
-    stage: stageReducer
-  },
+	reducer: {
+		player: playerReducer,
+		opponents: opponentReducer,
+		error: errorReducer
+	},
 });
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
 export type AppThunk<ReturnType = void> = ThunkAction<
-  ReturnType,
-  RootState,
-  unknown,
-  Action<string>
+	ReturnType,
+	RootState,
+	unknown,
+	Action<string>
 >;

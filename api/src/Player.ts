@@ -8,6 +8,7 @@ export default class Player {
 	public rows: number
 	public lost: boolean
 	public room?: string
+	public stage?: []
 
 	constructor(id: string, name: string) {
 		this.id = id
@@ -18,19 +19,21 @@ export default class Player {
 		this.lost = false
 	}
 
-	NEW_SCORE(score: number, level: number, rows: number) {
+	NEW_SCORE(score: number, level: number, rows: number, stage: []) {
 		const new_roows = rows - this.rows
 		this.score = score
 		this.level = level
 		this.rows = rows
+		this.stage = stage
 		const pyld = {
 			new_roows,
-			score:this.score,
-			level:this.level,
+			score: this.score,
+			level: this.level,
 			rows: this.rows,
-			name: this.name
+			name: this.name,
+			stage: this.stage
 		}
-		console.log(`player [${this.name}] cleared [+${pyld.new_roows}]`)
+		console.log(`player [${this.name}] [${stage.length}] cleared ${this.rows}[+${pyld.new_roows}]`)
 		// TODO : emit new roows to "NEW SCORE"
 		// this.socket.broadcast.to(this.room).emit("NEW_SCORE", pyld)
 		return pyld

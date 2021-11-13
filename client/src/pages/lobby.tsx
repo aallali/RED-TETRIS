@@ -1,7 +1,7 @@
-import RoomBar from "../../component/room_bar"
-import RankedPlayers from "../../component/ranked_players";
-import CreateRoomInput from "../../component/create_room";
-import ProfileCard from "../../component/profileCard";
+import RoomBar from "../component/room_bar"
+import RankedPlayers from "../component/ranked_players";
+import CreateRoomInput from "../component/create_room";
+import ProfileCard from "../component/profileCard";
 
 
 export default function Lobby() {
