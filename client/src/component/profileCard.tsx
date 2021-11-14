@@ -18,7 +18,7 @@ export default function ProfileCard(props: ComponentProps<any>) {
 			<img
 				src="https://images.launchbox-app.com/db8057c0-f51e-403f-9d59-46100abed4c6.png"
 				alt="deflat"
-				className="h-10 w-full object-cover content-center rounded-t-md"
+				className="h-14  w-full object-cover content-center rounded-t-md"
 			/>
 			<div className="flex justify-center">
 				<img

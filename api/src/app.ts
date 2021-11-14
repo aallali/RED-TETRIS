@@ -26,7 +26,7 @@ class App {
 	public http: any
 	public io: Socket
 	private port: number = 4242
-	private gameIns:Game
+	private gameIns: Game
 	constructor() {
 		this.app = express();
 		this.app.use(
@@ -47,20 +47,17 @@ class App {
 		this.gameIns = new Game(this.io)
 
 	}
-
+	/**
+	 * 
+	 */
 	private routes() {
 		this.app.get("/", (req: any, res: any) => {
 			console.log(Array.from(this.gameIns.players))
 			res.send(Array.from(this.gameIns.players))
 		});
 	}
-
 	private initSocketEvents() {
-
-
-
 	}
-
 	public listen() {
 		console.clear()
 		this.http.listen(this.port, () =>

@@ -35,11 +35,15 @@ export const usePlayer = () => {
 	};
 
 	const updatePlayerPos = ({ x, y, collided }: { x: number; y: number; collided: boolean }): void => {
-		setPlayer(prev => ({
-			...prev,
-			pos: { x: (prev.pos.x + x), y: (prev.pos.y + y) },
-			collided
-		}));
+		setPlayer(prev => {
+			if (prev.pos.y + y >= 0)
+				return ({
+					...prev,
+					pos: { x: (prev.pos.x + x), y: (prev.pos.y + y) },
+					collided
+				})
+			return prev
+		});
 	};
 
 	const resetPlayer = React.useCallback(

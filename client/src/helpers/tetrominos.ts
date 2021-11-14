@@ -4,7 +4,7 @@ export const ROWPOINTS = [40, 100, 300, 1200];
 
 export const TETROMINOS = {
 	0: { shape: [[0]], color: '0, 0, 0' },
-	X: { shape: [[0]], color: '245,222,179' },
+	X: { shape: [[0]], color: '255,255,255' },
 	I: {
 		shape: [
 			[0, 'I', 0, 0],

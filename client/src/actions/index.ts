@@ -5,7 +5,8 @@ import {
 	UPDATE_SCORE,
 	SET_PLAYER_ADMIN,
 	START_GAME,
-	SOCKET_LOADED
+	ADD_ROW,
+	PLAYER_LOST
 } from "../reducers/player.reducer";
 
 import { UPDATE_PLAYERS } from "../reducers/opponent.reducer"
@@ -19,7 +20,8 @@ export {
 	UPDATE_SCORE,
 	SET_PLAYER_ADMIN,
 	START_GAME,
-	SOCKET_LOADED,
+	ADD_ROW,
+	PLAYER_LOST,
 
 	// Opponents actions
 	UPDATE_PLAYERS,

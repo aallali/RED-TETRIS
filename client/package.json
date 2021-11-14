@@ -31,7 +31,8 @@
     "Cstart": "craco start",
     "Cbuild": "craco build",
     "Ctest": "craco test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+	"coverage": "react-scripts test --env=jsdom --coverage  CI=true "
   },
   "eslintConfig": {
     "extends": "react-app"

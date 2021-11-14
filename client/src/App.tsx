@@ -36,24 +36,35 @@ function App() {
 	const error = useAppSelector(getError)
 	const checkHash = HashParser(window.location.hash.substring(1))
 	useEffect(() => {
-		if (checkHash && checkHash.groups) {
-			const { roomname, username } = checkHash.groups
-			if (playerNickname && playerIngame === false) {
-
-				if (username !== playerNickname) {
-					dispatch(SET_ERROR({ title: "Error :", message: "there is an username already set to this browser, try to leave first to register new account" }))
-					console.log(error)
-				} else {
-					socket.emit('JOIN_ROOM', { room: checkHash.groups.roomname, playerName: checkHash.groups.username });
-				}
-			} else {
+		if (window.location.hash.substring(1)) {
+			if (checkHash && checkHash.groups) {
+				const { roomname, username } = checkHash.groups
 				if (namevalidtor(username, roomname)) {
-					socket.emit('JOIN_ROOM', { room: checkHash.groups.roomname, playerName: checkHash.groups.username });
+					console.log("hna 1")
+					if (playerNickname && playerIngame === false) {
+						console.log("hna 2")
+						if (username !== playerNickname) {
+							console.log("hna 3")
+							dispatch(SET_ERROR({ title: "Error :", message: "there is an username already set to this browser, try to leave first to register new account" }))
+						} else {
+							console.log("hna join room")
+							socket.emit('JOIN_ROOM', { room: checkHash.groups.roomname, playerName: checkHash.groups.username });
+						}
+					} else {
+						socket.emit('JOIN_ROOM', { room: checkHash.groups.roomname, playerName: checkHash.groups.username });
+					}
 				} else {
-					console.log("Not Valid")
+					console.log("hna 4")
+					dispatch(SET_ERROR({ title: "hash_query_error", message: "" }))
 				}
+
+			} else {
+				console.log("hna 5")
+
+				dispatch(SET_ERROR({ title: "hash_query_error", message: "" }))
 			}
 		}
+
 
 	}, [])
 

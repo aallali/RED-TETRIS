@@ -63,6 +63,7 @@ export default class ROOM {
 		return player_instance
 	}
 	QUIT(player_id: string) {
+		console.log(`[QUIT] : (${this.players.filter(p => p.id === player_id)[0]?.name}) left the room (${this.title})`)
 		this.players = this.players.filter(p => p.id !== player_id)
 		this.admin = this.players[0]
 		this.REFRESH_ROOM()
