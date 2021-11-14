@@ -1,12 +1,12 @@
 
-import { socket, useAppDispatch, useAppSelector } from "../app/hooks"
-import { UPDATE_PLAYERS, SET_PLAYER, SET_ERROR, SET_GAME, SET_PLAYER_ADMIN, START_GAME, SOCKET_LOADED } from "../actions"
+import { socket } from "../app/hooks"
+import { UPDATE_PLAYERS, SET_PLAYER, SET_ERROR, SET_GAME, SET_PLAYER_ADMIN, START_GAME, ADD_ROW } from "../actions"
 import { IError, IRoom } from "../types"
 import { store } from "../app/store"
 type ITodo = any
 
 function SocketListerners() {
-	console.log("SOCKET INTITIAED ...")
+	console.log("[SOCKET] listeners loaded ...")
 	const dispatch = store.dispatch
 
 	socket.on("ROOM_INFOS", function (pyld: any) {
@@ -32,13 +32,13 @@ function SocketListerners() {
 	})
 
 	socket.on("GAME_START", function (pyld: any) {
-		console.log(">STARTED_GAME")
 		dispatch(START_GAME())
 	})
 
 	socket.on("ADD_ROW", function (pyld: number) {
-		console.log("ROWS TO ADD")
-		console.log(pyld)
+		console.log("ROWS TO ADD : ", pyld)
+		dispatch(ADD_ROW(pyld))
+		
 	})
 
 	socket.on("ROOMS", function (pyld: IRoom[]) {

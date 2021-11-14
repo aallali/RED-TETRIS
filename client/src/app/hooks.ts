@@ -9,6 +9,7 @@ import { useStage } from "./TetrisHooks/useStage"
 import io from "socket.io-client";
 
 export const socket = io("http://localhost:4242");
+console.log("[SOCKET] connected")
 export { useGameStatus, usePlayer, useInterval, useStage }
 // Use throughout your app instead of plain `useDispatch` and `useSelector`
 export const useAppDispatch = () => useDispatch<AppDispatch>();

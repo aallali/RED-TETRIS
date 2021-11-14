@@ -1,0 +1,44 @@
+.resource {
+  margin: 0px;
+  position: relative;
+  color: white;
+  overflow: hidden;
+  /* box-shadow: 5px 5px 10px grey; */
+ }
+.resource img {
+  width: 70px;
+}
+.overlay-message {
+  font-weight: bolder;
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top: 20px;
+}
+
+#overlay {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background: rgba(0, 0, 0, 0.85);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: auto;
+  bottom: 0;
+  opacity: 0;
+  transform: translateY(100%);
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.resourceanimation img {
+  transform: scale(2);
+  transition: transform 0.5s;
+}
+
+.resourceanimation #overlay {
+  opacity: 1;
+  transform: translateY(0px);
+}

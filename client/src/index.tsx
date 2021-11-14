@@ -1,18 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-
-import SocketListerners from "./listeners"
 import { store } from './app/store';
 import { Provider } from 'react-redux';
+
+import './index.css';
+
+import App from './App';
+import SocketListerners from "./listeners"
 import * as serviceWorker from './serviceWorker';
 
-// window.addEventListener('hashchange', function () {
-//     const hash = window.location.hash.substring(1)
-// 	console.log(hash)
-// 	window.location.reload()
-// }, true);
+window.addEventListener('hashchange', function () {
+	window.location.reload()
+}, true);
 
 SocketListerners()
 

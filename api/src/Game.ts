@@ -8,7 +8,7 @@ export default class Game {
 	public rooms = new Map()
 	public players = new Map()
 	public io: Socket
-	public events: string[] = ['JOIN_ROOM', 'LEAVE_ROOM', 'START_GAME', 'GET_TETROS', 'disconnect', 'PLAYER_STAGE', 'PLAYER_LOST']
+	public events: string[] = ['JOIN_ROOM', 'LEAVE_ROOM', 'START_GAME', 'GET_TETROS', 'disconnect', 'PLAYER_STAGE', 'PLAYER_LOST', 'PLAYER_LEFT']
 	constructor(io: Socket) {
 		this.io = io
 		this.INIT_LISTERNERS()
@@ -19,18 +19,27 @@ export default class Game {
 		this.io.on("connection", function (socket: any) {
 			this.events.forEach((event: string) => {
 				socket.on(event, (pyld: any) => {
+					console.log(`[${event}] : fired`)
+					/**
+					 * 
+					 */
 					const ft_player_left = () => {
 						if (this.players.get(socket.id) && this.players.get(socket.id).room) {
 							const playerRoom = this.players.get(socket.id).room
+							socket.leave(playerRoom)
 							this.rooms.get(playerRoom).QUIT(socket.id)
 							if (this.rooms.get(playerRoom).players.length == 0)
 								this.rooms.delete(playerRoom)
 
 						}
-						this.players.delete(socket.id)
-						socket.leave(pyld.room)
 
+						this.players.delete(socket.id)
+						// socket.leave(playerRoom)
 					}
+					/**
+					 * 
+					 * @param sid 
+					 */
 					const ft_start_game = (sid: string) => {
 						const playerRoom = this.players.get(sid).room
 						console.log("=========>", playerRoom)
@@ -50,7 +59,7 @@ export default class Game {
 										title: pyld.room,
 										mode: ROOM_MODE.MULTIPLAYER,
 										admin: player,
-										size: 3,
+										size: 5,
 										io: this.io
 									})
 									this.rooms.set(pyld.room, room)
@@ -70,15 +79,16 @@ export default class Game {
 
 								break
 							case 'START_GAME':
-								console.log("------>")
 								ft_start_game(socket.id)
 
 								break
 							case 'PLAYER_STAGE':
+								console.log("Staaaaaage", pyld.stage.length)
 								const new_pyld = this.players.get(socket.id).NEW_SCORE(pyld.score, pyld.level, pyld.rows, pyld.stage)
 								const playerRoom = this.players.get(socket.id).room
 								if (this.rooms.get(playerRoom)) {
-									socket.broadcast.to(playerRoom).emit('ADD_ROW', new_pyld.new_roows);
+									if (new_pyld.new_roows > 0)
+										socket.broadcast.to(playerRoom).emit('ADD_ROW', new_pyld.new_roows);
 									this.rooms.get(playerRoom).REFRESH_ROOM()
 								}
 								break

@@ -2,15 +2,18 @@
 import ProfileCard from "../component/profileCard";
 import Opponents from "../component/opponents"
 import styled from "styled-components";
-import Display from '../component/tetris/Display/Display';
-
+import "./playboard.css"
 import Tetris from "../component/tetris";
-import { socket } from "../app/hooks";
+import { socket, useAppSelector } from "../app/hooks";
 import { useCallback, useEffect, useState } from "react";
-import Error from "../component/Error"
-// import { getPlayer } from "../../reducers/player.reducer";
+import looser from "../images/looser.gif"
+import winner from "../images/winner.gif"
+import audioOn from "../images/mute.png"
+import audioOff from "../images/sound.png"
+import locked from "../images/lock.png"
+import unlocked from "../images/unlocked.png"
 
-
+import { isLost, isGameOver, isAdmin } from "../reducers/player.reducer"
 export const HashParser = (window_hash: string) => {
 	const regexp = /(?<roomname>[a-zA-Z0-9]{1,10})\[(?<username>[a-zA-Z0-9]{1,10})\]/;
 	const result = window_hash.match(regexp);
@@ -18,7 +21,6 @@ export const HashParser = (window_hash: string) => {
 		return result;
 	return false;
 };
-
 
 
 
@@ -35,76 +37,71 @@ export const StyledOverlay = styled.div`
   outline: 4px solid #333333;
   opacity: 0.9;
 `
+
+
 export default function Playboard() {
-	console.log("__PLAYBOARD")
+	const isLostS = useAppSelector<boolean>(isLost)
+	const isAdminS = useAppSelector<boolean>(isAdmin)
+	const isGameOverS = useAppSelector<boolean>(isGameOver)
+	const [soundOn, toggleSound] = useState(true)
+	return (
+		// Start of left side of the lobby page
+		<div className="bg-gray-500 min-h-screen flex justify-center items-center shadow-xl" style={{ backgroundColor: "#aeb6bf" }}>
+			<div className="mt-0  flex flex-col lg:flex-row w-full justify-center gap-2 p-4">
+				<div className="bg-white lg:w-8/12 p-4 rounded-md ">
 
-	const checkHash = 1 + 1 === 2
-	if (checkHash === false) {
-		return (
-			<div className="flex flex-col h-screen bg-gray-800">
-				<div className="grid place-items-center mx-0 my-0 sm:my-auto">
-					<div className="bg-white p-3 rounded-xl shadow">
-						<div className="m-auto space-y-10">
-							<div className="flex gap-4 bg-red-100 p-4 rounded-md">
-								<div className="w-max">
-									<div className="h-10 w-10 flex rounded-full bg-gradient-to-b from-red-100 to-red-300 text-red-700">
+					<div className="w-full mx-auto">
+						<div className="flex flex-col sm:flex-row gap-1 content-center">
+							{/* <StyledOverlay> */}
+							<div style={{ width: "100%", backgroundColor: "grays" }}> </div>
+							<div style={{ width: "100%", backgroundColor: "grays" }}> </div>
 
+
+							<div style={{ width: "100%" }}>
+
+								<div className={(isGameOverS ? "resource resourceanimation" : "resource")}>
+									<Tetris />
+									<div id="overlay">
+										<img className="trohpy-icon" src={isLostS ? looser : winner} alt="statPlayer" />
+										<h2 className="overlay-message text-center">{isLostS ? "What a shame looser" : "Congrats! you won."}</h2>
+										{isAdminS ? (<button className="bg-green-400 hover:bg-green-300 w-1/2 py-1 px-4 m-0 rounded-sm text-black text-sm font-bold">Play Again</button>) : null}
 									</div>
 								</div>
-								<div className="space-y-1 text-sm">
-									<h6 className="font-medium text-red-900">OUUPS!</h6>
-									<p className="text-red-700 leading-tight">
-										Invalid Hash Query please respect the following format
-									</p>
-									<p className="text-red-700 leading-tight">while the (room/player) names should be alphabetics between 1-10 character
-									</p>
 
 
-									<p>http://&lt;server_name_or_ip&gt;:&lt;port&gt;/#&lt;room&gt;[&lt;player_name&gt;] </p>
-									<p><b>Example : </b> http://localhost:3003/#arena[aallali]</p>
-								</div>
 							</div>
+							<div className="bg-grays-200 pl-2" style={{ width: "100%" }}>
+								<p><i>Activate Sound :</i>
+									<button className="inline-flex items-center justify-center w-9 h-9 m-1 text-indigo-100 transition-colors duration-150 rounded-lg focus:shadow-outline bg-yellow-200 hover:bg-yellow-100"
+										onClick={() => toggleSound(prev => !prev)}>
+										<img className="h-5" src={soundOn ? audioOn : audioOff} alt="sound" />
+									</button></p>
 
+								<p><i>Switch Game Mode:</i>
+									<button className="inline-flex items-center justify-center w-9 h-9 m-1 text-indigo-100 transition-colors duration-150 rounded-lg focus:shadow-outline bg-yellow-200 hover:bg-yellow-100" >
+										<img className="h-5" src={locked} alt="sound" />
+									</button></p>
+
+
+
+							</div>
+							<div style={{ width: "100%", backgroundColor: "grays" }}> </div>
+
+
+							{/* </StyledOverlay> */}
 						</div>
 					</div>
 				</div>
-			</div>
+				<div className="w-full lg:w-1/12 order-1 lg:order-last flex flex-col flex-1 justify-start gap-1">
+					<ProfileCard playboard={true} />
+					<div className="w-full mx-auto">
 
-		)
-	}
-	else {
-		return (
-			// Start of left side of the lobby page
-			<div className="bg-gray-200 min-h-screen flex justify-center items-center shadow-xl">
-				<div className="mt-0  flex flex-col lg:flex-row w-full justify-center gap-2 p-4">
-					<div className="bg-white lg:w-7/12 p-4 rounded-sm ">
+						<Opponents />
 
-						<div className="w-full mx-auto">
-							<div className="flex flex-col sm:flex-row gap-1 content-center">
-								{/* <StyledOverlay> */}
-								<div style={{ width: "100%" }}>1</div>
-								<div style={{ width: "100%" }}>2</div>
-
-
-								<div style={{ width: "100%" }}><Tetris /></div>
-								<div style={{ width: "100%" }}>4</div>
-								<div style={{ width: "100%" }}>5</div>
-
-
-								{/* </StyledOverlay> */}
-							</div>
-						</div>
-					</div>
-					<div className="w-full lg:w-1/12 order-1 lg:order-last flex flex-col flex-1 justify-start gap-1">
-						<ProfileCard playboard={true} />
-						<div className="w-full mx-auto">
-
-							<Opponents />
-
-						</div>
 					</div>
 				</div>
 			</div>
-		)
-	}
+		</div >
+	)
+
 }

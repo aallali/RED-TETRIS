@@ -8,43 +8,52 @@ import { useStage } from '../../app/TetrisHooks/useStage';
 import { useGameStatus } from '../../app/TetrisHooks/useGameStatus';
 // Components
 import Stage from './Stage/Stage';
-import Display from './Display/Display';
-import StartButton from './StartButton/StartButton';
-import { STAGE_HEIGHT } from '../../helpers/tetrominos';
-import { getGameStartStatus } from "../../reducers/player.reducer"
-// Styles
-import { StyledTetrisWrapper, StyledTetris } from './tetris.styles'
-import { socket, useAppSelector } from '../../app/hooks';
 
+import { STAGE_HEIGHT, STAGE_WIDTH } from '../../helpers/tetrominos';
+import { getRows2Add, isGameStarted as isGameStartedS, isGameOver as isGameOverS } from "../../reducers/player.reducer"
+// Styles
+import { StyledTetrisWrapper } from './tetris.styles'
+import { socket, useAppDispatch, useAppSelector } from '../../app/hooks';
+
+import { PLAYER_LOST } from "../../actions"
 const Tetris: React.FC = (props: ComponentProps<any>) => {
+	const dispatch = useAppDispatch()
 	const [dropTime, setDroptime] = React.useState<null | number>(null);
-	const [gameOver, setGameOver] = React.useState(true);
+	const isGameOver = useAppSelector<boolean>(isGameOverS)
 	const gameArea = React.useRef<HTMLDivElement>(null);
-	const isGameStarted = useAppSelector(getGameStartStatus)
+	const rows2add = useAppSelector(getRows2Add)
+	const isGameStarted = useAppSelector(isGameStartedS)
 	const { player, updatePlayerPos, resetPlayer, playerRotate } = usePlayer();
 	const { stage, setStage, rowsCleared } = useStage(player, resetPlayer);
-	const { score, setScore, rows, setRows, level, setLevel } = useGameStatus(rowsCleared);
-	// useEffect(() => {
-	// 	let f = 1
-	// 	let tmp = new Array(10).fill(["X", "merged"]);
-	// 	for (let i = 0; i < STAGE_HEIGHT; i++) if (stage[i][0] === ["X", "merged"]) f++;
-	// 	while (f > 0) {
-	// 	  stage.push(tmp);
-	// 	  stage.shift();
-	// 	  f--;
-	// 	}
+	const { setScore, rows, setRows, level, setLevel } = useGameStatus(rowsCleared, stage);
+	useEffect(() => {
+		if (isGameStarted) {
+			let f = rows2add
+			let tmp = new Array(10).fill(["X", "merged"]);
+			for (let i = 0; i < STAGE_HEIGHT; i++)
+				if (stage[i][0][0] === "X" && stage[i][0][1] === "merged") f--;
 
-	//   }, [xrow]);
+			while (f > 0) {
+				updatePlayerPos({ x: 0, y: -1, collided: false });
+				stage.push(tmp);
+				stage.shift();
+				f--;
+			}
+
+		}
+
+
+
+	}, [rows2add]);
 
 	const movePlayer = (dir: number) => {
 		if (!isColliding(player, stage, { x: dir, y: 0 })) {
 			updatePlayerPos({ x: dir, y: 0, collided: false });
 		}
-
 	};
 
 	const keyUp = ({ keyCode }: { keyCode: number }): void => {
-		if (!gameOver) {
+		if (!isGameOver) {
 			// Change the droptime speed when user releases down arrow
 			if (keyCode === 40) {
 				setDroptime(1000 / level + 200);
@@ -69,7 +78,6 @@ const Tetris: React.FC = (props: ComponentProps<any>) => {
 		setScore(0);
 		setLevel(1);
 		setRows(0);
-		setGameOver(false);
 		return
 	};
 
@@ -90,7 +98,7 @@ const Tetris: React.FC = (props: ComponentProps<any>) => {
 		return
 	};
 	const move = ({ keyCode, repeat }: { keyCode: number; repeat: boolean }): void => {
-		if (!gameOver) {
+		if (!isGameOver) {
 			if (keyCode === 37) {
 				movePlayer(-1);
 			} else if (keyCode === 39) {
@@ -109,8 +117,8 @@ const Tetris: React.FC = (props: ComponentProps<any>) => {
 	};
 
 	const drop = (): void => {
-		// Increase level when player has cleared 10 rows
-		if (rows > level * 10) {
+		// Increase level when player has cleared 5 rows
+		if (rows > level * 5) {
 			setLevel(prev => prev + 1);
 			// Also increase speed
 			setDroptime(1000 / level + 200);
@@ -123,13 +131,13 @@ const Tetris: React.FC = (props: ComponentProps<any>) => {
 			// Game over!
 			if (player.pos.y < 1) {
 				socket.emit("PLAYER_LOST", "this asshole lost")
-				setGameOver(true);
 				setDroptime(null);
+				dispatch(PLAYER_LOST())
 			} else {
 				setDroptime(1000 / level + 200);
 			}
 			updatePlayerPos({ x: 0, y: 0, collided: true });
-			socket.emit("PLAYER_STAGE", { score: score, rows: rows, level: level, stage: stage })
+			// socket.emit("PLAYER_STAGE", { score: score, rows: rows, level: level, stage: stage })
 
 
 		}
@@ -138,6 +146,7 @@ const Tetris: React.FC = (props: ComponentProps<any>) => {
 
 	useInterval(() => {
 		drop();
+
 	}, dropTime);
 
 	return (
@@ -148,8 +157,8 @@ const Tetris: React.FC = (props: ComponentProps<any>) => {
 			<Stage
 
 				stage={stage}
-				STAGE_WIDTH={10}
-				STAGE_HEIGHT={20}
+				STAGE_WIDTH={STAGE_WIDTH}
+				STAGE_HEIGHT={STAGE_HEIGHT}
 				CELL_SIZE={24} />
 
 
@@ -158,9 +167,9 @@ const Tetris: React.FC = (props: ComponentProps<any>) => {
 
 								<div className="sm:w-1/4 p-0">
 
-									{gameOver ? (
+									{isGameOver ? (
 										<>
-											<Display gameOver={gameOver} text='Game Over!' />
+											<Display isGameOver={isGameOver} text='Game Over!' />
 											<StartButton callback={handleStartGame} />
 										</>
 									) : (
