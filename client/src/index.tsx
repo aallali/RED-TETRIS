@@ -9,9 +9,9 @@ import App from './App';
 import SocketListerners from "./listeners"
 import * as serviceWorker from './serviceWorker';
 
-window.addEventListener('hashchange', function () {
-	window.location.reload()
-}, true);
+// window.addEventListener('hashchange', function () {
+// 	window.location.reload()
+// }, true);
 
 SocketListerners()
 

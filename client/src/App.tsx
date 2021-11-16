@@ -5,14 +5,16 @@ import Lobby from './pages/lobby'
 import Error from './component/Error';
 import {
 	getPlayerNickname,
-	getPlayerInGame
+	getPlayerInGame,
+	getGameMode
 } from './reducers/player.reducer';
 import PlayBoard from "./pages/playboard";
 import { useAppDispatch, useAppSelector } from "./app/hooks"
 import { getError } from './reducers/error.reducer';
 import { SET_ERROR } from './actions';
 import { socket } from "./app/hooks"
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 
 const HashParser = (window_hash: string) => {
@@ -32,40 +34,42 @@ function App() {
 	const dispatch = useAppDispatch()
 	const playerNickname = useAppSelector(getPlayerNickname)
 	const playerIngame = useAppSelector(getPlayerInGame)
-
+	const gameMode = useAppSelector(getGameMode)
 	const error = useAppSelector(getError)
-	const checkHash = HashParser(window.location.hash.substring(1))
-	useEffect(() => {
+	let checkHash = HashParser(window.location.hash.substring(1))
+
+	const checkhash = useCallback(() => {
+		console.log("............ CHECK HASH ............")
+		console.log({ mode: gameMode })
 		if (window.location.hash.substring(1)) {
+			checkHash = HashParser(window.location.hash.substring(1))
 			if (checkHash && checkHash.groups) {
 				const { roomname, username } = checkHash.groups
 				if (namevalidtor(username, roomname)) {
-					console.log("hna 1")
 					if (playerNickname && playerIngame === false) {
-						console.log("hna 2")
 						if (username !== playerNickname) {
-							console.log("hna 3")
 							dispatch(SET_ERROR({ title: "Error :", message: "there is an username already set to this browser, try to leave first to register new account" }))
 						} else {
-							console.log("hna join room")
-							socket.emit('JOIN_ROOM', { room: checkHash.groups.roomname, playerName: checkHash.groups.username });
+							socket.emit('JOIN_ROOM', { room: checkHash.groups.roomname, playerName: checkHash.groups.username, mode: gameMode });
 						}
 					} else {
-						socket.emit('JOIN_ROOM', { room: checkHash.groups.roomname, playerName: checkHash.groups.username });
+						socket.emit('JOIN_ROOM', { room: checkHash.groups.roomname, playerName: checkHash.groups.username, mode: gameMode });
 					}
 				} else {
-					console.log("hna 4")
 					dispatch(SET_ERROR({ title: "hash_query_error", message: "" }))
 				}
 
 			} else {
-				console.log("hna 5")
-
 				dispatch(SET_ERROR({ title: "hash_query_error", message: "" }))
 			}
 		}
-
-
+	}, [gameMode])
+	useEffect(() => {
+		checkhash()
+		// window.removeEventListener("hashchange", () =>  {})
+		// window.addEventListener('hashchange', function () {
+		// 	checkhash()
+		// }, true);
 	}, [])
 
 	return (
@@ -76,7 +80,7 @@ function App() {
 					(<Home />)
 					: (playerIngame ?
 						(<PlayBoard />)
-						: (<Lobby />)))}
+						: (<Lobby callback={checkhash} />)))}
 
 		</div>
 

@@ -29,7 +29,6 @@ export default class ROOM {
 	START() {
 		this.started = true
 		this.winner = null
-		console.log("EMITING START GAME")
 		// this.REFRESH_ROOM()
 		this.emit("GAME_START", true)
 		// this.io.in(this.title).emit("START_GAME", { start: true })
@@ -47,6 +46,8 @@ export default class ROOM {
 		}
 	}
 	JOIN(player_instance: IPlayer) {
+		// if (this.mode === ROOM_MODE.SOLO && this.players.length > 0)
+		// 	throw "Game is solo"
 		if (this.started === true)
 			throw "Game Already Started"
 		if (this.players.length >= this.size)
@@ -85,7 +86,6 @@ export default class ROOM {
 				this.winner = this.players.filter(p => p.lost === false)[0]
 				this.started = false
 			}
-		console.log("emit infos -----------------------------")
 		this.emit("ROOM_INFOS", this.INFO())
 		return this.INFO()
 	}

@@ -14,6 +14,7 @@
     "@types/react-dom": "^16.9.0",
     "@types/react-redux": "^7.1.7",
     "@types/socket.io-client": "^3.0.0",
+    "axios": "^0.24.0",
     "connected-react-router": "^6.9.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -32,7 +33,7 @@
     "Cbuild": "craco build",
     "Ctest": "craco test",
     "eject": "react-scripts eject",
-	"coverage": "react-scripts test --env=jsdom --coverage  CI=true "
+    "coverage": "react-scripts test --env=jsdom --coverage  CI=true "
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -50,6 +51,7 @@
     ]
   },
   "devDependencies": {
+    "@types/axios": "^0.14.0",
     "@types/react-router-dom": "^5.3.2",
     "@types/styled-components": "^5.1.15",
     "autoprefixer": "^9.8.8",
