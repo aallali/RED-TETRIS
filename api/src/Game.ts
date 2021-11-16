@@ -13,13 +13,29 @@ export default class Game {
 		this.io = io
 		this.INIT_LISTERNERS()
 	}
+	GET_ROOMS() {
+		const roomsNames = Array.from(this.rooms.keys())
+		let rooms = []
+		for (let key in roomsNames) {
+			const room = this.rooms.get(roomsNames[key])
+			if (room && !room.started)
+				rooms.push({
+					title: room.title,
+					size: room.size,
+					mode: room.mode,
+					started: room.started,
+					active_players: room.players.length
+				})
+		}
 
+		return rooms
+	}
 	INIT_LISTERNERS() {
 
 		this.io.on("connection", function (socket: any) {
 			this.events.forEach((event: string) => {
 				socket.on(event, (pyld: any) => {
-					console.log(`[${event}] : fired`)
+					// console.log(`[${event}] : fired`)
 					/**
 					 * 
 					 */
@@ -42,7 +58,6 @@ export default class Game {
 					 */
 					const ft_start_game = (sid: string) => {
 						const playerRoom = this.players.get(sid).room
-						console.log("=========>", playerRoom)
 						if (playerRoom) {
 							this.rooms.get(playerRoom).START()
 						}
@@ -57,7 +72,7 @@ export default class Game {
 									console.log("----CREATED NEW ROOM ----")
 									const room = new ROOM({
 										title: pyld.room,
-										mode: ROOM_MODE.MULTIPLAYER,
+										mode: pyld.mode,
 										admin: player,
 										size: 5,
 										io: this.io
@@ -83,7 +98,6 @@ export default class Game {
 
 								break
 							case 'PLAYER_STAGE':
-								console.log("Staaaaaage", pyld.stage.length)
 								const new_pyld = this.players.get(socket.id).NEW_SCORE(pyld.score, pyld.level, pyld.rows, pyld.stage)
 								const playerRoom = this.players.get(socket.id).room
 								if (this.rooms.get(playerRoom)) {

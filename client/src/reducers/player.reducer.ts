@@ -14,22 +14,25 @@ export interface IPlayer extends IScore {
 	isAdmin: boolean
 	highestLevel: number
 	gameStarted: boolean
-	gameOver: boolean,
+	gameOver: boolean
 	rows2add: number
 	lost: boolean
+	mode: string
 }
 
 const initialState: IPlayer = {
 	nickname: localStorage.getItem("nickname") || "",
 	rows: 0,
-	level: 1,
+	level: parseInt(localStorage.getItem("highestLevel") || "1"),
 	score: 0,
+
 	inGame: false,
 	lost: false,
 	isAdmin: false,
 	gameStarted: false,
 	gameOver: false,
 	rows2add: 0,
+	mode: "solo",
 	stage: [],
 	highestLevel: parseInt(localStorage.getItem("highestLevel") || "1")
 };
@@ -54,6 +57,10 @@ export const playerSlice = createSlice({
 			// state.gameStarted = false
 			state.gameOver = true
 			state.lost = true
+		},
+		UPDATE_GAME_MODE(state, action: PayloadAction<string>) {
+			console.log("Game mode updating to :: " + action.payload)
+			state.mode = action.payload
 		},
 		SET_GAME: (state, action: PayloadAction<{ room: string }>) => {
 			state.inRoom = action.payload.room
@@ -121,9 +128,12 @@ export const {
 	SET_PLAYER_ADMIN,
 	START_GAME,
 	ADD_ROW,
-	PLAYER_LOST
+	PLAYER_LOST,
+	UPDATE_GAME_MODE
 } = playerSlice.actions;
+
 export const getPlayer = (state: RootState) => state.player;
+export const getGameMode = (state: RootState) => state.player.mode
 export const getPlayerNickname = (state: RootState) => state.player.nickname;
 export const getPlayerInGame = (state: RootState) => state.player.inGame;
 export const getRows2Add = (state: RootState) => state.player.rows2add;

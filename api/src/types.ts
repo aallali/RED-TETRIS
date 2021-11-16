@@ -2,7 +2,7 @@
 
 export enum ROOM_MODE {
 	SOLO = 'solo',
-	MULTIPLAYER = ' multiplayer'
+	MULTIPLAYER = 'multiplayer'
 }
 
 export interface IPlayer {

@@ -52,8 +52,10 @@ class App {
 	 */
 	private routes() {
 		this.app.get("/", (req: any, res: any) => {
-			console.log(Array.from(this.gameIns.players))
 			res.send(Array.from(this.gameIns.players))
+		});
+		this.app.get("/rooms", (req: any, res: any) => {
+			res.send(this.gameIns.GET_ROOMS())
 		});
 	}
 	private initSocketEvents() {
