@@ -7,7 +7,7 @@ export const createStage = () => Array.from(Array(STAGE_HEIGHT), () => Array(STA
 
 export const randomTetromino = () => {
 	// ['I', 'J', 'L', 'I', 'O', 'S', 'I', 'T', 'Z'] 
-	const tetrominos = ['O', 'I'] as (keyof typeof TETROMINOS)[];
+	const tetrominos =  ['I', 'J', 'L', 'I', 'O', 'S', 'I', 'T', 'Z']  as (keyof typeof TETROMINOS)[];
 	const randTetromino = tetrominos[Math.floor(Math.random() * tetrominos.length)];
 	return TETROMINOS[randTetromino];
 };

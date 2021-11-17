@@ -16,11 +16,13 @@ import { StyledTetrisWrapper } from './tetris.styles'
 import { socket, useAppDispatch, useAppSelector } from '../../app/hooks';
 
 import { PLAYER_LOST } from "../../actions"
+import { getTetros } from '../../reducers/game.reducer';
 const Tetris: React.FC = (props: ComponentProps<any>) => {
 	const dispatch = useAppDispatch()
 	const [dropTime, setDroptime] = React.useState<null | number>(null);
 	const isGameOver = useAppSelector<boolean>(isGameOverS)
 	const gameArea = React.useRef<HTMLDivElement>(null);
+	const tetros = useAppSelector(getTetros)
 	const rows2add = useAppSelector(getRows2Add)
 	const isGameStarted = useAppSelector(isGameStartedS)
 	const { player, updatePlayerPos, resetPlayer, playerRotate } = usePlayer();
@@ -61,11 +63,20 @@ const Tetris: React.FC = (props: ComponentProps<any>) => {
 		}
 	};
 	useEffect(() => {
+		console.log("Checking tetros length", isGameStarted, tetros.length)
+		if (isGameStarted && tetros.length < 5) {
+			socket.emit("TETROS_PLEASE")
+		}
+	}, [tetros.length, isGameStarted])
 
-		if (isGameStarted) {
+	useEffect(() => {
+		if (isGameStarted === true) {
 			console.log("===> handle start game ")
 			handleStartGame()
 		}
+		console.log(isGameStarted, tetros.length)
+
+
 	}, [isGameStarted])
 	const handleStartGame = (): void => {
 
@@ -146,7 +157,6 @@ const Tetris: React.FC = (props: ComponentProps<any>) => {
 
 	useInterval(() => {
 		drop();
-
 	}, dropTime);
 
 	return (

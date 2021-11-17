@@ -14,7 +14,6 @@ import { getError } from './reducers/error.reducer';
 import { SET_ERROR } from './actions';
 import { socket } from "./app/hooks"
 import { useCallback, useEffect } from 'react';
-import { useSelector } from 'react-redux';
 
 
 const HashParser = (window_hash: string) => {
@@ -36,13 +35,12 @@ function App() {
 	const playerIngame = useAppSelector(getPlayerInGame)
 	const gameMode = useAppSelector(getGameMode)
 	const error = useAppSelector(getError)
-	let checkHash = HashParser(window.location.hash.substring(1))
 
 	const checkhash = useCallback(() => {
 		console.log("............ CHECK HASH ............")
 		console.log({ mode: gameMode })
 		if (window.location.hash.substring(1)) {
-			checkHash = HashParser(window.location.hash.substring(1))
+			let checkHash = HashParser(window.location.hash.substring(1))
 			if (checkHash && checkHash.groups) {
 				const { roomname, username } = checkHash.groups
 				if (namevalidtor(username, roomname)) {

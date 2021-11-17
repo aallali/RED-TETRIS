@@ -32,7 +32,7 @@ const initialState: IPlayer = {
 	gameStarted: false,
 	gameOver: false,
 	rows2add: 0,
-	mode: "solo",
+	mode: "multiplayer",
 	stage: [],
 	highestLevel: parseInt(localStorage.getItem("highestLevel") || "1")
 };

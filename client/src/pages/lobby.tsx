@@ -16,7 +16,7 @@ export default function Lobby({ callback }: { callback: any }) {
 
 	useEffect(() => {
 		axios
-			.get(`http://localhost:4242/rooms`)
+			.get(`${process.env.REACT_APP_API_URL}/rooms`)
 			.then((res: any) => {
 				getRooms([...res.data])
 			})
@@ -39,11 +39,12 @@ export default function Lobby({ callback }: { callback: any }) {
 						Rooms Online now :
 					</h1>
 					<div className="my-0">
-						{rooms.sort((a, b) => a.active_players - b.active_players).map(room =>
-						(
-							<RoomBar key={room.title} {...room}  callback={callback}/>
-						)
-						)}
+						{rooms.length === 0 ? (<h1 className="text-md">No open room available ... create yours now!</h1>) :
+							rooms.sort((a, b) => a.active_players - b.active_players).map(room =>
+							(
+								<RoomBar key={room.title} {...room} callback={callback} />
+							)
+							)}
 					</div>
 				</div>
 				<div className="w-full lg:w-1/12 order-1 lg:order-last flex flex-col flex-1 justify-start gap-2">

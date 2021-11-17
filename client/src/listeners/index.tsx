@@ -1,9 +1,8 @@
 
 import { socket } from "../app/hooks"
-import { UPDATE_PLAYERS, SET_PLAYER, SET_ERROR, SET_GAME, SET_PLAYER_ADMIN, START_GAME, ADD_ROW } from "../actions"
+import { UPDATE_PLAYERS, SET_PLAYER, SET_ERROR, SET_GAME, SET_PLAYER_ADMIN, START_GAME, ADD_ROW, MORE_TETROS } from "../actions"
 import { IError, IRoom } from "../types"
 import { store } from "../app/store"
-type ITodo = any
 
 function SocketListerners() {
 	console.log("[SOCKET] listeners loaded ...")
@@ -11,6 +10,8 @@ function SocketListerners() {
 
 	socket.on("ROOM_INFOS", function (pyld: any) {
 		const playerName = localStorage.getItem("nickname")
+		// if (pyld.winner?.name)
+
 		if (playerName) {
 			if (playerName === pyld.admin.name)
 				dispatch(SET_PLAYER_ADMIN())
@@ -30,7 +31,9 @@ function SocketListerners() {
 		console.log("[ROOM_ERROR]", res)
 		dispatch(SET_ERROR(res))
 	})
-
+	socket.on('HAK_TETROS', function (pyld: (0 | "I" | "J" | "L" | "O" | "S" | "T" | "Z" | "X")[]) {
+		dispatch(MORE_TETROS(pyld))
+	})
 	socket.on("GAME_START", function (pyld: any) {
 		dispatch(START_GAME())
 	})
@@ -38,7 +41,7 @@ function SocketListerners() {
 	socket.on("ADD_ROW", function (pyld: number) {
 		console.log("ROWS TO ADD : ", pyld)
 		dispatch(ADD_ROW(pyld))
-		
+
 	})
 
 	socket.on("ROOMS", function (pyld: IRoom[]) {

@@ -81,11 +81,15 @@ export default class ROOM {
 		return false
 	}
 	REFRESH_ROOM() {
-		if (this.started === true)
-			if (this.players.length > 1 && this.players.filter(p => p.lost === false).length == 1 || this.players.length == 1) {
+		if (this.started === true) {
+			if (this.players.length > 1 && this.players.filter(p => p.lost === false).length == 1) {
 				this.winner = this.players.filter(p => p.lost === false)[0]
+				console.log(this.winner)
 				this.started = false
-			}
+			} else if (this.players.length === 1 && this.players.filter(p => p.lost === false).length === 0)
+				this.started = false
+
+		}
 		this.emit("ROOM_INFOS", this.INFO())
 		return this.INFO()
 	}

@@ -12,6 +12,7 @@ import {
 import { UPDATE_PLAYERS } from "../reducers/opponent.reducer"
 import { SET_ERROR, CLEAR_ERROR } from "../reducers/error.reducer"
 
+import { SHIFT_TETRO, MORE_TETROS } from "../reducers/game.reducer"
 export {
 	// Players actions
 	SET_PLAYER,
@@ -28,5 +29,8 @@ export {
 
 	// Error actions
 	SET_ERROR,
-	CLEAR_ERROR
+	CLEAR_ERROR,
+	// game actions
+	SHIFT_TETRO,
+	MORE_TETROS,
 }
