@@ -3,12 +3,13 @@ import PLAYER from "./Player"
 import ROOM from "./Room"
 import { Socket } from "socket.io"
 import { IPlayer, ROOM_MODE } from "./types"
-
+import Pieces from "./Pieces"
+const tetrosInst = new Pieces(undefined)
 export default class Game {
 	public rooms = new Map()
 	public players = new Map()
 	public io: Socket
-	public events: string[] = ['JOIN_ROOM', 'LEAVE_ROOM', 'START_GAME', 'GET_TETROS', 'disconnect', 'PLAYER_STAGE', 'PLAYER_LOST', 'PLAYER_LEFT']
+	public events: string[] = ['JOIN_ROOM', 'LEAVE_ROOM', 'START_GAME', 'GET_TETROS', 'disconnect', 'PLAYER_STAGE', 'PLAYER_LOST', 'PLAYER_LEFT', 'TETROS_PLEASE']
 	constructor(io: Socket) {
 		this.io = io
 		this.INIT_LISTERNERS()
@@ -114,8 +115,13 @@ export default class Game {
 							case 'disconnect':
 								ft_player_left()
 								break
+							case 'TETROS_PLEASE':
+								console.log(`Player ${this.players.get(socket.id).name} request new`)
+								this.io.in(this.players.get(socket.id).room).emit('HAK_TETROS', tetrosInst.getRandomTetros(5));
+								break
 							default:
 								console.log(`Event [DEFAULT:${event}] fired`)
+							
 								break
 						}
 				})
