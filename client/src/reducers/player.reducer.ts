@@ -9,12 +9,9 @@ export interface IScore {
 }
 export interface IPlayer extends IScore {
 	nickname: string
-	inGame: boolean
 	inRoom?: string
 	isAdmin: boolean
 	highestLevel: number
-	gameStarted: boolean
-	gameOver: boolean
 	rows2add: number
 	lost: boolean
 	mode: string
@@ -25,12 +22,8 @@ const initialState: IPlayer = {
 	rows: 0,
 	level: parseInt(localStorage.getItem("highestLevel") || "1"),
 	score: 0,
-
-	inGame: false,
 	lost: false,
 	isAdmin: false,
-	gameStarted: false,
-	gameOver: false,
 	rows2add: 0,
 	mode: "multiplayer",
 	stage: [],
@@ -46,16 +39,13 @@ export const playerSlice = createSlice({
 			state.nickname = action.payload.name
 			if (action.payload.room) {
 				state.inRoom = action.payload.room
-				state.inGame = true
 			}
-			console.log(state.nickname)
 			localStorage.setItem("nickname", state.nickname)
 			localStorage.setItem("highestLevel", "1")
 
 		},
 		PLAYER_LOST(state) {
 			// state.gameStarted = false
-			state.gameOver = true
 			state.lost = true
 		},
 		UPDATE_GAME_MODE(state, action: PayloadAction<string>) {
@@ -67,9 +57,14 @@ export const playerSlice = createSlice({
 			state.rows = 0
 			state.level = 0
 			state.score = 0
-			state.inGame = true
-			state.gameStarted = false
-			state.gameOver = false
+ 
+		},
+		RESET_STATES(state) {
+			state.rows = 0
+			state.level = 0
+			state.score = 0
+			state.lost = false
+
 		},
 		LOGOUT_PLAYER: (state) => {
 			localStorage.removeItem("nickname")
@@ -78,19 +73,13 @@ export const playerSlice = createSlice({
 			state.rows = 0
 			state.level = 1
 			state.score = 0
-			state.inGame = false
 			state.isAdmin = false
 			state.highestLevel = 1
 			state.rows2add = 0
 			state.stage = []
-			state.gameStarted = false
-			state.gameOver = false
 			socket.emit("PLAYER_LEFT")
 		},
-		START_GAME(state) {
-			state.gameStarted = true
-			state.gameOver = false
-		},
+
 		SET_PLAYER_ADMIN(state) {
 			state.isAdmin = true
 		},
@@ -126,20 +115,22 @@ export const {
 	LOGOUT_PLAYER,
 	UPDATE_SCORE,
 	SET_PLAYER_ADMIN,
-	START_GAME,
 	ADD_ROW,
 	PLAYER_LOST,
-	UPDATE_GAME_MODE
+	UPDATE_GAME_MODE,
+	RESET_STATES
 } = playerSlice.actions;
 
 export const getPlayer = (state: RootState) => state.player;
 export const getGameMode = (state: RootState) => state.player.mode
 export const getPlayerNickname = (state: RootState) => state.player.nickname;
-export const getPlayerInGame = (state: RootState) => state.player.inGame;
+// export const getPlayerInGame = (state: RootState) => state.player.inGame;
 export const getRows2Add = (state: RootState) => state.player.rows2add;
+export const getRoomTitle = (state: RootState) => state.player.inRoom;
+
 export const isLost = (state: RootState) => state.player.lost
 export const isAdmin = (state: RootState) => state.player.isAdmin
-export const isGameStarted = (state: RootState) => state.player.gameStarted
-export const isGameOver = (state: RootState) => state.player.gameOver
+// export const isGameStarted = (state: RootState) => state.player.gameStarted
+// export const isGameOver = (state: RootState) => state.player.gameOver
 export const getPlayerScore = (state: RootState) => ({ level: state.player.level, rows: state.player.rows, score: state.player.score });
 export default playerSlice.reducer;

@@ -8,26 +8,32 @@ import { useStage } from '../../app/TetrisHooks/useStage';
 import { useGameStatus } from '../../app/TetrisHooks/useGameStatus';
 // Components
 import Stage from './Stage/Stage';
-
+// Configs
 import { STAGE_HEIGHT, STAGE_WIDTH } from '../../helpers/tetrominos';
-import { getRows2Add, isGameStarted as isGameStartedS, isGameOver as isGameOverS } from "../../reducers/player.reducer"
+// Reducers
+import { getRows2Add } from "../../reducers/player.reducer"
+import { isGameStarted as isGameStartedS, isGameOver as isGameOverS, getTetros } from "../../reducers/game.reducer"
 // Styles
 import { StyledTetrisWrapper } from './tetris.styles'
 import { socket, useAppDispatch, useAppSelector } from '../../app/hooks';
-
+// Actions
 import { PLAYER_LOST } from "../../actions"
-import { getTetros } from '../../reducers/game.reducer';
+
+import { TETROMINOS } from '../../helpers/tetrominos';
+
 const Tetris: React.FC = (props: ComponentProps<any>) => {
 	const dispatch = useAppDispatch()
-	const [dropTime, setDroptime] = React.useState<null | number>(null);
 	const isGameOver = useAppSelector<boolean>(isGameOverS)
-	const gameArea = React.useRef<HTMLDivElement>(null);
+	const isGameStarted = useAppSelector(isGameStartedS)
 	const tetros = useAppSelector(getTetros)
 	const rows2add = useAppSelector(getRows2Add)
-	const isGameStarted = useAppSelector(isGameStartedS)
-	const { player, updatePlayerPos, resetPlayer, playerRotate } = usePlayer();
+
+	const [dropTime, setDroptime] = React.useState<null | number>(null);
+	const gameArea = React.useRef<HTMLDivElement>(null);
+	const { player, updatePlayerPos, resetPlayer, playerRotate, setPlayer } = usePlayer();
 	const { stage, setStage, rowsCleared } = useStage(player, resetPlayer);
 	const { setScore, rows, setRows, level, setLevel } = useGameStatus(rowsCleared, stage);
+
 	useEffect(() => {
 		if (isGameStarted) {
 			let f = rows2add
@@ -43,9 +49,6 @@ const Tetris: React.FC = (props: ComponentProps<any>) => {
 			}
 
 		}
-
-
-
 	}, [rows2add]);
 
 	const movePlayer = (dir: number) => {
@@ -63,26 +66,35 @@ const Tetris: React.FC = (props: ComponentProps<any>) => {
 		}
 	};
 	useEffect(() => {
-		console.log("Checking tetros length", isGameStarted, tetros.length)
-		if (isGameStarted && tetros.length < 5) {
+		if (isGameOver)
+			setDroptime(null);
+
+	}, [isGameOver])
+
+	useEffect(() => {
+		if (isGameStarted && tetros.length <= 5) {
 			socket.emit("TETROS_PLEASE")
 		}
 	}, [tetros.length, isGameStarted])
 
 	useEffect(() => {
 		if (isGameStarted === true) {
-			console.log("===> handle start game ")
 			handleStartGame()
 		}
-		console.log(isGameStarted, tetros.length)
-
-
 	}, [isGameStarted])
 	const handleStartGame = (): void => {
 
 		// Need to focus the window with the key events on start
 		if (gameArea.current) gameArea.current.focus();
 		// Reset everything
+		setPlayer({
+			pos: {
+				x: 0,
+				y: 0,
+			},
+			tetromino: TETROMINOS[0].shape,
+			collided: true,
+		})
 		setStage(createStage());
 		setDroptime(1000);
 		resetPlayer();
@@ -132,7 +144,7 @@ const Tetris: React.FC = (props: ComponentProps<any>) => {
 		if (rows > level * 5) {
 			setLevel(prev => prev + 1);
 			// Also increase speed
-			setDroptime(1000 / level + 200);
+			setDroptime(1000 / level + 500);
 		}
 
 		if (!isColliding(player, stage, { x: 0, y: 1 })) {

@@ -1,13 +1,15 @@
 import { ComponentProps } from "react";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { getPlayer } from "../reducers/player.reducer";
+import { isGameStarted } from "../reducers/game.reducer"
 import { LOGOUT_PLAYER } from "../actions";
 import { socket } from "../app/hooks";
 export default function ProfileCard(props: ComponentProps<any>) {
 	const player = useAppSelector(getPlayer)
+	const gameStarted = useAppSelector(isGameStarted)
 	const dispatch = useAppDispatch()
 	function start() {
-		if (!player.gameStarted) {
+		if (!gameStarted) {
 			console.log("START GAME ...")
 			socket.emit("START_GAME")
 		}
@@ -58,7 +60,7 @@ export default function ProfileCard(props: ComponentProps<any>) {
 						onClick={() => dispatch(LOGOUT_PLAYER())}>
 						Leave
 					</button>
-					{props.playboard && player.isAdmin && !player.gameStarted ?
+					{props.playboard && player.isAdmin && !gameStarted ?
 						(<button
 							className="bg-green-300 hover:bg-green-700 w-full py-1 px-4 m-0 rounded-sm text-white text-sm font-bold"
 							onClick={() => start()}

@@ -11,7 +11,7 @@ export default class ROOM {
 	private io?: Socket
 	public tetrominos: string[]
 	public size: number
-	public winner?: IPlayer
+	public winner?: IPlayer | null
 	constructor({ title, mode, admin, io, size }: { title: string, mode: ROOM_MODE, admin: IPlayer, io?: Socket, size: number }) {
 		this.title = title
 		this.mode = mode
@@ -27,6 +27,13 @@ export default class ROOM {
 		this.io.in(this.title).emit(event, pyld)
 	}
 	START() {
+		this.players.map(l => {
+			l.stage = []
+			l.score = 0
+			l.level = 0
+			l.rows = 0
+			l.lost = false
+		})
 		this.started = true
 		this.winner = null
 		// this.REFRESH_ROOM()
@@ -45,6 +52,7 @@ export default class ROOM {
 			started: started
 		}
 	}
+
 	JOIN(player_instance: IPlayer) {
 		// if (this.mode === ROOM_MODE.SOLO && this.players.length > 0)
 		// 	throw "Game is solo"
@@ -84,10 +92,12 @@ export default class ROOM {
 		if (this.started === true) {
 			if (this.players.length > 1 && this.players.filter(p => p.lost === false).length == 1) {
 				this.winner = this.players.filter(p => p.lost === false)[0]
-				console.log(this.winner)
 				this.started = false
-			} else if (this.players.length === 1 && this.players.filter(p => p.lost === false).length === 0)
+				this.emit("GAME_OVER", null)
+			} else if (this.players.length === 1 && this.started === true) {
 				this.started = false
+				this.emit("GAME_OVER", null)
+			}
 
 		}
 		this.emit("ROOM_INFOS", this.INFO())
