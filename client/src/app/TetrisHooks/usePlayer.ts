@@ -67,10 +67,10 @@ export const usePlayer = () => {
 					tetromino: TETROMINOS[tetro].shape,
 					collided: false
 				})
-			}
+			}  
 		},
-		[tetros, dispatch]
+		[tetros]
 	);
 
-	return { player, updatePlayerPos, resetPlayer, playerRotate };
+	return { player, updatePlayerPos, setPlayer, resetPlayer, playerRotate };
 };

@@ -5,7 +5,7 @@ import Lobby from './pages/lobby'
 import Error from './component/Error';
 import {
 	getPlayerNickname,
-	getPlayerInGame,
+	getRoomTitle,
 	getGameMode
 } from './reducers/player.reducer';
 import PlayBoard from "./pages/playboard";
@@ -32,7 +32,7 @@ function App() {
 	console.log("_APP")
 	const dispatch = useAppDispatch()
 	const playerNickname = useAppSelector(getPlayerNickname)
-	const playerIngame = useAppSelector(getPlayerInGame)
+	const playerIngame = useAppSelector(getRoomTitle)
 	const gameMode = useAppSelector(getGameMode)
 	const error = useAppSelector(getError)
 
@@ -44,7 +44,7 @@ function App() {
 			if (checkHash && checkHash.groups) {
 				const { roomname, username } = checkHash.groups
 				if (namevalidtor(username, roomname)) {
-					if (playerNickname && playerIngame === false) {
+					if (playerNickname && playerIngame) {
 						if (username !== playerNickname) {
 							dispatch(SET_ERROR({ title: "Error :", message: "there is an username already set to this browser, try to leave first to register new account" }))
 						} else {

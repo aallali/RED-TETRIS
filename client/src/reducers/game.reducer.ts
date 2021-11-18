@@ -2,9 +2,9 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../app/store';
 import { TETROMINOS } from "../helpers/tetrominos"
 
-
 type TypeGameMode = "multiplayer" | "solo"
 interface IGame {
+	title: string
 	started: boolean
 	inGame: boolean
 	winner: string | undefined
@@ -13,6 +13,7 @@ interface IGame {
 	gameOver: boolean
 }
 const initialState: IGame = {
+	title: "",
 	started: false,
 	inGame: false,
 	winner: undefined,
@@ -26,13 +27,23 @@ export const gameSlice = createSlice({
 	initialState,
 	reducers: {
 		SET_GAME_STARTED(state) {
+			state.tetros = []
 			state.started = true
+			state.gameOver = false
+			state.winner = undefined
+		},
+		SET_GAME_TITLE(state, action: PayloadAction<string>) {
+			state.title = action.payload
 		},
 		SET_IN_GAME(state) {
 			state.inGame = true
 		},
 		SET_GAME_OVER(state) {
 			state.gameOver = true
+			state.started = false
+		},
+		SET_WINNER(state, action: PayloadAction<string>) {
+			state.winner = action.payload
 		},
 		RESET_GAME(state) {
 			state.started = false
@@ -49,10 +60,6 @@ export const gameSlice = createSlice({
 			let clone = [...state.tetros]
 			clone.shift()
 			state.tetros = clone
-			// console.log(Array.from(state.tetros))
-			if (state.tetros.length === 0) {
-				console.log("requesting new tetros ..... wait motherfucker >:(")
-			}
 		},
 		MORE_TETROS(state, action: PayloadAction<(keyof typeof TETROMINOS)[]>) {
 			state.tetros = [...state.tetros, ...action.payload]
@@ -60,7 +67,15 @@ export const gameSlice = createSlice({
 	}
 });
 
-export const { SHIFT_TETRO, MORE_TETROS } = gameSlice.actions;
-export const isGameStarted = (state: RootState) => state.game;
+export const {
+	SHIFT_TETRO, MORE_TETROS,
+	SET_GAME_MODE, SET_GAME_OVER,
+	SET_GAME_STARTED, SET_IN_GAME,
+	SET_WINNER, RESET_GAME
+} = gameSlice.actions;
+export const isGameStarted = (state: RootState) => state.game.started;
+export const isGameOver = (state: RootState) => state.game.gameOver
+export const getWinner = (state: RootState) => state.game.winner
+export const getGameWinner = (state: RootState) => state.game.winner
 export const getTetros = (state: RootState) => state.game.tetros
 export default gameSlice.reducer;
