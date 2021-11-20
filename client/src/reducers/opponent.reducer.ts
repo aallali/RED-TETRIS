@@ -23,10 +23,14 @@ export const opponentSlice = createSlice({
 					admin: action.payload.admin.name === el.name,
 				})
 			})
+		},
+		CLEAR_OPPONENTS(state) {
+			state.players = []
 		}
 	}
 });
 
-export const { UPDATE_PLAYERS } = opponentSlice.actions;
+export const { UPDATE_PLAYERS, CLEAR_OPPONENTS } = opponentSlice.actions;
 export const getOpponents = (state: RootState) => state.opponents.players;
+
 export default opponentSlice.reducer;

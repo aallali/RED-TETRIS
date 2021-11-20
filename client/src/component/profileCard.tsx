@@ -1,18 +1,27 @@
 import { ComponentProps } from "react";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { getPlayer } from "../reducers/player.reducer";
-import { isGameStarted } from "../reducers/game.reducer"
+import { getGameMode, isGameStarted } from "../reducers/game.reducer"
+import { getOpponents } from "../reducers/opponent.reducer";
+
 import { LOGOUT_PLAYER } from "../actions";
 import { socket } from "../app/hooks";
 export default function ProfileCard(props: ComponentProps<any>) {
 	const player = useAppSelector(getPlayer)
 	const gameStarted = useAppSelector(isGameStarted)
+	const gameMode = useAppSelector(getGameMode)
+	const onlineOpponents = useAppSelector(getOpponents)
 	const dispatch = useAppDispatch()
 	function start() {
-		if (!gameStarted) {
-			console.log("START GAME ...")
+		if (!gameStarted)
 			socket.emit("START_GAME")
-		}
+		return
+	}
+	function handleLeaveEvent() {
+		if (props.playboard) {
+			socket.emit("PLAYER_LEFT")
+			window.location.href = window.location.href.split('#')[0]
+		} else dispatch(LOGOUT_PLAYER())
 	}
 	return (
 
@@ -57,10 +66,10 @@ export default function ProfileCard(props: ComponentProps<any>) {
 				<div className="flex flex-col flex-1 sm:flex-row gap-1">
 					<button
 						className="bg-red-300 hover:bg-red-700 w-full py-1 px-4 mr-0 rounded-sm text-white text-sm font-semibold"
-						onClick={() => dispatch(LOGOUT_PLAYER())}>
+						onClick={() => handleLeaveEvent()}>
 						Leave
 					</button>
-					{props.playboard && player.isAdmin && !gameStarted ?
+					{props.playboard && player.isAdmin && !gameStarted && (gameMode === "solo" || (gameMode === "multiplayer" && onlineOpponents.length > 0)) ?
 						(<button
 							className="bg-green-300 hover:bg-green-700 w-full py-1 px-4 m-0 rounded-sm text-white text-sm font-bold"
 							onClick={() => start()}
@@ -72,7 +81,7 @@ export default function ProfileCard(props: ComponentProps<any>) {
 			</div>
 
 
-		</div>
+		</div >
 
 
 	);

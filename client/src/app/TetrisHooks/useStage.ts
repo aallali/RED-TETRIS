@@ -1,12 +1,14 @@
 import React from 'react';
+import { BROADCAST_SCORE } from '../../actions';
 import { createStage } from '../../helpers/gameHelpers';
 // Types
 import { IStage, IStageCell, IPlayer } from "../../types"
+import { useAppDispatch } from '../hooks';
 
 export const useStage = (player: IPlayer, resetPlayer: () => void) => {
 	const [stage, setStage] = React.useState(createStage());
 	const [rowsCleared, setRowsCleared] = React.useState(0);
-
+	const dispatch = useAppDispatch()
 	React.useEffect(() => {
 		if (!player.pos) return;
 
