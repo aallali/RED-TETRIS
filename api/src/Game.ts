@@ -9,7 +9,7 @@ export default class Game {
 	public rooms = new Map()
 	public players = new Map()
 	public io: Socket
-	public events: string[] = ['JOIN_ROOM', 'LEAVE_ROOM', 'START_GAME', 'GET_TETROS', 'disconnect', 'PLAYER_STAGE', 'PLAYER_LOST', 'PLAYER_LEFT', 'TETROS_PLEASE']
+	public events: string[] = ['JOIN_ROOM', 'LEAVE_ROOM', 'START_GAME', 'GET_TETROS', 'disconnect', 'PLAYER_STAGE', 'PLAYER_LOST', 'PLAYER_LEFT', 'TETROS_PLEASE', 'UPDATE_GAME_MODE']
 	constructor(io: Socket) {
 		this.io = io
 		this.INIT_LISTERNERS()
@@ -36,41 +36,41 @@ export default class Game {
 		this.io.on("connection", function (socket: any) {
 			this.events.forEach((event: string) => {
 				socket.on(event, (pyld: any) => {
-					// console.log(`[${event}] : fired`)
-					/**
-					 * 
-					 */
-					const ft_player_left = () => {
-						if (this.players.get(socket.id) && this.players.get(socket.id).room) {
-							const playerRoom = this.players.get(socket.id).room
-							socket.leave(playerRoom)
-							this.rooms.get(playerRoom).QUIT(socket.id)
-							if (this.rooms.get(playerRoom).players.length == 0)
-								this.rooms.delete(playerRoom)
+					if (this.players.get(socket.id) || event == "JOIN_ROOM") {
+						const username = this.players.get(socket.id)?.name
+						const roomname = this.players.get(socket.id)?.room
 
+						/**
+						 * 
+						 */
+						const ft_player_left = () => {
+							if (this.players.get(socket.id) && this.players.get(socket.id).room) {
+								socket.leave(roomname)
+								this.rooms.get(roomname).QUIT(socket.id)
+								if (this.rooms.get(roomname).players.length == 0)
+									this.rooms.delete(roomname)
+
+							}
+							this.players.delete(socket.id)
+							// socket.leave(roomname)
+						}
+						/**
+						 * 
+						 * @param sid 
+						 */
+						const ft_start_game = (sid: string) => {
+							if (roomname) {
+								this.rooms.get(roomname).START()
+							}
 						}
 
-						this.players.delete(socket.id)
-						// socket.leave(playerRoom)
-					}
-					/**
-					 * 
-					 * @param sid 
-					 */
-					const ft_start_game = (sid: string) => {
-						const playerRoom = this.players.get(sid).room
-						if (playerRoom) {
-							this.rooms.get(playerRoom).START()
-						}
-					}
 
-					if (this.players.get(socket.id) || event == "JOIN_ROOM")
+
 						switch (event) {
 							case 'JOIN_ROOM':
 								const player = new PLAYER(socket.id, pyld.playerName)
 								socket.join(pyld.room)
 								if (!this.rooms.get(pyld.room)) {
-									console.log("----CREATED NEW ROOM ----")
 									const room = new ROOM({
 										title: pyld.room,
 										mode: pyld.mode,
@@ -100,12 +100,12 @@ export default class Game {
 								break
 							case 'PLAYER_STAGE':
 								const new_pyld = this.players.get(socket.id).NEW_SCORE(pyld.score, pyld.level, pyld.rows, pyld.stage)
-								const playerRoom = this.players.get(socket.id).room
-								if (this.rooms.get(playerRoom)) {
-									if (new_pyld.new_roows > 0)
-										socket.broadcast.to(playerRoom).emit('ADD_ROW', new_pyld.new_roows);
-									this.rooms.get(playerRoom).REFRESH_ROOM()
+								if (new_pyld.new_roows > 0) {
+									console.log(username, new_pyld.new_roows, roomname)
+									socket.broadcast.to(roomname).emit('ADD_ROW', new_pyld.new_roows);
 								}
+								this.rooms.get(roomname).REFRESH_ROOM()
+
 								break
 							case 'PLAYER_LOST':
 								this.players.get(socket.id).LOOSE()
@@ -116,14 +116,27 @@ export default class Game {
 								ft_player_left()
 								break
 							case 'TETROS_PLEASE':
-								console.log(`Player ${this.players.get(socket.id).name} request new`)
-								this.io.in(this.players.get(socket.id).room).emit('HAK_TETROS', tetrosInst.getRandomTetros(5));
+								this.io.in(roomname).emit('HAK_TETROS', tetrosInst.getRandomTetros(5));
 								break
+							case 'UPDATE_GAME_MODE':
+								const roomAdmin = this.rooms.get(roomname)?.admin.name
+								if (username
+									&& roomname
+									&& roomAdmin
+									&& (pyld === "solo" || pyld === "multiplayer")) {
+
+									if (roomAdmin === username) {
+										this.rooms.get(roomname).MODE(pyld)
+										console.log(username, roomname, "CHANGED GAME MODE TO : ", pyld)
+
+									}
+								}
 							default:
 								console.log(`Event [DEFAULT:${event}] fired`)
-							
+
 								break
 						}
+					}
 				})
 			})
 

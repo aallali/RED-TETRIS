@@ -1,12 +1,10 @@
 
-
+/* eslint-disable react-hooks/exhaustive-deps */
 import Home from './pages/home'
 import Lobby from './pages/lobby'
 import Error from './component/Error';
 import {
-	getPlayerNickname,
-	getRoomTitle,
-	getGameMode
+	getPlayerNickname
 } from './reducers/player.reducer';
 import PlayBoard from "./pages/playboard";
 import { useAppDispatch, useAppSelector } from "./app/hooks"
@@ -14,6 +12,7 @@ import { getError } from './reducers/error.reducer';
 import { SET_ERROR } from './actions';
 import { socket } from "./app/hooks"
 import { useCallback, useEffect } from 'react';
+import { getGameMode, getGameTitle } from './reducers/game.reducer';
 
 
 const HashParser = (window_hash: string) => {
@@ -29,30 +28,28 @@ const namevalidtor = (u: string, r: string) => {
 	return false
 }
 function App() {
-	console.log("_APP")
 	const dispatch = useAppDispatch()
 	const playerNickname = useAppSelector(getPlayerNickname)
-	const playerIngame = useAppSelector(getRoomTitle)
+	const playerIngame = useAppSelector(getGameTitle)
 	const gameMode = useAppSelector(getGameMode)
 	const error = useAppSelector(getError)
 
 	const checkhash = useCallback(() => {
-		console.log("............ CHECK HASH ............")
-		console.log({ mode: gameMode })
+		console.log("CHECK HASH CALLED ", window.location.hash)
+		socket.emit("PLAYER_LEFT")
 		if (window.location.hash.substring(1)) {
 			let checkHash = HashParser(window.location.hash.substring(1))
 			if (checkHash && checkHash.groups) {
 				const { roomname, username } = checkHash.groups
 				if (namevalidtor(username, roomname)) {
-					if (playerNickname && playerIngame) {
-						if (username !== playerNickname) {
-							dispatch(SET_ERROR({ title: "Error :", message: "there is an username already set to this browser, try to leave first to register new account" }))
-						} else {
-							socket.emit('JOIN_ROOM', { room: checkHash.groups.roomname, playerName: checkHash.groups.username, mode: gameMode });
-						}
+					console.log(playerNickname, playerIngame, username)
+					if (playerNickname && username !== playerNickname) {
+						dispatch(SET_ERROR({ title: "Error :", message: "there is an username already set to this browser, try to leave first to register new account" }))
 					} else {
+						dispatch(SET_ERROR({ title: "", message: "" }))
 						socket.emit('JOIN_ROOM', { room: checkHash.groups.roomname, playerName: checkHash.groups.username, mode: gameMode });
 					}
+
 				} else {
 					dispatch(SET_ERROR({ title: "hash_query_error", message: "" }))
 				}
@@ -60,14 +57,21 @@ function App() {
 			} else {
 				dispatch(SET_ERROR({ title: "hash_query_error", message: "" }))
 			}
+		} else {
+			console.log("No hash")
+			dispatch(SET_ERROR({ title: "", message: "" }))
+			// dispatch(LEAVE_GAME())
+			// dispatch(RESET_STATES())
+			socket.emit("PLAYER_LEFT")
+
 		}
-	}, [gameMode])
+	}, [playerIngame, playerNickname])
 	useEffect(() => {
 		checkhash()
-		// window.removeEventListener("hashchange", () =>  {})
-		// window.addEventListener('hashchange', function () {
-		// 	checkhash()
-		// }, true);
+		window.removeEventListener("hashchange", () => { })
+		window.addEventListener('hashchange', function () {
+			checkhash()
+		}, true);
 	}, [])
 
 	return (
@@ -78,7 +82,7 @@ function App() {
 					(<Home />)
 					: (playerIngame ?
 						(<PlayBoard />)
-						: (<Lobby callback={checkhash} />)))}
+						: (<Lobby callback={() => 0} />)))}
 
 		</div>
 

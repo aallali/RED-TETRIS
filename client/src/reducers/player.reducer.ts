@@ -1,11 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../app/store';
 import { socket } from "../app/hooks"
+import { IStage } from "../types"
 export interface IScore {
 	rows: number
 	level: number
 	score: number
-	stage: any
+	stage: IStage
 }
 export interface IPlayer extends IScore {
 	nickname: string
@@ -14,7 +15,6 @@ export interface IPlayer extends IScore {
 	highestLevel: number
 	rows2add: number
 	lost: boolean
-	mode: string
 }
 
 const initialState: IPlayer = {
@@ -25,7 +25,6 @@ const initialState: IPlayer = {
 	lost: false,
 	isAdmin: false,
 	rows2add: 0,
-	mode: "multiplayer",
 	stage: [],
 	highestLevel: parseInt(localStorage.getItem("highestLevel") || "1")
 };
@@ -48,23 +47,19 @@ export const playerSlice = createSlice({
 			// state.gameStarted = false
 			state.lost = true
 		},
-		UPDATE_GAME_MODE(state, action: PayloadAction<string>) {
-			console.log("Game mode updating to :: " + action.payload)
-			state.mode = action.payload
-		},
 		SET_GAME: (state, action: PayloadAction<{ room: string }>) => {
 			state.inRoom = action.payload.room
 			state.rows = 0
 			state.level = 0
 			state.score = 0
- 
 		},
 		RESET_STATES(state) {
 			state.rows = 0
 			state.level = 0
 			state.score = 0
 			state.lost = false
-
+			state.rows2add = 0
+			state.stage = []
 		},
 		LOGOUT_PLAYER: (state) => {
 			localStorage.removeItem("nickname")
@@ -79,9 +74,17 @@ export const playerSlice = createSlice({
 			state.stage = []
 			socket.emit("PLAYER_LEFT")
 		},
-
+		UNSET_PLAYER_ADMIN(state) {
+			if (state.isAdmin) {
+				console.log("UNSET PLAYER ADMIN")
+				state.isAdmin = false
+			}
+		},
 		SET_PLAYER_ADMIN(state) {
-			state.isAdmin = true
+			if (!state.isAdmin) {
+				console.log("Setting playe admin yes")
+				state.isAdmin = true
+			}
 		},
 		ADD_ROW(state, action: PayloadAction<number>) {
 			state.rows2add = state.rows2add + action.payload
@@ -90,6 +93,7 @@ export const playerSlice = createSlice({
 			state.stage = action.payload
 		},
 		UPDATE_SCORE: (state, action: PayloadAction<IScore>) => {
+
 			state.rows = action.payload.rows
 			state.level = action.payload.level
 			state.score = action.payload.score
@@ -97,13 +101,15 @@ export const playerSlice = createSlice({
 				state.highestLevel = state.level
 				localStorage.setItem("highestLevel", state.highestLevel.toString())
 			}
+
+		},
+		BROADCAST_SCORE: (state, action: PayloadAction<IStage>) => {
 			socket.emit("PLAYER_STAGE", {
 				score: state.score,
 				rows: state.rows,
 				level: state.level,
-				stage: action.payload.stage
+				stage: action.payload
 			})
-
 		}
 
 	}
@@ -117,12 +123,12 @@ export const {
 	SET_PLAYER_ADMIN,
 	ADD_ROW,
 	PLAYER_LOST,
-	UPDATE_GAME_MODE,
-	RESET_STATES
+	RESET_STATES,
+	BROADCAST_SCORE,
+	UNSET_PLAYER_ADMIN
 } = playerSlice.actions;
 
 export const getPlayer = (state: RootState) => state.player;
-export const getGameMode = (state: RootState) => state.player.mode
 export const getPlayerNickname = (state: RootState) => state.player.nickname;
 // export const getPlayerInGame = (state: RootState) => state.player.inGame;
 export const getRows2Add = (state: RootState) => state.player.rows2add;

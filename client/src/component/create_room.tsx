@@ -1,6 +1,8 @@
 import { ChangeEvent, ComponentProps, useState } from "react";
+import { UPDATE_GAME_MODE } from "../actions";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { getGameMode, getPlayerNickname, UPDATE_GAME_MODE } from "../reducers/player.reducer";
+import { getGameMode } from "../reducers/game.reducer";
+import {  getPlayerNickname } from "../reducers/player.reducer";
 
 export default function CreateRoomInput(props: ComponentProps<any>) {
 	const game_mode = useAppSelector(getGameMode)

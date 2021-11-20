@@ -2,8 +2,8 @@ import React from 'react';
 import { STAGE_WIDTH } from '../../helpers/tetrominos';
 import { isColliding } from '../../helpers/gameHelpers';
 import { IPlayer, IStage } from "../../types"
-import { useAppDispatch, useAppSelector } from '../hooks';
-import { getTetros, SHIFT_TETRO } from '../../reducers/game.reducer';
+import { useAppSelector } from '../hooks';
+import { getTetros } from '../../reducers/game.reducer';
 import { TETROMINOS } from '../../helpers/tetrominos';
 
 
@@ -16,7 +16,6 @@ export const usePlayer = () => {
 		tetromino: TETROMINOS[0].shape,
 		collided: true,
 	} as IPlayer)
-	const dispatch = useAppDispatch()
 	const tetros = useAppSelector(getTetros)
 	const rotate = (matrix: IPlayer['tetromino']) => {
 		// Make the rows to become cols (transpose)
@@ -60,14 +59,12 @@ export const usePlayer = () => {
 	const resetPlayer = React.useCallback(
 		(): void => {
 			if (tetros.length > 0) {
-				const tetro = tetros[0]
-				dispatch(SHIFT_TETRO())
 				setPlayer({
 					pos: { x: STAGE_WIDTH / 2 - 2, y: 0 },
-					tetromino: TETROMINOS[tetro].shape,
+					tetromino: TETROMINOS[tetros[0]].shape,
 					collided: false
 				})
-			}  
+			}
 		},
 		[tetros]
 	);

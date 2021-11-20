@@ -11,7 +11,7 @@ interface IRooms {
 	started: boolean
 	active_players: number
 }
-export default function Lobby({ callback }: { callback: any }) {
+export default function Lobby({ callback }: { callback: CallableFunction }) {
 	const [rooms, getRooms] = useState<IRooms[]>([])
 
 	useEffect(() => {

@@ -18,13 +18,21 @@ export default class ROOM {
 		this.players = []
 		this.io = io
 		this.started = false
-		this.size = this.mode == ROOM_MODE.SOLO ? 1 : size || 5
+		this.size = this.mode === ROOM_MODE.SOLO ? 1 : size || 5
 		this.admin = admin
 		this.players = []
 		this.JOIN(admin)
 	}
 	emit(event: string, pyld: any) {
 		this.io.in(this.title).emit(event, pyld)
+	}
+	MODE(mode?: string) {
+		if (mode && (mode === "solo" || mode === "multiplayer")) {
+			this.mode = mode === "solo" ? ROOM_MODE.SOLO : ROOM_MODE.MULTIPLAYER
+			this.emit("ROOM_INFOS", this.INFO())
+		}
+
+
 	}
 	START() {
 		this.players.map(l => {
@@ -38,6 +46,7 @@ export default class ROOM {
 		this.winner = null
 		// this.REFRESH_ROOM()
 		this.emit("GAME_START", true)
+		this.emit("ROOM_INFOS", this.INFO())
 		// this.io.in(this.title).emit("START_GAME", { start: true })
 	}
 	INFO() {
@@ -54,8 +63,8 @@ export default class ROOM {
 	}
 
 	JOIN(player_instance: IPlayer) {
-		// if (this.mode === ROOM_MODE.SOLO && this.players.length > 0)
-		// 	throw "Game is solo"
+		if (this.mode === ROOM_MODE.SOLO && this.players.length === 1)
+			throw "Game is solo"
 		if (this.started === true)
 			throw "Game Already Started"
 		if (this.players.length >= this.size)
@@ -65,14 +74,14 @@ export default class ROOM {
 
 		player_instance.room = this.title
 		this.players.push(player_instance)
-		console.log(`[ ${player_instance.name} ] has joined the room [${this.title}] ${this.players.length == 1 ? 'as Admin' : ''}`)
+		// console.log(`[ ${player_instance.name} ] has joined the room [${this.title}] ${this.players.length == 1 ? 'as Admin' : ''}`)
 		if (this.players.length == 1)
 			this.admin = player_instance
 		this.REFRESH_ROOM()
 		return player_instance
 	}
 	QUIT(player_id: string) {
-		console.log(`[QUIT] : (${this.players.filter(p => p.id === player_id)[0]?.name}) left the room (${this.title})`)
+		// console.log(`[QUIT] : (${this.players.filter(p => p.id === player_id)[0]?.name}) left the room (${this.title})`)
 		this.players = this.players.filter(p => p.id !== player_id)
 		this.admin = this.players[0]
 		this.REFRESH_ROOM()
@@ -90,11 +99,14 @@ export default class ROOM {
 	}
 	REFRESH_ROOM() {
 		if (this.started === true) {
-			if (this.players.length > 1 && this.players.filter(p => p.lost === false).length == 1) {
+			if (this.players.length > 1 && this.players.filter(p => p.lost === false).length == 1 && this.mode !== "solo") {
 				this.winner = this.players.filter(p => p.lost === false)[0]
 				this.started = false
 				this.emit("GAME_OVER", null)
-			} else if (this.players.length === 1 && this.started === true) {
+			} else if (this.players.length === 1 && this.started === true && this.mode !== "solo") {
+				this.started = false
+				this.emit("GAME_OVER", null)
+			} else if (this.players.length === 1 && this.players.filter(p => p.lost === true).length == 1) {
 				this.started = false
 				this.emit("GAME_OVER", null)
 			}
