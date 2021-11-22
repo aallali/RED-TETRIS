@@ -8,7 +8,7 @@ import { isGameOver } from "../reducers/game.reducer";
 function Opponent(props: ComponentProps<any>) {
 	const { stage, name, admin, score, lost, level, rows } = props.p
 	return (
-		<div className="sm:w-1/4 lg:w-1-4 p-0">
+		<div className="w-1/3 p-0">
 			<div className="bg-white p-0 rounded-md shadow-lg text-center">
 				<h2 className="text-md font-bold text-gray-700">{admin ? '★' : '#'}{name}</h2>
 				<div className="flex flex-row  justify-center items-center">
@@ -33,7 +33,7 @@ const Opponents: React.FC = () => {
 	const players = useAppSelector(getOpponents)
 	const gameOver = useAppSelector(isGameOver)
 	return (
-		<div className="flex gap-1">
+		<div className="flex gap-1 flex-wrap">
 			{
 				players.map(p => (<Opponent key={p.name} p={p} gameOver={gameOver} />))
 			}
