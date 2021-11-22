@@ -33,13 +33,11 @@ const Opponents: React.FC = () => {
 	const players = useAppSelector(getOpponents)
 	const gameOver = useAppSelector(isGameOver)
 	return (
-		<div className="flex flex-row sm:flex-row gap-1">
+		<div className="flex gap-1">
 			{
 				players.map(p => (<Opponent key={p.name} p={p} gameOver={gameOver} />))
 			}
-
 		</div>
-
 	)
 }
 

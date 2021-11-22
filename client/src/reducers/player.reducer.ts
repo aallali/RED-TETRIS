@@ -10,7 +10,6 @@ export interface IScore {
 }
 export interface IPlayer extends IScore {
 	nickname: string
-	inRoom?: string
 	isAdmin: boolean
 	highestLevel: number
 	rows2add: number
@@ -34,21 +33,22 @@ export const playerSlice = createSlice({
 	initialState,
 	// The `reducers` field lets us define reducers and generate associated actions
 	reducers: {
-		SET_PLAYER: (state, action: PayloadAction<{ name: string, room?: string }>) => {
-			state.nickname = action.payload.name
-			if (action.payload.room) {
-				state.inRoom = action.payload.room
+		SET_PLAYER: (state, action: PayloadAction<{ name: string }>) => {
+			console.log(state.nickname, action.payload)
+			if (state.nickname !== action.payload.name ) {
+				state.nickname = action.payload.name
+				localStorage.setItem("nickname", state.nickname)
+				localStorage.setItem("highestLevel", "1")
+				console.log(state.nickname, "THIS IS AFTER")
 			}
-			localStorage.setItem("nickname", state.nickname)
-			localStorage.setItem("highestLevel", "1")
 
 		},
 		PLAYER_LOST(state) {
 			// state.gameStarted = false
+			socket.emit("PLAYER_LOST", "this asshole lost")
 			state.lost = true
 		},
 		SET_GAME: (state, action: PayloadAction<{ room: string }>) => {
-			state.inRoom = action.payload.room
 			state.rows = 0
 			state.level = 0
 			state.score = 0
@@ -132,7 +132,6 @@ export const getPlayer = (state: RootState) => state.player;
 export const getPlayerNickname = (state: RootState) => state.player.nickname;
 // export const getPlayerInGame = (state: RootState) => state.player.inGame;
 export const getRows2Add = (state: RootState) => state.player.rows2add;
-export const getRoomTitle = (state: RootState) => state.player.inRoom;
 
 export const isLost = (state: RootState) => state.player.lost
 export const isAdmin = (state: RootState) => state.player.isAdmin

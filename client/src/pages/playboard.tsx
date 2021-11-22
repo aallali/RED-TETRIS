@@ -4,14 +4,16 @@ import { useAppSelector } from "../app/hooks";
 // Stylesheets
 import "./playboard.css"
 // Components
-import ProfileCard from "../component/profileCard";
+import Profile_card from "../component/profile_card";
 import Opponents from "../component/opponents"
-import NextTetros from "../component/nexTetros";
+import NextTetros from "../component/next_tetros";
 import Tetris from "../component/tetris";
 import Options from "../component/options"
-// images import 
-import looser from "../images/looser.gif"
-import winner from "../images/winner.gif"
+import YoutubeEmbed from "../component/youtube_embed"
+import ChatBox from "../component/chatbox";
+// images import
+import looser from "../assets/images/looser.gif"
+import winner from "../assets/images/winner.gif"
 
 // States Selectors
 import { isLost } from "../reducers/player.reducer"
@@ -28,23 +30,30 @@ export const HashParser = (window_hash: string) => {
 
 
 export default function Playboard() {
-
+	console.log("_PLAYBOARD")
 	const isLostS = useAppSelector<boolean>(isLost)
 	const isGameOverS = useAppSelector<boolean>(isGameOver)
 
 	return (
 		// Start of left side of the lobby page
-		<div className="bg-gray-500 min-h-screen flex justify-center items-center shadow-xl" style={{ backgroundColor: "#aeb6bf" }}>
-			<div className="mt-0  flex flex-col lg:flex-row w-full justify-center gap-2 p-4">
-				<div className="bg-white lg:w-8/12 p-4 rounded-md ">
+		<div className=" min-h-screen flex justify-center items-center shadow-xl">
+
+			<div className="mt-0   flex flex-col lg:flex-row w-full justify-center gap-2 p-4">
+				<div className="lg:w-9/12 p-4 rounded-md ">
 
 					<div className="w-full mx-auto">
-						<div className="flex flex-col sm:flex-row gap-1 content-center">
-							<div className="w-1/3 bg-gray-100"> 1</div>
-							<div className="w-1/3 bg-gray-100"> 2</div>
+						<div className="flex flex-col sm:flex-row gap-2 content-center">
+							<div className="w-6/12 ">
+								<div className="w-full mx-auto">
+									<Opponents />
+								</div>
+
+								{/*<ChatBox />*/}
+
+							</div>
 
 
-							<div className="w-auto bg-gray-100 content-endy">
+							<div className="w-auto content-endy">
 
 								<div className={(isGameOverS || isLostS ? "resource resourceanimation" : "resource")}>
 									<Tetris />
@@ -58,7 +67,7 @@ export default function Playboard() {
 							</div>
 
 
-							<div className="bg-gray-100 pl-0 w-1/4">
+							<div className="text-white pl-0 w-1/4 ">
 								<NextTetros />
 								<Options />
 							</div>
@@ -68,10 +77,10 @@ export default function Playboard() {
 						</div>
 					</div>
 				</div>
-				<div className="w-full lg:w-1/12 order-1 lg:order-last flex flex-col flex-1 justify-start gap-1">
-					<ProfileCard playboard={true} />
+				<div className="w-full   order-1 lg:order-last flex flex-col flex-1 justify-start gap-1">
+					<Profile_card playboard={true} />
 					<div className="w-full mx-auto">
-						<Opponents />
+						<YoutubeEmbed embedId="s-Dq5FJEH10" />
 					</div>
 				</div>
 			</div>

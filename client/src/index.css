@@ -14,3 +14,9 @@
     @apply: bg-green-400;
     background-color: #68D391;
 }
+body {
+    background-image: url('./assets/images/bg.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+}

@@ -45,8 +45,8 @@ export const gameSlice = createSlice({
 			state.inGame = true
 		},
 		SET_GAME_OVER(state) {
-			state.gameOver = true
 			state.started = false
+			state.gameOver = true
 		},
 		SET_WINNER(state, action: PayloadAction<string>) {
 			state.winner = action.payload
@@ -81,7 +81,7 @@ export const gameSlice = createSlice({
 		},
 		UPDATE_GAME_MODE(state, action: PayloadAction<TypeGameMode>) {
 			state.mode = action.payload
-			console.log(state.inGame)
+			console.log("UPDATING GAME MODE WHEN  inGame state is", state.inGame)
 			if (state.inGame) {
 				socket.emit("UPDATE_GAME_MODE", state.mode)
 			}

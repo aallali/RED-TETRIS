@@ -1,5 +1,5 @@
 import React from 'react';
-import { BROADCAST_SCORE } from '../../actions';
+import { BROADCAST_SCORE } from '../actions';
 import { createStage } from '../../helpers/gameHelpers';
 // Types
 import { IStage, IStageCell, IPlayer } from "../../types"
