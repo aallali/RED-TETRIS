@@ -29,7 +29,7 @@ const Options: React.FC = () => {
 		}
 	}, [isLocked])
 	return (
-		<div className="font-bold  backdrop-filter backdrop-blur-xs" >
+		<div className="font-bold backdrop-filter backdrop-blur-xs" >
 			<p >
 				<button className="inline-flex items-center justify-center w-9 h-9 m-1 text-indigo-100 transition-colors duration-150 rounded-lg focus:shadow-outline bg-yellow-300 hover:bg-yellow-500"
 					onClick={() => toggleSound(prev => !prev)}>
