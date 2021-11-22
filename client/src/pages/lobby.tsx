@@ -1,7 +1,7 @@
 import RoomBar from "../component/room_bar"
 import RankedPlayers from "../component/ranked_players";
 import CreateRoomInput from "../component/create_room";
-import ProfileCard from "../component/profileCard";
+import Profile_card from "../component/profile_card";
 import { useEffect, useState } from "react";
 import axios from "axios"
 interface IRooms {
@@ -26,14 +26,14 @@ export default function Lobby({ callback }: { callback: CallableFunction }) {
 	}, []);
 	return (
 		// Start of left side of the lobby page
-		<div className="bg-gray-200 min-h-screen flex justify-center items-center shadow-xl">
+		<div className="  min-h-screen flex justify-center items-center shadow-xl">
 			<div className="mt-0  flex flex-col lg:flex-row w-full justify-center gap-2 p-4">
 				<div className="bg-white lg:w-7/12 p-4 rounded-lg order-2 lg:order-first">
 					<h1 className="text-gray-700 text-xl  font-bold">
 						Start your own room now !
 					</h1>
 					{/*Creat a room input*/}
-					<CreateRoomInput callback={callback} />
+					<CreateRoomInput />
 					{/*End of Creat a room input*/}
 					<h1 className="text-gray-700 font-bold text-xl tracking-wider">
 						Rooms Online now :
@@ -42,15 +42,18 @@ export default function Lobby({ callback }: { callback: CallableFunction }) {
 						{rooms.length === 0 ? (<h1 className="text-md">No open room available ... create yours now!</h1>) :
 							rooms.sort((a, b) => a.active_players - b.active_players).map(room =>
 							(
-								<RoomBar key={room.title} {...room} callback={callback} />
+								<RoomBar key={room.title} {...room} />
 							)
 							)}
 					</div>
 				</div>
 				<div className="w-full lg:w-1/12 order-1 lg:order-last flex flex-col flex-1 justify-start gap-2">
-					<ProfileCard />
+					<Profile_card />
 					{/*START OF RANKING*/}
+					<div className="gap-2 justify-between flex flex-row">
 					<RankedPlayers />
+					<RankedPlayers />
+					</div>
 					{/*END OF RANKING*/}
 				</div>
 			</div>

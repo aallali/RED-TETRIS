@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ROWPOINTS } from '../../helpers/tetrominos';
 import { UPDATE_SCORE } from "../../reducers/player.reducer"
 import { useAppDispatch } from '../hooks';
-import popMp3 from "../../assets/scoring.mp3"
+import popMp3 from "../../assets/audio/scoring.mp3"
 export const useGameStatus = (rowsCleared: number, stage: any) => {
 	rowsCleared = Math.ceil(rowsCleared / 2)
 	const dispatch = useAppDispatch()

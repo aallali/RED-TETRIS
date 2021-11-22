@@ -5,9 +5,9 @@ import {
 	PLAYER_LOST, RESET_STATES,
 	BROADCAST_SCORE,
 	UNSET_PLAYER_ADMIN
-} from "../reducers/player.reducer";
-import { UPDATE_PLAYERS, CLEAR_OPPONENTS } from "../reducers/opponent.reducer"
-import { SET_ERROR, CLEAR_ERROR } from "../reducers/error.reducer"
+} from "../../reducers/player.reducer";
+import { UPDATE_PLAYERS, CLEAR_OPPONENTS } from "../../reducers/opponent.reducer"
+import { SET_ERROR, CLEAR_ERROR } from "../../reducers/error.reducer"
 
 import {
 	SHIFT_TETRO, MORE_TETROS,
@@ -17,12 +17,13 @@ import {
 	UPDATE_GAME_MODE,
 	LEAVE_GAME,
 	SET_GAME_TITLE
-} from "../reducers/game.reducer"
+} from "../../reducers/game.reducer"
 
 export {
 	// Players actions
 	SET_PLAYER, SET_GAME,
-	LOGOUT_PLAYER, UPDATE_SCORE,
+	LOGOUT_PLAYER,
+	UPDATE_SCORE,
 	SET_PLAYER_ADMIN,
 	ADD_ROW, PLAYER_LOST,
 	BROADCAST_SCORE,

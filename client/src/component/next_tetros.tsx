@@ -32,14 +32,14 @@ const NextTetros: React.FC = () => {
 		return stage
 	}
 	return (
-		<div className="inline-block">
-			{tetros.slice(1, 4).map((l, i) => (<Stage key={i} stage={generateMiniStageFromTetro(l)} STAGE_HEIGHT={4} STAGE_WIDTH={4} CELL_SIZE={15}></Stage>
-			))}
-
+		<div>
+			{/*{tetros.length > 0 ? (<h1 className={"text-xl text-gray-200 font-bold"}>Next Tetros :</h1>): null}*/}
+			<div className="inline-blocks  flex   space-x-2">
+				{tetros.slice(1, 4).map((l, i) => (<Stage  key={i} stage={generateMiniStageFromTetro(l)} STAGE_HEIGHT={4} STAGE_WIDTH={4} CELL_SIZE={15}/>
+				))}
+			</div>
 		</div>
 
 	)
 }
-
-
 export default NextTetros

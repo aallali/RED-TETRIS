@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { ComponentProps, useEffect, useState } from 'react';
+import React, {  useEffect, useState } from 'react';
 import { createStage, isColliding } from '../../helpers/gameHelpers';
 // Custom hooks
 import { useInterval } from '../../app/TetrisHooks/useInterval';
@@ -17,14 +17,13 @@ import { isGameStarted as isGameStartedS, isGameOver as isGameOverS, getTetros, 
 import { StyledTetrisWrapper } from './tetris.styles'
 import { socket, useAppDispatch, useAppSelector } from '../../app/hooks';
 // Actions
-import { PLAYER_LOST, BROADCAST_SCORE } from "../../actions"
+import { PLAYER_LOST, BROADCAST_SCORE } from "../../app/actions"
 import { TETROMINOS } from '../../helpers/tetrominos';
 // Audio assets
-import gameOverMp3 from "../../assets/game-over-sound-effect.mp3"
-import youLoseMp3 from "../../assets/you-lose-sound-effect.mp3"
+import gameOverMp3 from "../../assets/audio/game-over-sound-effect.mp3"
+import youLoseMp3 from "../../assets/audio/you-lose-sound-effect.mp3"
 
-const Tetris: React.FC = (props: ComponentProps<any>) => {
-	console.log("_TETRIS")
+const Tetris: React.FC = () => {
 	const dispatch = useAppDispatch()
 	// Selectors
 	const isGameOver = useAppSelector<boolean>(isGameOverS)
@@ -41,6 +40,7 @@ const Tetris: React.FC = (props: ComponentProps<any>) => {
 	const { player, updatePlayerPos, resetPlayer, playerRotate, setPlayer } = usePlayer();
 	const { stage, setStage, rowsCleared } = useStage(player, resetPlayer);
 	const { setScore, rows, setRows, level, setLevel } = useGameStatus(rowsCleared, stage);
+	const [dropping, setDropping] = useState(false)
 	useEffect(() => {
 		if (isGameStarted) {
 			let f = rows2add
@@ -64,9 +64,9 @@ const Tetris: React.FC = (props: ComponentProps<any>) => {
 
 		}
 	}, [rows2add]);
-	// useEffect(() => {
-	// 	dispatch(BROADCAST_SCORE(stage))
-	// }, [rows])
+	useEffect(() => {
+		dispatch(BROADCAST_SCORE(stage))
+	}, [rows])
 	const movePlayer = (dir: number) => {
 		if (!isColliding(player, stage, { x: dir, y: 0 })) {
 			updatePlayerPos({ x: dir, y: 0, collided: false });
@@ -83,8 +83,9 @@ const Tetris: React.FC = (props: ComponentProps<any>) => {
 	};
 
 	useEffect(() => {
-		if (isGameOver)
+		if (isGameOver) {
 			setDroptime(null);
+		}
 	}, [isGameOver])
 
 	useEffect(() => {
@@ -156,41 +157,39 @@ const Tetris: React.FC = (props: ComponentProps<any>) => {
 	};
 
 	const drop = (): void => {
-
-		// Increase level when player has cleared 5 rows
-		if (rows > level * 2) {
-			setLevel(prev => prev + 1);
-			// Also increase speed
-			setDroptime(1000 / level + 1000);
-		}
-
+		setDropping(true)
 		if (!isColliding(player, stage, { x: 0, y: 1 })) {
 			updatePlayerPos({ x: 0, y: 1, collided: false });
 
 		} else {
-			// dispatch(BROADCAST_SCORE(stage))
-			// Game over!
 			if (player.pos.y < 1) {
-				socket.emit("PLAYER_LOST", "this asshole lost")
+				// console.log(player.pos)
+				// console.log("PLAYER LOST")
 				setDroptime(null);
 				dispatch(PLAYER_LOST())
 				audio_game_over.play()
 				audio_you_lose.play()
+
 			} else {
-				setDroptime(1000 / level + 200);
+				dispatch(SHIFT_TETRO())
+				updatePlayerPos({ x: 0, y: 0, collided: true });
 			}
-
-			dispatch(SHIFT_TETRO())
-			updatePlayerPos({ x: 0, y: 0, collided: true });
-
 			dispatch(BROADCAST_SCORE(stage))
-
 		}
-
+		if (rows >= level * 4 ) {
+			setLevel(prev => prev + 1);
+			// Also increase speed
+		}
+		setDroptime(1000 / level + 400);
+		setDropping(false)
 		return
 	};
 	useInterval(() => {
-		drop();
+		// console.log(dropTime)
+		if (!dropping)
+			drop();
+		else
+			console.log("Still dropping")
 	}, dropTime);
 
 	return (

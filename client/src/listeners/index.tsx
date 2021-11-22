@@ -4,7 +4,7 @@ import {
 	UPDATE_PLAYERS, SET_PLAYER, SET_ERROR, SET_GAME_TITLE,
 	SET_PLAYER_ADMIN, ADD_ROW, MORE_TETROS, SET_GAME_STARTED,
 	SET_WINNER, SET_GAME_OVER, RESET_STATES, UNSET_PLAYER_ADMIN, CLEAR_OPPONENTS
-} from "../actions"
+} from "../app/actions"
 import { IError } from "../types"
 import { store } from "../app/store"
 
@@ -13,16 +13,17 @@ function SocketListerners() {
 	const dispatch = store.dispatch
 
 	socket.on("ROOM_INFOS", function (pyld: any) {
-		const playerName = localStorage.getItem("nickname")
-
+		const playerName = store.getState().player.nickname
 		if (pyld.winner?.name) {
 			dispatch(SET_WINNER(pyld.winner.name))
 		}
 		if (playerName) {
-			if (playerName === pyld.admin.name)
-				dispatch(SET_PLAYER_ADMIN())
-			else
-				dispatch(UNSET_PLAYER_ADMIN())
+			if (!store.getState().game.started) {
+				if (playerName === pyld.admin.name)
+					dispatch(SET_PLAYER_ADMIN())
+				else
+					dispatch(UNSET_PLAYER_ADMIN())
+			}
 			pyld.players = pyld.players.filter((l: any) => l.name !== playerName)
 			dispatch(UPDATE_PLAYERS(pyld))
 		}
@@ -31,7 +32,7 @@ function SocketListerners() {
 	socket.on("JOIN_ROOM", function (pyld: { name: string, room: string }) {
 		const playerName = localStorage.getItem("nickname")
 		if (!playerName)
-			dispatch(SET_PLAYER({ name: pyld.name, room: pyld.room }))
+			dispatch(SET_PLAYER({ name: pyld.name}))
 
 		dispatch(SET_GAME_TITLE(pyld.room))
 		dispatch(RESET_STATES())
@@ -55,7 +56,6 @@ function SocketListerners() {
 	})
 
 	socket.on("ADD_ROW", function (pyld: number) {
-		console.log("ROWS TO ADD :: ", pyld)
 		dispatch(ADD_ROW(pyld))
 	})
 

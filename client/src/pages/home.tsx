@@ -1,34 +1,22 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { useAppDispatch } from '../app/hooks';
-
-import { SET_PLAYER } from "../actions";
+import home_wallpaper from "../assets/images/tetris_home_wallpaper.jpg"
+import { SET_PLAYER } from "../app/actions";
 export default function Home() {
 	const [nickname, setNickName] = useState("")
 	const dispatch = useAppDispatch()
-
-
-
-
-	const isMounted = useRef(false)
-	useEffect(() => {
-		isMounted.current = true;
-		return () => {
-			isMounted.current = false;
-		}
-	}, [])
 
 	return (
 
 		<div className="min-h-screen   flex justify-center items-center" style={{
 			background:
-				'url("https://www.pixelstalk.net/wp-content/uploads/images1/Tetris-Game-Photos-Download.jpg") no-repeat',
+				`url("${home_wallpaper}") no-repeat`,
 			backgroundPosition: 'center',
 			backgroundSize: 'cover'
 		}}>
 
 			<div className="py-12 px-12 bg-white rounded-2xl shadow-xl z-20">
 				<div>
-
 					<h1 className="text-3xl font-bold text-center mb-4 cursor-pointer">
 						Welcome to Red Tetris
 					</h1>
