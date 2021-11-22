@@ -36,20 +36,15 @@ export default function Playboard() {
 
 	return (
 		// Start of left side of the lobby page
-		<div className=" min-h-screen flex justify-center items-center shadow-xl">
+		<div className="min-h-screen flex justify-center items-center shadow-xl">
 
-			<div className="mt-0   flex flex-col lg:flex-row w-full justify-center gap-2 p-4">
-				<div className="lg:w-9/12 p-4 rounded-md ">
+			<div className="mt-0   flex flex-col lg:flex-row w-full justify-center gap-2 p-4 ">
+				<div className="lg:w-9/12 p-4 rounded-md   ">
 
 					<div className="w-full mx-auto">
 						<div className="flex flex-col sm:flex-row gap-2 content-center">
-							<div className="w-6/12 ">
-								<div className="w-full mx-auto">
-									<Opponents />
-								</div>
-
-								{/*<ChatBox />*/}
-
+							<div className="w-auto inline-block ">
+								<Opponents />
 							</div>
 
 
@@ -82,6 +77,8 @@ export default function Playboard() {
 					<div className="w-full mx-auto">
 						<YoutubeEmbed embedId="s-Dq5FJEH10" />
 					</div>
+					<ChatBox />
+
 				</div>
 			</div>
 		</div >
