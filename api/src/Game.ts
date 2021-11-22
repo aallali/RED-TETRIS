@@ -41,7 +41,7 @@ export default class Game {
 						const roomname = this.players.get(socket.id)?.room
 
 						/**
-						 * 
+						 *
 						 */
 						const ft_player_left = () => {
 							if (this.players.get(socket.id) && this.players.get(socket.id).room) {
@@ -55,8 +55,8 @@ export default class Game {
 							// socket.leave(roomname)
 						}
 						/**
-						 * 
-						 * @param sid 
+						 *
+						 * @param sid
 						 */
 						const ft_start_game = (sid: string) => {
 							if (roomname) {
@@ -116,7 +116,7 @@ export default class Game {
 								ft_player_left()
 								break
 							case 'TETROS_PLEASE':
-								this.io.in(roomname).emit('HAK_TETROS', tetrosInst.getRandomTetros(5));
+								this.io.in(roomname).emit('HAK_TETROS', tetrosInst.getRandomTetros(10));
 								break
 							case 'UPDATE_GAME_MODE':
 								const roomAdmin = this.rooms.get(roomname)?.admin.name
@@ -153,4 +153,4 @@ export default class Game {
 	ADD_PLAYER(player: PLAYER) {
 		this.players.set(player.id, player)
 	}
-} 
+}
