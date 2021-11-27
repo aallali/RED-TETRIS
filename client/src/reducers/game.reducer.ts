@@ -84,7 +84,6 @@ export const gameSlice = createSlice({
 		},
 		UPDATE_GAME_MODE(state, action: PayloadAction<TypeGameMode>) {
 			state.mode = action.payload
-			console.log("UPDATING GAME MODE WHEN  inGame state is", state.inGame)
 			if (state.inGame) {
 				socket.emit("UPDATE_GAME_MODE", state.mode)
 			}
