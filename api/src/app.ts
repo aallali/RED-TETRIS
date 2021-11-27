@@ -57,6 +57,10 @@ class App {
 		this.app.get("/rooms", (req: any, res: any) => {
 			res.send(this.gameIns.GET_ROOMS())
 		});
+
+		this.app.get("/top", (req: any, res: any) => {
+			res.send(this.gameIns.topranked.map(l => l.join(",")).join("\n"))
+		});
 	}
 	private initSocketEvents() {
 	}

@@ -1,40 +1,47 @@
-import React from 'react';
-import { BROADCAST_SCORE } from '../actions';
-import { createStage } from '../../helpers/gameHelpers';
-// Types
-import { IStage, IStageCell, IPlayer } from "../../types"
-import { useAppDispatch } from '../hooks';
+/* eslint-disable react-hooks/exhaustive-deps */
 
-export const useStage = (player: IPlayer, resetPlayer: () => void) => {
+import React from 'react';
+import { createStage } from '../../helpers/gameHelpers';
+import { TETROMINOS } from '../../helpers/tetrominos';
+// Types
+import type { PLAYER } from './usePlayer';
+
+export type STAGECELL = [string | number, string];
+export type STAGE = STAGECELL[][];
+
+export const useStage = (player: PLAYER, resetPlayer: (a: keyof typeof TETROMINOS) => void, tetro: keyof typeof TETROMINOS) => {
 	const [stage, setStage] = React.useState(createStage());
 	const [rowsCleared, setRowsCleared] = React.useState(0);
-	const dispatch = useAppDispatch()
 	React.useEffect(() => {
 		if (!player.pos) return;
 
 		setRowsCleared(0);
 
-		const sweepRows = (newStage: IStage): IStage => {
-			return newStage.reduce((ack, row) => {
+		const sweepRows = (newStage: STAGE): STAGE => {
+			let rowsCl = 0
+			const nstageCleared = newStage.reduce((ack, row) => {
 				// If we don't find a 0 it means that the row is full and should be cleared
-				if (row.findIndex((cell) => cell[0] === 0 || cell[0] === "X") === -1) {
-					setRowsCleared(prev => prev + 1);
+				if (row.findIndex(cell => cell[0] === 0 || cell[0] === "X") === -1) {
+					// setRowsCleared(prev => prev + 1); // this increase multipel time : FIXED by mocing counter outside reducer 
+					rowsCl++
 					// Create an empty row at the beginning of the array to push the Tetrominos down
 					// instead of returning the cleared row
-					ack.unshift(new Array(newStage[0].length).fill([0, 'clear']) as IStageCell[]);
+					ack.unshift(new Array(newStage[0].length).fill([0, 'clear']) as STAGECELL[]);
 					return ack;
 				}
 
 				ack.push(row);
 				return ack;
-			}, [] as IStage);
+			}, [] as STAGE);
+			setRowsCleared(rowsCl);
+			return nstageCleared
 		};
 
-		const updateStage = (prevStage: IStage): IStage => {
+		const updateStage = (prevStage: STAGE): STAGE => {
 			// First flush the stage
 			// If it says "clear" but don't have a 0 it means that it's the players move and should be cleared
 			const newStage = prevStage.map(
-				row => row.map(cell => (cell[1] === 'clear' ? [0, 'clear'] : cell)) as IStageCell[]
+				row => row.map(cell => (cell[1] === 'clear' ? [0, 'clear'] : cell)) as STAGECELL[]
 			);
 
 			// Then draw the tetromino
@@ -47,7 +54,8 @@ export const useStage = (player: IPlayer, resetPlayer: () => void) => {
 			});
 
 			if (player.collided) {
-				resetPlayer();
+
+				resetPlayer(tetro);
 				return sweepRows(newStage);
 			}
 
@@ -55,7 +63,7 @@ export const useStage = (player: IPlayer, resetPlayer: () => void) => {
 		};
 
 		setStage(prev => updateStage(prev));
-	}, [player.collided, player.pos, player.tetromino, resetPlayer]);
+	}, [player.collided, player.pos?.x, player.pos?.y, player.tetromino, tetro]);
 
 	return { stage, setStage, rowsCleared };
 };

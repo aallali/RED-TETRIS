@@ -15,10 +15,11 @@ import {
 	SET_GAME_STARTED, SET_IN_GAME,
 	SET_WINNER, RESET_GAME,
 	UPDATE_GAME_MODE,
-	LEAVE_GAME,
-	SET_GAME_TITLE
+	LEAVE_GAME, UPDATE_ROOM_SIZE,
+	SET_GAME_TITLE,
 } from "../../reducers/game.reducer"
 
+import { ADD_MSG } from "../../reducers/chat.reducer"
 export {
 	// Players actions
 	SET_PLAYER, SET_GAME,
@@ -43,5 +44,9 @@ export {
 	SET_WINNER, RESET_GAME,
 	UPDATE_GAME_MODE,
 	LEAVE_GAME,
-	SET_GAME_TITLE
+	SET_GAME_TITLE,
+	UPDATE_ROOM_SIZE,
+
+	// Chat Actions
+	ADD_MSG
 }

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { TETROMINOS } from '../../../helpers/tetrominos'
+import { TETROMINOS } from "../../../../helpers/tetrominos"
 
 type Props = {
   type: keyof typeof TETROMINOS;

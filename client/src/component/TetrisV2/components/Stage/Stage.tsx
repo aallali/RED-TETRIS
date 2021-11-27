@@ -1,7 +1,7 @@
 import React from 'react';
 import Cell from '../Cell/Cell';
 import { StyledStage } from './Stage.styles';
-import { TETROMINOS } from '../../../helpers/tetrominos';
+import { TETROMINOS } from '../../../../helpers/tetrominos'
 
 export type STAGECELL = [keyof typeof TETROMINOS, string];
 export type STAGE = STAGECELL[][];

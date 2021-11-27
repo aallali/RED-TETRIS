@@ -12,17 +12,20 @@ export const opponentSlice = createSlice({
 	reducers: {
 		UPDATE_PLAYERS: (state, action: PayloadAction<any>) => {
 			const players = action.payload.players
-			state.players = players.map((el: IOpponentData): IOpponent => {
-				return ({
-					name: el.name,
-					stage: el.stage || [],
-					lost: el.lost,
-					rows: el.rows,
-					score: el.score,
-					level: el.level,
-					admin: action.payload.admin.name === el.name,
+
+			if (players.length > 0)
+				state.players = players.map((el: IOpponentData): IOpponent => {
+					return ({
+						name: el.name,
+						stage: el.stage || [],
+						lost: el.lost,
+						rows: el.rows,
+						score: el.score,
+						level: el.level,
+						admin: action.payload.admin.name === el.name,
+					})
 				})
-			})
+			else state.players = []
 		},
 		CLEAR_OPPONENTS(state) {
 			state.players = []

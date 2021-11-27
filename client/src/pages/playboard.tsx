@@ -4,13 +4,14 @@ import { useAppSelector } from "../app/hooks";
 // Stylesheets
 import "./playboard.css"
 // Components
-import Profile_card from "../component/profile_card";
-import Opponents from "../component/opponents"
-import NextTetros from "../component/next_tetros";
-import Tetris from "../component/tetris";
-import Options from "../component/options"
-import YoutubeEmbed from "../component/youtube_embed"
-import ChatBox from "../component/chatbox";
+import ProfileCard from "../component/ProfileCard";
+import Opponents from "../component/OpponentBox"
+import NextTetros from "../component/NextTetros";
+import TetrisV2 from "../component/TetrisV2";
+
+import Options from "../component/Options"
+// import YoutubeEmbed from "../component/YoutubeBox"
+import ChatBox from "../component/Chatbox";
 // images import
 import looser from "../assets/images/looser.gif"
 import winner from "../assets/images/winner.gif"
@@ -18,6 +19,7 @@ import winner from "../assets/images/winner.gif"
 // States Selectors
 import { isLost } from "../reducers/player.reducer"
 import { isGameOver } from "../reducers/game.reducer"
+import YoutubeEmbed from "../component/YoutubeBox";
 
 
 export const HashParser = (window_hash: string) => {
@@ -30,10 +32,9 @@ export const HashParser = (window_hash: string) => {
 
 
 export default function Playboard() {
-	console.log("_PLAYBOARD")
+
 	const isLostS = useAppSelector<boolean>(isLost)
 	const isGameOverS = useAppSelector<boolean>(isGameOver)
-
 	return (
 		// Start of left side of the lobby page
 		<div className="min-h-screen flex justify-center items-center shadow-xl">
@@ -43,15 +44,13 @@ export default function Playboard() {
 
 					<div className="w-full mx-auto">
 						<div className="flex flex-col sm:flex-row gap-2 content-center">
-							<div className="w-auto inline-block ">
-								<Opponents />
+							<div className="w-full inline-block ">
+								<Opponents gameOver={isGameOverS}/>
 							</div>
-
-
 							<div className="w-auto content-endy">
-
 								<div className={(isGameOverS || isLostS ? "resource resourceanimation" : "resource")}>
-									<Tetris />
+									{/* <Tetris /> */}
+									<TetrisV2 />
 									<div id="overlay">
 										<img className="trohpy-icon" src={isLostS ? looser : winner} alt="statPlayer" />
 										<h2 className="overlay-message text-center">{isLostS ? "What a shame looser" : "Congrats! you won."}</h2>
@@ -67,14 +66,12 @@ export default function Playboard() {
 								<Options />
 							</div>
 							{/* <div style={{ width: "100%", backgroundColor: "grays" }}> </div> */}
-
-
 						</div>
 					</div>
 				</div>
-				<div className="w-full   order-1 lg:order-last flex flex-col flex-1 justify-start gap-1">
-					<Profile_card playboard={true} />
-					<div className="w-full mx-auto">
+				<div className="w-auto   order-1 lg:order-last flex flex-col flex-1 justify-start gap-1">
+					<ProfileCard playboard={true} />
+					<div className="w-auto">
 						<YoutubeEmbed embedId="s-Dq5FJEH10" />
 					</div>
 					<ChatBox />

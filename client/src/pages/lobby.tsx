@@ -1,7 +1,7 @@
-import RoomBar from "../component/room_bar"
-import RankedPlayers from "../component/ranked_players";
-import CreateRoomInput from "../component/create_room";
-import Profile_card from "../component/profile_card";
+import RoomBar from "../component/RoomBar"
+import RankedPlayers from "../component/RankedPlayers";
+import CreateRoomInput from "../component/CreateRoom";
+import ProfileCard from "../component/ProfileCard";
 import { useEffect, useState } from "react";
 import axios from "axios"
 interface IRooms {
@@ -48,11 +48,26 @@ export default function Lobby({ callback }: { callback: CallableFunction }) {
 					</div>
 				</div>
 				<div className="w-full lg:w-1/12 order-1 lg:order-last flex flex-col flex-1 justify-start gap-2">
-					<Profile_card />
+					<ProfileCard />
 					{/*START OF RANKING*/}
 					<div className="gap-2 justify-between flex flex-row">
-					<RankedPlayers />
-					<RankedPlayers />
+						<div className="w-3/5">
+							<RankedPlayers />
+						</div>
+
+						<div className="bg-white rounded-lg p-1 pl-0 pr-0 w-full ">
+							<h1 className="font-bold tracking-wider text-gray-800 text-xl p-2">
+								About :
+							</h1>
+							<div className="flex flex-col items-center">
+								<div className="w-full md:w-full flex flex-col items-center h-60">
+									<div className="w-full px-2 overflow-x-auto">
+										<p><b>Red-Tetris</b> is an online multiplayer tetris game, realised in following stack [<b>reactJs</b>, <b>redux</b>, <b>sockets</b>, <b>express</b>] and written in typescript, it provides many features such playing in open/locked room and specify the size of your current room where you are the owner, play the game synchronously with joined members with same pieces, where one of you wins the game at the end, each time you clear a row, your opponents receive a n -1 row in their board, so be fast and clear more rows faster, the game just recently deployed to public so there is more feautures incomming to add and more bugs to fix :)</p>
+										<p>if you ever wanted to contact the creator, please feel free to reach me via : <b>hi@allali.me</b> </p>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 					{/*END OF RANKING*/}
 				</div>

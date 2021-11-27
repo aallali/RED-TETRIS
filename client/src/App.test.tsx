@@ -11,5 +11,17 @@ test('render app component', () => {
     </Provider>
   );
 
-  expect(getByText(/Welcome to Red Tetris/i)).toBeInTheDocument();
+  expect(getByText(/Welcome to DarkTetris/i)).toBeInTheDocument();
 });
+
+
+test('render app component', () => {
+	const { getByText } = render(
+	  <Provider store={store}>
+		<App />
+	  </Provider>
+	);
+  
+	expect(getByText(/nickname should be alphabetics or number or alphanumeric and 10 characters maximum/i)).toBeInTheDocument();
+  });
+  

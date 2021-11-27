@@ -1,10 +1,12 @@
 
-import { socket } from "../app/hooks"
 import {
 	UPDATE_PLAYERS, SET_PLAYER, SET_ERROR, SET_GAME_TITLE,
 	SET_PLAYER_ADMIN, ADD_ROW, MORE_TETROS, SET_GAME_STARTED,
-	SET_WINNER, SET_GAME_OVER, RESET_STATES, UNSET_PLAYER_ADMIN, CLEAR_OPPONENTS
+	SET_WINNER, SET_GAME_OVER, RESET_STATES, UNSET_PLAYER_ADMIN, CLEAR_OPPONENTS,
+	ADD_MSG
 } from "../app/actions"
+import { socket } from "../app/hooks"
+
 import { IError } from "../types"
 import { store } from "../app/store"
 
@@ -32,7 +34,7 @@ function SocketListerners() {
 	socket.on("JOIN_ROOM", function (pyld: { name: string, room: string }) {
 		const playerName = localStorage.getItem("nickname")
 		if (!playerName)
-			dispatch(SET_PLAYER({ name: pyld.name}))
+			dispatch(SET_PLAYER({ name: pyld.name }))
 
 		dispatch(SET_GAME_TITLE(pyld.room))
 		dispatch(RESET_STATES())
@@ -57,6 +59,11 @@ function SocketListerners() {
 
 	socket.on("ADD_ROW", function (pyld: number) {
 		dispatch(ADD_ROW(pyld))
+	})
+
+	socket.on("CHAT_MSG", function (pyld: { from: string, msg: string }) {
+		const { from, msg } = pyld
+		dispatch(ADD_MSG({ from, msg }))
 	})
 
 

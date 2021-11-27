@@ -2,9 +2,21 @@ export const STAGE_WIDTH = 10;
 export const STAGE_HEIGHT = 20;
 export const ROWPOINTS = [40, 100, 300, 1000];
 
+const colors = {
+	0: '244, 239, 201',
+	X: '0,0,0',
+	I: '211, 0, 38',
+	J: '157, 21, 44',
+	L: '211, 0, 38',
+	O: '134, 138, 147',
+	S: '94, 102, 116',
+	T: '94, 102, 116',
+	Z: '94, 102, 116',
+
+}
 export const TETROMINOS = {
-	0: { shape: [[0]], color: '1,1,1' },
-	X: { shape: [[0]], color: '255,255,255' },
+	0: { shape: [[0]], color: colors[0] },
+	X: { shape: [[0]], color: colors['X'] },
 	I: {
 		shape: [
 			[0, 'I', 0, 0],
@@ -12,7 +24,7 @@ export const TETROMINOS = {
 			[0, 'I', 0, 0],
 			[0, 'I', 0, 0]
 		],
-		color: '80, 227, 230'
+		color: colors['I']
 	},
 	J: {
 		shape: [
@@ -20,7 +32,7 @@ export const TETROMINOS = {
 			[0, 'J', 0],
 			['J', 'J', 0]
 		],
-		color: '36, 95, 223'
+		color: colors['J']
 	},
 	L: {
 		shape: [
@@ -28,14 +40,14 @@ export const TETROMINOS = {
 			[0, 'L', 0],
 			[0, 'L', 'L']
 		],
-		color: '223, 173, 36'
+		color: colors['L']
 	},
 	O: {
 		shape: [
 			['O', 'O'],
 			['O', 'O']
 		],
-		color: '223, 217, 36'
+		color: colors['O']
 	},
 	S: {
 		shape: [
@@ -43,7 +55,7 @@ export const TETROMINOS = {
 			['S', 'S', 0],
 			[0, 0, 0]
 		],
-		color: '48, 211, 56'
+		color: colors['S']
 	},
 	T: {
 		shape: [
@@ -51,7 +63,7 @@ export const TETROMINOS = {
 			['T', 'T', 'T'],
 			[0, 'T', 0]
 		],
-		color: '132, 61, 198'
+		color: colors['T']
 	},
 	Z: {
 		shape: [
@@ -59,6 +71,6 @@ export const TETROMINOS = {
 			[0, 'Z', 'Z'],
 			[0, 0, 0]
 		],
-		color: '227, 78, 78'
+		color: colors['Z']
 	}
 };

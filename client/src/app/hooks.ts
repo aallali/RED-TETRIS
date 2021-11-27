@@ -1,9 +1,9 @@
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import type { RootState, AppDispatch } from './store';
-import { useGameStatus } from "./TetrisHooks/useGameStatus"
-import { useInterval } from "./TetrisHooks/useInterval"
-import { usePlayer } from "./TetrisHooks/usePlayer"
-import { useStage } from "./TetrisHooks/useStage"
+import { useGameStatus } from "./TetrisHooksV2/useGameStatus"
+import { useInterval } from "./TetrisHooksV2/useInterval"
+import { usePlayer } from "./TetrisHooksV2/usePlayer"
+import { useStage } from "./TetrisHooksV2/useStage"
 
 
 import io from "socket.io-client";
