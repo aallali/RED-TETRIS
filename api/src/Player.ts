@@ -33,16 +33,12 @@ export default class Player {
 			name: this.name,
 			stage: this.stage
 		}
-		// console.log(`player [${this.name}] [${stage.length}] cleared ${this.rows}[+${pyld.new_roows}]`)
-		// TODO : emit new roows to "NEW SCORE"
-		// this.socket.broadcast.to(this.room).emit("NEW_SCORE", pyld)
 		return pyld
 	}
 
 	LOOSE() {
 		return new Promise((resolve, reject) => {
 			this.lost = true
-			// console.log(this.name + " has lost the game.")
 			resolve(this.lost)
 		})
 

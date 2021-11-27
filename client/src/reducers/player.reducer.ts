@@ -34,12 +34,10 @@ export const playerSlice = createSlice({
 	// The `reducers` field lets us define reducers and generate associated actions
 	reducers: {
 		SET_PLAYER: (state, action: PayloadAction<{ name: string }>) => {
-			console.log(state.nickname, action.payload)
-			if (state.nickname !== action.payload.name ) {
+			if (state.nickname !== action.payload.name) {
 				state.nickname = action.payload.name
 				localStorage.setItem("nickname", state.nickname)
 				localStorage.setItem("highestLevel", "1")
-				console.log(state.nickname, "THIS IS AFTER")
 			}
 
 		},
@@ -76,13 +74,11 @@ export const playerSlice = createSlice({
 		},
 		UNSET_PLAYER_ADMIN(state) {
 			if (state.isAdmin) {
-				console.log("UNSET PLAYER ADMIN")
 				state.isAdmin = false
 			}
 		},
 		SET_PLAYER_ADMIN(state) {
 			if (!state.isAdmin) {
-				console.log("Setting playe admin yes")
 				state.isAdmin = true
 			}
 		},
@@ -93,10 +89,16 @@ export const playerSlice = createSlice({
 			state.stage = action.payload
 		},
 		UPDATE_SCORE: (state, action: PayloadAction<IScore>) => {
-
 			state.rows = action.payload.rows
 			state.level = action.payload.level
 			state.score = action.payload.score
+
+			socket.emit("PLAYER_STAGE", {
+				score: state.score,
+				rows: state.rows,
+				level: state.level,
+				stage: action.payload.stage
+			})
 			if (state.level > state.highestLevel) {
 				state.highestLevel = state.level
 				localStorage.setItem("highestLevel", state.highestLevel.toString())
@@ -130,12 +132,9 @@ export const {
 
 export const getPlayer = (state: RootState) => state.player;
 export const getPlayerNickname = (state: RootState) => state.player.nickname;
-// export const getPlayerInGame = (state: RootState) => state.player.inGame;
 export const getRows2Add = (state: RootState) => state.player.rows2add;
+export const getPlayerScore = (state: RootState) => ({ level: state.player.level, rows: state.player.rows, score: state.player.score });
 
 export const isLost = (state: RootState) => state.player.lost
 export const isAdmin = (state: RootState) => state.player.isAdmin
-// export const isGameStarted = (state: RootState) => state.player.gameStarted
-// export const isGameOver = (state: RootState) => state.player.gameOver
-export const getPlayerScore = (state: RootState) => ({ level: state.player.level, rows: state.player.rows, score: state.player.score });
 export default playerSlice.reducer;

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react"
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { isAdmin as ifAdmin } from "../reducers/player.reducer"
@@ -9,8 +10,8 @@ import plus from "../assets/images/plus.png"
 import minus from "../assets/images/minus.png"
 import "../pages/playboard.css"
 // Actions
-import { UPDATE_GAME_MODE } from "../app/actions"
-import {store} from "../app/store";
+import { UPDATE_GAME_MODE, UPDATE_ROOM_SIZE } from "../app/actions"
+import { store } from "../app/store";
 
 
 const Options: React.FC = () => {
@@ -19,7 +20,7 @@ const Options: React.FC = () => {
 	const isAdminS = useAppSelector<boolean>(ifAdmin)
 	const [soundOn, toggleSound] = useState<boolean>(true)
 	const [isLocked, toggleLock] = useState<boolean>(gameMode === "solo" ? true : false)
-	const [roomSize, setRoomSize] = useState<number>(gameMode === "solo" ? 1: 5)
+	const [roomSize, setRoomSize] = useState<number>(gameMode === "solo" ? 1 : 10)
 	useEffect(() => {
 		if (isLocked === true || isLocked === false) {
 			if (isLocked)
@@ -28,12 +29,18 @@ const Options: React.FC = () => {
 				dispatch(UPDATE_GAME_MODE("multiplayer"))
 		}
 	}, [isLocked])
+
+	useEffect(() => {
+		if (roomSize > 1 && roomSize <= 10) 
+			dispatch(UPDATE_ROOM_SIZE(roomSize))
+		
+	}, [roomSize])
 	return (
 		<div className="font-bold backdrop-filter backdrop-blur-xs" >
 			<p >
 				<button className="inline-flex items-center justify-center w-9 h-9 m-1 text-indigo-100 transition-colors duration-150 rounded-lg focus:shadow-outline bg-yellow-300 hover:bg-yellow-500"
 					onClick={() => toggleSound(prev => !prev)}>
-					<img className="h-5" src={soundOn ? audioOn : audioOff} alt="sound" />
+					<img className="h-5" src={!soundOn ? audioOn : audioOff} alt="sound" />
 				</button>
 				<i className="text-sm ">: {soundOn ? "Sound On" : "Sound Off"}</i>
 			</p>
@@ -63,7 +70,7 @@ const Options: React.FC = () => {
 						focus:outline-none
 						cursor-pointer
 						 align-middle"
-						onClick={() => setRoomSize((prev) => prev > 1 ?  --prev : prev)}
+						onClick={() => setRoomSize((prev) => prev > 1 ? --prev : prev)}
 					>
 						<span className="m-auto">
 							<img className="h-3" src={minus} alt="minus" />
@@ -83,7 +90,7 @@ const Options: React.FC = () => {
 						rounded-r
 						focus:outline-none
 						cursor-pointer"
-						onClick={() => setRoomSize((prev) => prev < 5 ? ++prev : prev)}
+						onClick={() => setRoomSize((prev) => prev < 10 ? ++prev : prev)}
 					>
 						<span className="m-auto">
 							<img className="h-3" src={plus} alt="plus" />

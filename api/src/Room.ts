@@ -1,18 +1,26 @@
+'use-strict';
 
 import { Socket } from "socket.io";
 import { ROOM_MODE, IPlayer } from "./types"
 
 export default class ROOM {
+
 	public title: string
-	public mode: ROOM_MODE
+	public tetrominos: string[]
 	public started: boolean
+	public size: number
+
+	public winner?: IPlayer | null
 	public players: IPlayer[]
 	public admin: IPlayer
+	public mode: ROOM_MODE
+
 	private io?: Socket
-	public tetrominos: string[]
-	public size: number
-	public winner?: IPlayer | null
-	constructor({ title, mode, admin, io, size }: { title: string, mode: ROOM_MODE, admin: IPlayer, io?: Socket, size: number }) {
+
+	constructor(
+		{ title, mode, admin, io, size }
+			: { title: string, mode: ROOM_MODE, admin: IPlayer, io?: Socket, size: number }) {
+
 		this.title = title
 		this.mode = mode
 		this.players = []
@@ -23,15 +31,26 @@ export default class ROOM {
 		this.players = []
 		this.JOIN(admin)
 	}
+
 	emit(event: string, pyld: any) {
 		this.io.in(this.title).emit(event, pyld)
 	}
+
 	MODE(mode?: string) {
 		if (mode && (mode === "solo" || mode === "multiplayer")) {
 			this.mode = mode === "solo" ? ROOM_MODE.SOLO : ROOM_MODE.MULTIPLAYER
+			if (this.mode === ROOM_MODE.MULTIPLAYER)
+				this.size = 10
+			else
+				this.size = this.players.length || 1
 			this.emit("ROOM_INFOS", this.INFO())
 		}
-
+	}
+	SIZE(size: number) {
+		if (size > 0 && size <= 10) {
+			this.size = size
+			this.emit("ROOM_INFOS", this.INFO())
+		}
 
 	}
 	START() {
@@ -44,13 +63,12 @@ export default class ROOM {
 		})
 		this.started = true
 		this.winner = null
-		// this.REFRESH_ROOM()
 		this.emit("GAME_START", true)
 		this.emit("ROOM_INFOS", this.INFO())
-		// this.io.in(this.title).emit("START_GAME", { start: true })
 	}
 	INFO() {
 		const { winner, title, mode, players, size, admin, started } = this
+
 		return {
 			winner: winner,
 			title: title,
@@ -74,23 +92,16 @@ export default class ROOM {
 
 		player_instance.room = this.title
 		this.players.push(player_instance)
-		// console.log(`[ ${player_instance.name} ] has joined the room [${this.title}] ${this.players.length == 1 ? 'as Admin' : ''}`)
 		if (this.players.length == 1)
 			this.admin = player_instance
 		this.REFRESH_ROOM()
 		return player_instance
 	}
 	QUIT(player_id: string) {
-		// console.log(`[QUIT] : (${this.players.filter(p => p.id === player_id)[0]?.name}) left the room (${this.title})`)
 		this.players = this.players.filter(p => p.id !== player_id)
 		this.admin = this.players[0]
 		this.REFRESH_ROOM()
 		return
-	}
-	DISTRIBUTE_FUCKING_TETROMINOS() {
-		this.tetrominos = ['I', 'J', 'L', 'I', 'O', 'S', 'I', 'T', 'Z']  // TODO: replace with random generator function
-		// TODO : emit random tetrominos to player
-		return this.tetrominos;
 	}
 	IS_ENDED() {
 		if (this.players.length == 0)

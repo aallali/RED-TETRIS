@@ -1,4 +1,6 @@
-import { ChangeEvent, ComponentProps, useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+
+import { ChangeEvent, useState } from "react";
 import { UPDATE_GAME_MODE } from "../app/actions";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { getGameMode } from "../reducers/game.reducer";

@@ -1,6 +1,6 @@
 import React from "react"
 import { useAppSelector } from "../app/hooks";
-import Stage from "../component/tetris/Stage/Stage";
+import Stage from "./TetrisV2/components/Stage/Stage";
 import { TETROMINOS } from "../helpers/tetrominos";
 import "../pages/playboard.css"
 import { getTetros } from "../reducers/game.reducer";

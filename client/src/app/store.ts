@@ -3,13 +3,17 @@ import playerReducer from "../reducers/player.reducer";
 import opponentReducer from "../reducers/opponent.reducer"
 import errorReducer from "../reducers/error.reducer"
 import gameReducer from "../reducers/game.reducer"
+import chatReducer from '../reducers/chat.reducer';
+
 export const store = configureStore({
 	reducer: {
 		player: playerReducer,
 		opponents: opponentReducer,
 		error: errorReducer,
-		game: gameReducer
+		game: gameReducer,
+		chat: chatReducer
 	},
+	middleware: []
 });
 
 export type AppDispatch = typeof store.dispatch;

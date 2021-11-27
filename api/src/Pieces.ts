@@ -1,6 +1,6 @@
 
 class Pieces {
-	pieces: string[] = ['I']
+	pieces: string[] =  ['I', 'J', 'L', 'I', 'O', 'S', 'I', 'T', 'Z', 'I', 'O']
 	constructor(pieces: string[] | undefined) {
 		if (pieces)
 			this.pieces = pieces

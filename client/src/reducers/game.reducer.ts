@@ -14,6 +14,7 @@ interface IGame {
 	gameOver: boolean
 	nextPiece: keyof typeof TETROMINOS
 	indexNext: number
+	size: number
 }
 const initialState: IGame = {
 	title: "",
@@ -24,7 +25,8 @@ const initialState: IGame = {
 	nextPiece: 0,
 	mode: "multiplayer",
 	gameOver: false,
-	indexNext: 0
+	indexNext: 0,
+	size: 5
 };
 
 export const gameSlice = createSlice({
@@ -72,6 +74,7 @@ export const gameSlice = createSlice({
 			state.mode = "multiplayer"
 			state.gameOver = false
 			state.indexNext = 0
+			state.size = 5
 		},
 		SHIFT_TETRO: (state) => {
 			state.tetros.shift()
@@ -86,6 +89,10 @@ export const gameSlice = createSlice({
 				socket.emit("UPDATE_GAME_MODE", state.mode)
 			}
 		},
+		UPDATE_ROOM_SIZE(state, action: PayloadAction<number>) {
+			state.size = action.payload
+			socket.emit("UPDATE_ROOM_SIZE", action.payload)
+		},
 
 	}
 });
@@ -96,7 +103,7 @@ export const {
 	SET_GAME_STARTED, SET_IN_GAME,
 	SET_WINNER, RESET_GAME,
 	UPDATE_GAME_MODE,
-	LEAVE_GAME,
+	LEAVE_GAME,UPDATE_ROOM_SIZE,
 	SET_GAME_TITLE
 } = gameSlice.actions;
 export const isGameStarted = (state: RootState) => state.game.started;

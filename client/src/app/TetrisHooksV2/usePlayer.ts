@@ -1,30 +1,29 @@
 import React from 'react';
-import { STAGE_WIDTH } from '../../helpers/tetrominos';
+import { STAGE_WIDTH } from "../../helpers/tetrominos"
 import { isColliding } from '../../helpers/gameHelpers';
-import { IPlayer, IStage } from "../../types"
-import { useAppSelector } from '../hooks';
-import { getTetros } from '../../reducers/game.reducer';
+import { STAGE } from './useStage';
 import { TETROMINOS } from '../../helpers/tetrominos';
 
+export type PLAYER = {
+	pos: {
+		x: number;
+		y: number;
+	};
+	tetromino: (string | number)[][];
+	collided: boolean;
+};
 
 export const usePlayer = () => {
-	const [player, setPlayer] = React.useState({
-		pos: {
-			x: 0,
-			y: 0,
-		},
-		tetromino: TETROMINOS[0].shape,
-		collided: true,
-	} as IPlayer)
-	const tetros = useAppSelector(getTetros)
-	const rotate = (matrix: IPlayer['tetromino']) => {
+	const [player, setPlayer] = React.useState({} as PLAYER);
+
+	const rotate = (matrix: PLAYER['tetromino']) => {
 		// Make the rows to become cols (transpose)
 		const mtrx = matrix.map((_, i) => matrix.map(column => column[i]));
 		// Reverse each row to get a rotated matrix
 		return mtrx.map(row => row.reverse());
 	};
 
-	const playerRotate = (stage: IStage): void => {
+	const playerRotate = (stage: STAGE): void => {
 		const clonedPlayer = JSON.parse(JSON.stringify(player));
 		clonedPlayer.tetromino = rotate(clonedPlayer.tetromino);
 
@@ -55,19 +54,16 @@ export const usePlayer = () => {
 			return prev
 		});
 	};
-
 	const resetPlayer = React.useCallback(
-		(): void => {
-			if (tetros.length > 0) {
-				setPlayer({
-					pos: { x: STAGE_WIDTH / 2 - 2, y: 0 },
-					tetromino: TETROMINOS[tetros[0]].shape,
-					collided: false
-				})
-			}
+		(tetro: keyof typeof TETROMINOS): void => {
+			return setPlayer({
+				pos: { x: STAGE_WIDTH / 2 - 2, y: 0 },
+				tetromino: TETROMINOS[tetro].shape,
+				collided: tetro === 0 ? true : false
+			})
 		},
-		[tetros]
+		[]
 	);
 
-	return { player, updatePlayerPos, setPlayer, resetPlayer, playerRotate };
+	return { player, updatePlayerPos, resetPlayer, playerRotate };
 };

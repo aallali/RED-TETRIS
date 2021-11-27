@@ -1,30 +1,66 @@
-.chat-services{
-  transition: .5s;
+.chat-services {
+  transition: 0.5s;
   max-height: 0;
+  width: auto;
 }
-.chat-services.expand{
+.chat-services.expand {
   max-height: 350px;
 }
 .message {
-  max-width: 250px;
+  max-width: 500px;
+  word-wrap: break-word;
 }
 
-.chat-modal{
-  transition: .5s;
+.chat-modal {
+  transition: 0.5s;
   opacity: 0;
   transform: translateX(500px);
 }
 
-.chat-modal.show{
+.chat-modal.show {
   opacity: 1;
   transform: translateX(0);
 }
 
 @keyframes animateModal {
-  from{
+  from {
     transform: translateX(200px) opacity(0);
   }
-  to{
+  to {
     transform: translateX(0) opacity(1);
+  }
+}
+
+.blob {
+  background: transparent;
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
+  /* height: 20px; */
+  /* width: 20px; */
+  transform: scale(1);
+  animation: pulse-black 2s infinite;
+}
+
+.blob.red {
+  /* background: rgba(255, 82, 82, 1); */
+  background: transparent;
+  box-shadow: 0 0 0 0 rgba(255, 82, 82, 1);
+  animation: pulse-red 2s infinite;
+}
+
+@keyframes pulse-red {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(255, 82, 82, 0.7);
+  }
+
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 10px rgba(255, 82, 82, 0);
+  }
+
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(255, 82, 82, 0);
   }
 }

@@ -1,14 +1,14 @@
-import React, { ComponentProps } from "react"
+import { ComponentProps } from "react"
 import { useAppSelector } from "../app/hooks";
-import Stage from "../component/tetris/Stage/Stage";
+import Stage from "./TetrisV2/components/Stage/Stage"
 import { getOpponents } from "../reducers/opponent.reducer"
 import "../pages/playboard.css"
-import { isGameOver } from "../reducers/game.reducer";
+// import { isGameOver } from "../reducers/game.reducer";
 
 function Opponent(props: ComponentProps<any>) {
 	const { stage, name, admin, score, lost, level, rows } = props.p
 	return (
-		<div className="w-1/3 p-0">
+		<div className="w-auto p-0">
 			<div className="bg-white p-0 rounded-md shadow-lg text-center">
 				<h2 className="text-md font-bold text-gray-700">{admin ? '★' : '#'}{name}</h2>
 				<div className="flex flex-row  justify-center items-center">
@@ -29,9 +29,9 @@ function Opponent(props: ComponentProps<any>) {
 	)
 }
 
-const Opponents: React.FC = () => {
+const Opponents = ({ gameOver }: { gameOver: boolean }) => {
 	const players = useAppSelector(getOpponents)
-	const gameOver = useAppSelector(isGameOver)
+	// const gameOver = useAppSelector(isGameOver)
 	return (
 		<div className="flex gap-1 flex-wrap">
 			{

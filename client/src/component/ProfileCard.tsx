@@ -13,6 +13,7 @@ import cover_profile from "../assets/images/cover_profile.png"
 	const gameMode = useAppSelector(getGameMode)
 	const onlineOpponents = useAppSelector(getOpponents)
 	const dispatch = useAppDispatch()
+
 	function start() {
 		if (!gameStarted)
 			socket.emit("START_GAME")
@@ -28,7 +29,7 @@ import cover_profile from "../assets/images/cover_profile.png"
 
 		<div className="bg-white p-1 rounded-md text-center">
 			<img
-				src="https://picsum.photos/400"
+				src={cover_profile}
 				alt="deflat"
 				className="h-24  w-full object-cover content-center rounded-t-md"
 			/>
@@ -43,11 +44,13 @@ import cover_profile from "../assets/images/cover_profile.png"
 				{player.isAdmin ? '★' : ''}{player.nickname} {player.isAdmin}
 			</h1>
 
-
-			<button
+			{!props.playboard ? (<button
 				className="bg-blue-100  border-1 border-blue-700 py-2 px-2 rounded-md text-blue-700 text-md font-bold mb-2">
 				Max Level: {player.level}
-			</button>
+			</button>) : null
+			}
+
+			
 			{props.playboard ? (<div className="mt-0 flex justify-between mx-10 mb-1">
 				<div className="text-left">
 					<h1 className="text-gray-500">level</h1>
