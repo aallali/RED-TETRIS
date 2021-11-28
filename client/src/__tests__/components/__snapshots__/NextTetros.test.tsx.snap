@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App render test  1`] = `
+<div>
+  <div
+    className="inline-blocks  flex   space-x-2"
+  />
+</div>
+`;
