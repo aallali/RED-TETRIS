@@ -1,5 +1,6 @@
 
 
+import { TETROMINOS } from "../helpers/tetrominos";
 export interface IPlayer {
 	pos: {
 		x: number;
@@ -48,4 +49,30 @@ export interface IError {
 export interface IRoom {
 	title: string
 	online: number
+}
+
+export type TypeGameMode = "multiplayer" | "solo"
+export interface IGame {
+	title: string
+	started: boolean
+	inGame: boolean
+	winner: string | undefined
+	tetros: (keyof typeof TETROMINOS)[]
+	mode: TypeGameMode
+	gameOver: boolean
+	size: number
+}
+
+export interface IScore {
+	rows: number
+	level: number
+	score: number
+	stage: IStage
+}
+export interface IPlayerState extends IScore {
+	nickname: string
+	isAdmin: boolean
+	highestLevel: number
+	rows2add: number
+	lost: boolean
 }
