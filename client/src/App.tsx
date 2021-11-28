@@ -2,7 +2,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import Home from './pages/Home'
 import Lobby from './pages/Lobby'
-import Error from './component/Error';
+import Error from './components/Error';
 import {
 	getPlayerNickname
 } from './reducers/player.reducer';

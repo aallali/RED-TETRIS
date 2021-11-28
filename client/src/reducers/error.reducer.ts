@@ -7,7 +7,7 @@ const initialState: IError = {
 	message: "",
 }
 export const errorSlice = createSlice({
-	name: 'Opponents',
+	name: 'ErrorReducer',
 	initialState,
 	// The `reducers` field lets us define reducers and generate associated actions
 	reducers: {
@@ -15,12 +15,10 @@ export const errorSlice = createSlice({
 			state.title = action.payload.title
 			state.message = action.payload.message
 		},
-		CLEAR_ERROR: (state, action: PayloadAction<IError>) => {
-			state = {
-				title: "",
-				message: "",
-				secondaryMessage: ""
-			}
+		CLEAR_ERROR: (state) => {
+			state.title = ""
+			state.message = ""
+			state.secondaryMessage = ""
 		}
 	}
 });

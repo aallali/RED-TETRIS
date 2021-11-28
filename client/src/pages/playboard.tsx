@@ -4,14 +4,14 @@ import { useAppSelector } from "../app/hooks";
 // Stylesheets
 import "./playboard.css"
 // Components
-import ProfileCard from "../component/ProfileCard";
-import Opponents from "../component/OpponentBox"
-import NextTetros from "../component/NextTetros";
-import TetrisV2 from "../component/TetrisV2";
+import ProfileCard from "../components/ProfileCard";
+import Opponents from "../components/OpponentBox"
+import NextTetros from "../components/NextTetros";
+import TetrisV2 from "../components/TetrisV2";
 
-import Options from "../component/Options"
-// import YoutubeEmbed from "../component/YoutubeBox"
-import ChatBox from "../component/Chatbox";
+import Options from "../components/Options"
+// import YoutubeEmbed from "../components/YoutubeBox"
+import ChatBox from "../components/Chatbox";
 // images import
 import looser from "../assets/images/looser.gif"
 import winner from "../assets/images/winner.gif"
@@ -19,7 +19,7 @@ import winner from "../assets/images/winner.gif"
 // States Selectors
 import { isLost } from "../reducers/player.reducer"
 import { isGameOver } from "../reducers/game.reducer"
-import YoutubeEmbed from "../component/YoutubeBox";
+import YoutubeEmbed from "../components/YoutubeBox";
 
 
 export const HashParser = (window_hash: string) => {
