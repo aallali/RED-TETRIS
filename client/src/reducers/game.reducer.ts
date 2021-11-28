@@ -2,30 +2,15 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { socket } from '../app/hooks';
 import { RootState } from '../app/store';
 import { TETROMINOS } from "../helpers/tetrominos"
-
-type TypeGameMode = "multiplayer" | "solo"
-interface IGame {
-	title: string
-	started: boolean
-	inGame: boolean
-	winner: string | undefined
-	tetros: (keyof typeof TETROMINOS)[]
-	mode: TypeGameMode
-	gameOver: boolean
-	nextPiece: keyof typeof TETROMINOS
-	indexNext: number
-	size: number
-}
+import { IGame, TypeGameMode } from '../types';
 const initialState: IGame = {
 	title: "",
 	started: false,
 	inGame: false,
 	winner: undefined,
 	tetros: [],
-	nextPiece: 0,
 	mode: "multiplayer",
 	gameOver: false,
-	indexNext: 0,
 	size: 5
 };
 
@@ -70,10 +55,8 @@ export const gameSlice = createSlice({
 			state.inGame = false
 			state.winner = undefined
 			state.tetros = []
-			state.nextPiece = 0
 			state.mode = "multiplayer"
 			state.gameOver = false
-			state.indexNext = 0
 			state.size = 5
 		},
 		SHIFT_TETRO: (state) => {
@@ -102,16 +85,14 @@ export const {
 	SET_GAME_STARTED, SET_IN_GAME,
 	SET_WINNER, RESET_GAME,
 	UPDATE_GAME_MODE,
-	LEAVE_GAME,UPDATE_ROOM_SIZE,
+	LEAVE_GAME, UPDATE_ROOM_SIZE,
 	SET_GAME_TITLE
 } = gameSlice.actions;
 export const isGameStarted = (state: RootState) => state.game.started;
 export const isGameOver = (state: RootState) => state.game.gameOver
 export const getGameMode = (state: RootState) => state.game.mode
 export const getGameTitle = (state: RootState) => state.game.title
-export const getWinner = (state: RootState) => state.game.winner
-export const getGameWinner = (state: RootState) => state.game.winner
 export const getTetros = (state: RootState) => state.game.tetros
-export const getNextPiece = (state: RootState) => state.game.nextPiece
+
 
 export default gameSlice.reducer;

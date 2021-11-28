@@ -1,31 +1,19 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../app/store';
 import { socket } from "../app/hooks"
-import { IStage } from "../types"
-export interface IScore {
-	rows: number
-	level: number
-	score: number
-	stage: IStage
-}
-export interface IPlayer extends IScore {
-	nickname: string
-	isAdmin: boolean
-	highestLevel: number
-	rows2add: number
-	lost: boolean
-}
+import { IStage, IScore, IPlayerState } from "../types"
 
-const initialState: IPlayer = {
+
+const initialState: IPlayerState = {
 	nickname: localStorage.getItem("nickname") || "",
 	rows: 0,
-	level: parseInt(localStorage.getItem("highestLevel") || "1"),
+	level: parseInt(localStorage.getItem("highestLevel") || "0"),
 	score: 0,
 	lost: false,
 	isAdmin: false,
 	rows2add: 0,
-	stage: [],
-	highestLevel: parseInt(localStorage.getItem("highestLevel") || "1")
+	highestLevel: parseInt(localStorage.getItem("highestLevel") || "0"),
+	stage: []
 };
 
 export const playerSlice = createSlice({
@@ -57,19 +45,17 @@ export const playerSlice = createSlice({
 			state.score = 0
 			state.lost = false
 			state.rows2add = 0
-			state.stage = []
 		},
 		LOGOUT_PLAYER: (state) => {
 			localStorage.removeItem("nickname")
 			localStorage.removeItem("highestLevel")
 			state.nickname = ""
 			state.rows = 0
-			state.level = 1
+			state.level = 0
 			state.score = 0
 			state.isAdmin = false
-			state.highestLevel = 1
+			state.highestLevel = 0
 			state.rows2add = 0
-			state.stage = []
 			socket.emit("PLAYER_LEFT")
 		},
 		UNSET_PLAYER_ADMIN(state) {
@@ -84,9 +70,6 @@ export const playerSlice = createSlice({
 		},
 		ADD_ROW(state, action: PayloadAction<number>) {
 			state.rows2add = state.rows2add + action.payload
-		},
-		SET_STAGE(state, action: PayloadAction<any>) {
-			state.stage = action.payload
 		},
 		UPDATE_SCORE: (state, action: PayloadAction<IScore>) => {
 			state.rows = action.payload.rows
@@ -134,7 +117,7 @@ export const getPlayer = (state: RootState) => state.player;
 export const getPlayerNickname = (state: RootState) => state.player.nickname;
 export const getRows2Add = (state: RootState) => state.player.rows2add;
 export const getPlayerScore = (state: RootState) => ({ level: state.player.level, rows: state.player.rows, score: state.player.score });
-
 export const isLost = (state: RootState) => state.player.lost
 export const isAdmin = (state: RootState) => state.player.isAdmin
+
 export default playerSlice.reducer;
