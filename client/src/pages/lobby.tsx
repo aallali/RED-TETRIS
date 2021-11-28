@@ -1,7 +1,7 @@
-import RoomBar from "../component/RoomBar"
-import RankedPlayers from "../component/RankedPlayers";
-import CreateRoomInput from "../component/CreateRoom";
-import ProfileCard from "../component/ProfileCard";
+import RoomBar from "../components/RoomBar"
+import RankedPlayers from "../components/RankedPlayers";
+import CreateRoomInput from "../components/CreateRoom";
+import ProfileCard from "../components/ProfileCard";
 import { useEffect, useState } from "react";
 import axios from "axios"
 interface IRooms {
