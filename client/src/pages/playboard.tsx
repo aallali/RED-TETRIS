@@ -10,7 +10,6 @@ import NextTetros from "../components/NextTetros";
 import TetrisV2 from "../components/TetrisV2";
 
 import Options from "../components/Options"
-// import YoutubeEmbed from "../components/YoutubeBox"
 import ChatBox from "../components/Chatbox";
 // images import
 import looser from "../assets/images/looser.gif"
