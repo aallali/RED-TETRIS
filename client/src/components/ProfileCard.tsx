@@ -1,13 +1,18 @@
 import { ComponentProps } from "react";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
+// Selectors
 import { getPlayer } from "../reducers/player.reducer";
 import { getGameMode, isGameStarted } from "../reducers/game.reducer"
 import { getOpponents } from "../reducers/opponent.reducer";
+// actions
 import { LOGOUT_PLAYER } from "../app/actions";
+//socket
 import { socket } from "../app/hooks";
-
+// assets
 import cover_profile from "../assets/images/cover_profile.png"
- export default function Profile_card(props: ComponentProps<any>) {
+
+// Component Function , i dunno why i'm writing this xD
+export default function ProfileCard(props: ComponentProps<any>) {
 	const player = useAppSelector(getPlayer)
 	const gameStarted = useAppSelector(isGameStarted)
 	const gameMode = useAppSelector(getGameMode)
@@ -15,10 +20,10 @@ import cover_profile from "../assets/images/cover_profile.png"
 	const dispatch = useAppDispatch()
 
 	function start() {
-		if (!gameStarted)
-			socket.emit("START_GAME")
+		socket.emit("START_GAME")
 		return
 	}
+
 	function handleLeaveEvent() {
 		if (props.playboard) {
 			socket.emit("PLAYER_LEFT")
@@ -50,7 +55,7 @@ import cover_profile from "../assets/images/cover_profile.png"
 			</button>) : null
 			}
 
-			
+
 			{props.playboard ? (<div className="mt-0 flex justify-between mx-10 mb-1">
 				<div className="text-left">
 					<h1 className="text-gray-500">level</h1>
@@ -84,10 +89,6 @@ import cover_profile from "../assets/images/cover_profile.png"
 					}
 				</div>
 			</div>
-
-
 		</div >
-
-
 	);
 }
