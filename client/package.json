@@ -5,8 +5,8 @@
   "dependencies": {
     "@craco/craco": "^6.4.0",
     "@reduxjs/toolkit": "^1.5.1",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
+    "@testing-library/jest-dom": "^5.15.1",
+    "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^7.1.2",
     "@types/jest": "^24.0.0",
     "@types/node": "^12.0.0",
@@ -17,12 +17,14 @@
     "axios": "^0.24.0",
     "connected-react-router": "^6.9.1",
     "dotenv": "^10.0.0",
+    "enzyme": "^3.11.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.3.0",
     "react-scripts": "4.0.3",
     "react-test-renderer": "^17.0.2",
+    "redux-mock-store": "^1.5.4",
     "socket.io-client": "^4.3.2",
     "styled-components": "^5.3.3",
     "typescript": "~4.1.5"
@@ -33,9 +35,9 @@
     "test": "react-scripts test",
     "Cstart": "craco start",
     "Cbuild": "craco build",
-    "Ctest": "craco test",
+    "Ctest": "craco test --env=jsdom",
     "eject": "react-scripts eject",
-    "coverage": "craco test --env=jsdom --coverage  CI=true --detectOpenHandles "
+    "coverage": "craco test --env=jsdom --coverage  CI=true"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -54,10 +56,17 @@
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
+    "@types/enzyme": "^3.10.10",
+    "@types/enzyme-adapter-react-16": "^1.0.6",
     "@types/react-router-dom": "^5.3.2",
     "@types/react-test-renderer": "^17.0.1",
+    "@types/redux-mock-store": "^1.0.3",
     "@types/styled-components": "^5.1.15",
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.5",
     "autoprefixer": "^9.8.8",
+    "enzyme-adapter-react-16": "^1.15.6",
+    "jsdom": "^18.1.1",
+    "jsdom-global": "^3.0.2",
     "postcss": "^7.0.39",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17"
   }
