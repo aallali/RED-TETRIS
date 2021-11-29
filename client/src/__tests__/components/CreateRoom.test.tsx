@@ -1,30 +1,25 @@
-import renderer, { act } from "react-test-renderer";
+import renderer from "react-test-renderer";
 import CreateRoom from "../../components/CreateRoom"
 import { Provider } from 'react-redux';
 import * as reactRedux from "react-redux";
-import { render, fireEvent, screen, wrapper as dwrapper } from '../../test-utils'
+import { render, fireEvent, screen } from '../../test-utils'
 import { store } from "../../app/store"
 // so we can import fireEvent and screen here as well
 
-import { shallow, mount } from "enzyme";
-import App from "../../App";
-
-
 jest.setTimeout(10 * 1000)
 
-const runAllPromises = () => new Promise(setImmediate)
 describe("_ ChatBox Component test", () => {
 	const useDispatchMock = jest.spyOn(reactRedux, "useDispatch");
 	beforeEach(() => {
 		useDispatchMock.mockClear();
 	});
 
-	// test("test chatbox rendering ", () => {
-	// 	const tree = renderer.create(<Provider store={store}>
-	// 		<CreateRoom />
-	// 	</Provider>).toJSON();
-	// 	expect(tree).toMatchSnapshot();
-	// });
+	test("test chatbox rendering ", () => {
+		const tree = renderer.create(<Provider store={store}>
+			<CreateRoom />
+		</Provider>).toJSON();
+		expect(tree).toMatchSnapshot();
+	});
 
 	test('test send message chatbox', async () => {
 		useDispatchMock.mockReturnValue(jest.fn());
