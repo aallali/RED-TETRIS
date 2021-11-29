@@ -3,8 +3,8 @@
 
 import { createRef, useEffect, useState } from "react";
 import { socket, useAppDispatch, useAppSelector } from "../app/hooks";
-import { store } from "../app/store";
 import { ADD_MSG, getChatMsgs } from "../reducers/chat.reducer";
+import { getOpponents } from "../reducers/opponent.reducer";
 import "./css/chatbox.css"
 
 const SentMsg = ({ msg }: { msg: string }) => (<div className="message bg-black text-white p-1 self-end my-1 rounded-md shadow ml-3">
@@ -13,10 +13,10 @@ const SentMsg = ({ msg }: { msg: string }) => (<div className="message bg-black 
 const ReveicedMsg = ({ from, msg }: { from: string, msg: string }) => (<div className="message bg-white text-gray-700 p-1 self-start my-1 rounded-md shadow mr-3">
 	<b>[{from}]</b>:{msg}
 </div>)
-const ChatBox = () => {
+function ChatBox() {
 	const dispatch = useAppDispatch()
 	const boxRef = createRef<any>()
-	const friends = store.getState().opponents.players.map(l => l.name)
+	const friends = useAppSelector(getOpponents).map(l => l.name)
 	const [msg, setMsg] = useState<string>("")
 	const chatMsgs = useAppSelector(getChatMsgs)
 	const [newMsgs, setNewMsg] = useState(false)
@@ -28,7 +28,7 @@ const ChatBox = () => {
 
 	const handleSendMsg = () => {
 		if (msg?.trim().length > 0) {
-			dispatch(ADD_MSG({ from: "", msg: msg }))
+			dispatch(ADD_MSG({ from: "sssss", msg: msg }))
 			socket.emit("CHAT_MSG", { msg: msg })
 			setMsg("")
 		}
@@ -37,8 +37,6 @@ const ChatBox = () => {
 	const handleKeyDown = ({ key }: { key: string }) => {
 		if (key === 'Enter') {
 			handleSendMsg()
-			// boxRef.current.scrollTop = boxRef.current.scrollHeight;
-			// scrollTosBottom()
 		}
 	}
 
@@ -68,14 +66,14 @@ const ChatBox = () => {
 		showChat?.classList.add('hidden')
 		setTimeout(() => {
 			chatServices?.classList.add('expand')
-
 		}, 500);
 		setNewMsg(false)
 		setChatOpen(true)
 		return true
 	}
 	useEffect(() => {
-		boxRef.current.scrollTop = boxRef.current.scrollHeight;
+		if (boxRef.current)
+			boxRef.current.scrollTop = boxRef.current.scrollHeight;
 		setNewMsg(true)
 	}, [chatMsgs])
 
@@ -83,8 +81,7 @@ const ChatBox = () => {
 		// closeModel()
 		setTimeout(() => {
 			showModel()
-
-		}, 1000)
+		}, 500)
 	}, [])
 	useEffect(() => {
 		const showChat: Element | null = document.querySelector('.show-chat');
@@ -101,9 +98,11 @@ const ChatBox = () => {
 		<div>
 
 			<div className="fixed bottom-0 right-0 flex flex-col items-end ml-6  w-auto ">
-				<div className={"chat-modal mr-1 flex flex-col mb-5 shadow-lg w-full"}>
+				<div className={"chat-modal mr-1 flex flex-col mb-5 shadow-lg w-full"}
+					data-testid="chat-modal">
 					<div
 						className="close-chat bg-red-500 hover:bg-red-600 text-white mb-1 w-10 flex justify-center items-center px-2 py-1 rounded self-end cursor-pointer"
+						data-testid="closeModal"
 						onClick={() => closeModel()}
 					>
 						<svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-x" fill="currentColor"
@@ -133,7 +132,9 @@ const ChatBox = () => {
 
 					</div>
 
-					<div className={"flex flex-col bg-gray-200 px-2 chat-services overflow-auto "} ref={boxRef}>
+					<div className={"flex flex-col bg-gray-200 px-2 chat-services overflow-auto "} ref={boxRef}
+						data-testid="chat-services"
+					>
 						{
 							chatMsgs.map((l, i) => {
 								if (!l.from) return <SentMsg key={i} msg={l.msg} />
@@ -151,6 +152,7 @@ const ChatBox = () => {
 						</input>
 						<button
 							className="absolute right-0 bottom-0 text-black bg-white  hover:text-blue-500 m-1 px-3 py-1 w-auto transistion-color duration-100 focus:outline-none"
+							data-testid="send"
 							onClick={() => handleSendMsg()}
 						>Send
 						</button>
@@ -158,6 +160,7 @@ const ChatBox = () => {
 				</div>
 				<div
 					className={"show-chat mx-10 mb-6 mt-4 text-white hover:text-gray-500 flex justify-center items-center cursor-pointer "}
+					data-testid="show-chat"
 					onClick={() => showModel()}
 				>
 					<svg width="4em" height="2em" viewBox="0 0 16 16" className="bi bi-chat-text-fill" fill="currentColor"
