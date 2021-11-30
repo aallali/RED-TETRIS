@@ -46,24 +46,8 @@ function render(
 	return rtlRender(ui, { wrapper: Wrapper, ...renderOptions })
 }
 
-function wrapper(ui: React.ReactElement<any, string | React.JSXElementConstructor<any>>,
-	{
-		preloadedState,
-		store = configureStore({
-			reducer: {
-				player: playerReducer,
-				opponents: opponentReducer,
-				error: errorReducer,
-				game: gameReducer,
-				chat: chatReducer
-			},
-			preloadedState
-		}),
-		...renderOptions
-	}: any = {}) {
-	return <Provider store={store}>{ui}</Provider>
-}
+
 // re-export everything
 export * from '@testing-library/react'
 // override render method
-export { render, wrapper,aallaliStore }
+export { render, aallaliStore }
