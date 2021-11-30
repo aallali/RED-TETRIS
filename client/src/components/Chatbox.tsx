@@ -28,7 +28,7 @@ function ChatBox() {
 
 	const handleSendMsg = () => {
 		if (msg?.trim().length > 0) {
-			dispatch(ADD_MSG({ from: "sssss", msg: msg }))
+			dispatch(ADD_MSG({ from: "", msg: msg }))
 			socket.emit("CHAT_MSG", { msg: msg })
 			setMsg("")
 		}
