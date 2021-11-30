@@ -23,35 +23,29 @@ const HashParser = (window_hash: string) => {
 		return result;
 	return false;
 };
-const namevalidtor = (u: string, r: string) => {
-	if (u.length <= 10 && r.length <= 10)
-		return true
-	return false
-}
+// const namevalidtor = (u: string, r: string) => {
+// 	if (u.length <= 10 && r.length <= 10)
+// 		return true
+// 	return false
+// }
 function App() {
 	const dispatch = useAppDispatch()
 	const playerIngame = useAppSelector(getGameTitle)
 	const playerNickname = useAppSelector(getPlayerNickname)
-
 	const error = useAppSelector(getError)
 	const checkhash = () => {
-		const playername = store.getState().player.nickname
+		const playername = playerNickname
 		socket.emit("PLAYER_LEFT")
 		if (window.location.hash.substring(1)) {
 			let checkHash = HashParser(window.location.hash.substring(1))
 			if (checkHash && checkHash.groups) {
 				const { roomname, username } = checkHash.groups
-				if (namevalidtor(username, roomname)) {
-					if (playername && username !== playername) {
-						dispatch(SET_ERROR({ title: "Error :", message: "there is an username already set to this browser, try to leave first to register new account" }))
-					} else {
-						dispatch(SET_ERROR({ title: "", message: "" }))
-						const gameMode = store.getState().game.mode
-						socket.emit('JOIN_ROOM', { room: checkHash.groups.roomname, playerName: checkHash.groups.username, mode: gameMode });
-					}
-
+				if (playername && username !== playername) {
+					dispatch(SET_ERROR({ title: "Error :", message: "there is an username already set to this browser, try to leave first to register new account" }))
 				} else {
-					dispatch(SET_ERROR({ title: "hash_query_error", message: "" }))
+					dispatch(SET_ERROR({ title: "", message: "" }))
+					const gameMode = store.getState().game.mode
+					socket.emit('JOIN_ROOM', { room: roomname, playerName: username, mode: gameMode });
 				}
 
 			} else {
@@ -62,7 +56,6 @@ function App() {
 			// dispatch(LEAVE_GAME())
 			// dispatch(RESET_STATES())
 			socket.emit("PLAYER_LEFT")
-
 		}
 	}
 	useEffect(() => {
@@ -81,7 +74,7 @@ function App() {
 					(<Home />)
 					: (playerIngame ?
 						(<PlayBoard />)
-						: (<Lobby callback={() => 0} />)))}
+						: (<Lobby />)))}
 
 		</div>
 
