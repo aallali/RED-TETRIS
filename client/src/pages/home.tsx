@@ -12,6 +12,10 @@ export default function Home() {
 		} else
 			setError("nickname should be alphabetics or number or alphanumeric and 10 characters maximum ")
 	}, [nickname])
+
+	function setName(e: any) {
+		dispatch(SET_PLAYER({ name: nickname }))
+	}
 	return (
 
 		<div className="min-h-screen   flex justify-center items-center" style={{
@@ -21,13 +25,13 @@ export default function Home() {
 			backgroundSize: 'cover'
 		}}>
 
-			<div className="py-10 px-10 bg-white rounded-2xl shadow-xl z-20 " style={{width:"400px"}}>
+			<div className="py-10 px-10 bg-white rounded-2xl shadow-xl z-20 " style={{ width: "400px" }}>
 				<div>
 					<h1 className="text-3xl font-bold text-center mb-4 cursor-pointer">
 						Welcome to DarkTetris
 					</h1>
 					<p className="w-80 text-center text-sm mb-8 font-semibold text-gray-700 tracking-wide cursor-pointer">
-						choose a nickname to start playing 
+						choose a nickname to start playing
 					</p>
 				</div>
 				<div className="space-y-4 ">
@@ -42,8 +46,8 @@ export default function Home() {
 				</div>
 				<div className="text-center mt-6">
 					<button className={"py-3 w-64 text-xl font-bold  text-2xl text-white  rounded-2xl" + (error ? " bg-gray-300" : " bg-gray-900")}
-						onClick={() => dispatch(SET_PLAYER({ name: nickname }))}
-
+						onClick={setName}
+						data-testid="play"
 						disabled={!error ? false : true}>
 						PLAY
 					</button>
