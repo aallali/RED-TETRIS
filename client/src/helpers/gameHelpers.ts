@@ -1,16 +1,16 @@
 import { IPlayer, IStage } from "../types"
 
 import { STAGE_WIDTH, STAGE_HEIGHT } from './tetrominos';
-import { TETROMINOS } from './tetrominos';
 
 export const createStage = () => Array.from(Array(STAGE_HEIGHT), () => Array(STAGE_WIDTH).fill([0, 'clear']));
+export const costumStage = (t: string | number) => Array.from(Array(STAGE_HEIGHT), () => Array(STAGE_WIDTH).fill([t, 'clear']));
 
-export const randomTetromino = () => {
-	// ['I', 'J', 'L', 'I', 'O', 'S', 'I', 'T', 'Z'] 
-	const tetrominos =  ['I', 'J', 'L', 'I', 'O', 'S', 'I', 'T', 'Z']  as (keyof typeof TETROMINOS)[];
-	const randTetromino = tetrominos[Math.floor(Math.random() * tetrominos.length)];
-	return TETROMINOS[randTetromino];
-};
+// export const randomTetromino = () => {
+// 	// ['I', 'J', 'L', 'I', 'O', 'S', 'I', 'T', 'Z'] 
+// 	const tetrominos =  ['I', 'J', 'L', 'I', 'O', 'S', 'I', 'T', 'Z']  as (keyof typeof TETROMINOS)[];
+// 	const randTetromino = tetrominos[Math.floor(Math.random() * tetrominos.length)];
+// 	return TETROMINOS[randTetromino];
+// };
 
 export const isColliding = (player: IPlayer, stage: IStage, { x: moveX, y: moveY }: { x: number; y: number }) => {
 	// Using for loops to be able to return (and break). Not possible with forEach

@@ -4,25 +4,34 @@ import CreateRoomInput from "../components/CreateRoom";
 import ProfileCard from "../components/ProfileCard";
 import { useEffect, useState } from "react";
 import axios from "axios"
-interface IRooms {
+
+interface IRoom {
 	title: string
 	size: number
 	mode: string
 	started: boolean
 	active_players: number
 }
-export default function Lobby({ callback }: { callback: CallableFunction }) {
-	const [rooms, getRooms] = useState<IRooms[]>([])
+export default function Lobby() {
+	const [rooms, getRooms] = useState<IRoom[]>([])
 
-	useEffect(() => {
+	function setRooms() {
 		axios
-			.get(`${process.env.REACT_APP_API_URL}/rooms`)
-			.then((res: any) => {
-				getRooms([...res.data])
+			.get(`${process.env.REACT_APP_API_URL}/rooms`).then((res: any) => {
+				if (res.data?.length > 0)
+					getRooms([...res.data])
+				else
+					getRooms([
+						{ title: "arena", size: 7, active_players: 5, mode: "multiplayer", started: false },
+						{ title: "league", size: 3, active_players: 1, mode: "multiplayer", started: false },
+						{ title: "bitn3as", size: 2, active_players: 2, mode: "multiplayer", started: true },
+						{ title: "labs", size: 10, active_players: 10, mode: "multiplayer", started: false },
+						{ title: "cluster", size: 10, active_players: 1, mode: "multiplayer", started: false }])
 			})
-		return () => {
-
-		};
+		return
+	}
+	useEffect(() => {
+		setRooms()
 	}, []);
 	return (
 		// Start of left side of the lobby page

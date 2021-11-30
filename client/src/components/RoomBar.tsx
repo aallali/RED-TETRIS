@@ -24,7 +24,7 @@ export default function RoomBar(props: ComponentProps<any>) {
 				</div>
 				<button onClick={() => { window.location.hash = `#${props.title}[${playerName}]`; }}
 					className={"bg-blue-500 h-14 hover:bg-blue-400 text-white font-bold py-2 px-4 " +
-						"order-b-4 border-blue-700 hover:border-blue-500 rounded-r-lg " + (props.active_players === 10 ? "opacity-50 cursor-not-allowed" : null)}
+						"order-b-4 border-blue-700 hover:border-blue-500 rounded-r-lg " + (props.active_players === props.size ? "opacity-50 cursor-not-allowed" : null)}
 				>
 					JOIN
 				</button>

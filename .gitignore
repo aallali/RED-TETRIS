@@ -125,3 +125,6 @@ typings/
 
 # TernJS port file
 .tern-port
+
+
+__snapshots__

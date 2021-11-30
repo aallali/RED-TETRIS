@@ -16,7 +16,7 @@ export const chatSlice = createSlice({
 	// The `reducers` field lets us define reducers and generate associated actions
 	reducers: {
 		ADD_MSG: (state, action: PayloadAction<{ from: string, msg: string }>) => {
-			if (action.payload?.from && action.payload?.msg && action.payload.from?.length <= 10 && action.payload.msg?.length <= 100)
+			if (action.payload?.msg && action.payload.from?.length <= 10 && action.payload.msg?.length <= 100)
 				state.msgs = [...state.msgs, action.payload]
 		}
 	}

@@ -9,7 +9,7 @@ import { useStage } from "./TetrisHooksV2/useStage"
 import io from "socket.io-client";
 
 export const socket = io(`${process.env.REACT_APP_SOCKET_URL || process.env.REACT_APP_API_URL}`);
-console.log("[SOCKET] connected")
+// console.log("[SOCKET] connected")
 export { useGameStatus, usePlayer, useInterval, useStage }
 // Use throughout your app instead of plain `useDispatch` and `useSelector`
 export const useAppDispatch = () => useDispatch<AppDispatch>();

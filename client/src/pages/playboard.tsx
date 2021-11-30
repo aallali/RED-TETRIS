@@ -10,7 +10,6 @@ import NextTetros from "../components/NextTetros";
 import TetrisV2 from "../components/TetrisV2";
 
 import Options from "../components/Options"
-// import YoutubeEmbed from "../components/YoutubeBox"
 import ChatBox from "../components/Chatbox";
 // images import
 import looser from "../assets/images/looser.gif"
@@ -20,16 +19,6 @@ import winner from "../assets/images/winner.gif"
 import { isLost } from "../reducers/player.reducer"
 import { isGameOver } from "../reducers/game.reducer"
 import YoutubeEmbed from "../components/YoutubeBox";
-
-
-export const HashParser = (window_hash: string) => {
-	const regexp = /(?<roomname>[a-zA-Z0-9]{1,10})\[(?<username>[a-zA-Z0-9]{1,10})\]/;
-	const result = window_hash.match(regexp);
-	if (result)
-		return result;
-	return false;
-};
-
 
 export default function Playboard() {
 
