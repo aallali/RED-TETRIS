@@ -152,7 +152,7 @@ const TetrisV2: React.FC = () => {
 			if (player.pos.y < 1) {
 				setDroptime(null);
 				dispatch(PLAYER_LOST())
-				dispatch(SET_GAME_OVER())
+				// dispatch(SET_GAME_OVER())
 			}
 			dispatch(SHIFT_TETRO())
 			updatePlayerPos({ x: 0, y: 0, collided: true });
