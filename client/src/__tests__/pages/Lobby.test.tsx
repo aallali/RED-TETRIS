@@ -1,22 +1,17 @@
 
 import { Provider } from 'react-redux';
 import { store } from '../../app/store';
-import Lobby from '../../pages/Lobby';
+import Lobby from '../../pages/lobby';
 import renderer from "react-test-renderer";
 import * as reactRedux from "react-redux";
 // import { render, screen } from "@testing-library/react";
-import { render, screen } from '../../test-utils'
 
-import { fireEvent, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
 import { rest } from "msw";
 import { setupServer } from "msw/node";
-import { mount } from 'enzyme';
 
 // import { act } from 'react-test-renderer';
 // import { act } from '@testing-library/react';
-
 // import { act } from 'react-dom/test-utils';
-const axios = require('axios');
 
 const server = setupServer(
 	rest.get("http://localhost:4242/rooms", (_, res, ctx) => {
@@ -27,9 +22,7 @@ const server = setupServer(
 	})
 );
 
-// jest.mock('axios')
-
-const testRooms = [{ title: "arena", size: 7, active_players: 5, mode: "multiplayer" }, { title: "arena2", size: 3, active_players: 1, mode: "multiplayer" }]
+// const testRooms = [{ title: "arena", size: 7, active_players: 5, mode: "multiplayer" }, { title: "arena2", size: 3, active_players: 1, mode: "multiplayer" }]
 
 describe("_Loby PageXContainer test", () => {
 	const useDispatchMock = jest.spyOn(reactRedux, "useDispatch");

@@ -1,12 +1,12 @@
 
 /* eslint-disable react-hooks/exhaustive-deps */
-import Home from './pages/Home'
-import Lobby from './pages/Lobby'
+import Home from './pages/home'
+import Lobby from './pages/lobby'
 import Error from './components/Error';
 import {
 	getPlayerNickname
 } from './reducers/player.reducer';
-import PlayBoard from "./pages/Playboard";
+import PlayBoard from "./pages/playboard"
 import { useAppDispatch, useAppSelector } from "./app/hooks"
 import { getError } from './reducers/error.reducer';
 import { SET_ERROR } from './app/actions';

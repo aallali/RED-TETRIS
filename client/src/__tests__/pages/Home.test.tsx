@@ -1,7 +1,7 @@
 
 import { Provider } from 'react-redux';
 import { store } from '../../app/store';
-import Home from '../../pages/Home';
+import Home from '../../pages/home';
 import renderer from "react-test-renderer";
 import { render, screen } from '../../test-utils'
 import { fireEvent } from '@testing-library/react';
