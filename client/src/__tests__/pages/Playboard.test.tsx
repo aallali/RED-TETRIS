@@ -3,12 +3,10 @@ import { Provider } from 'react-redux';
 import { store } from '../../app/store';
 import renderer from "react-test-renderer";
 import * as reactRedux from "react-redux";
-import { render, screen } from '../../test-utils'
-import { fireEvent, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
+import { render } from '../../test-utils'
 import { rest } from "msw";
 import { setupServer } from "msw/node";
-import { mount } from 'enzyme';
-import Playboard from '../../pages/Playboard';
+import Playboard from '../../pages/playboard';
 // import { act } from 'react-test-renderer';
 // import { act } from '@testing-library/react';
 // import { act } from 'react-dom/test-utils';
