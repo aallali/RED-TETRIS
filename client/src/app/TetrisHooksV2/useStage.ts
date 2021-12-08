@@ -50,8 +50,14 @@ export const useStage = (player: PLAYER, resetPlayer: (a: keyof typeof TETROMINO
 				player.tetromino.forEach((row, y) => {
 					row.forEach((value, x) => {
 						if (value !== 0) {
+							try {
+								newStage[y + player.pos.y][x + player.pos.x] = [value, `${player.collided ? 'merged' : 'clear'}`];
 
-							newStage[y + player.pos.y][x + player.pos.x] = [value, `${player.collided ? 'merged' : 'clear'}`];
+							} catch (error) {
+								console.log(error)
+								console.log(`Throwed at Y : ${y} X: ${x} Player pos X ${player.pos.x} Player pos y ${player.pos.y}`)
+								console.log(player.pos)
+							}	
 						}
 					});
 				});
