@@ -30,12 +30,9 @@
     "typescript": "~4.1.5"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "Cstart": "craco start",
-    "Cbuild": "craco build",
-    "Ctest": "craco test --env=jsdom --detectOpenHandles",
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test --env=jsdom --detectOpenHandles",
     "eject": "react-scripts eject",
     "coverage": "craco test --env=jsdom --coverage  CI=true --detectOpenHandles"
   },
