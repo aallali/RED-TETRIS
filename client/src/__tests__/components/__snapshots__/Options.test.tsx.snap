@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`_ Options Component test render test 1 1`] = `
+<div
+  className="font-bold backdrop-filter backdrop-blur-xs"
+>
+  <p>
+    <button
+      className="inline-flex items-center justify-center w-9 h-9 m-1 text-indigo-100 transition-colors duration-150 rounded-lg focus:shadow-outline bg-yellow-300 hover:bg-yellow-500"
+      data-testid="toggleAudio"
+      onClick={[Function]}
+    >
+      <img
+        alt="sound"
+        className="h-5"
+        src="sound.png"
+      />
+    </button>
+    <i
+      className="text-sm "
+    >
+      : 
+      Sound On
+    </i>
+  </p>
+</div>
+`;

@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`_Home PageXContainer test _ Home rendering check 1`] = `
+<div
+  className="min-h-screen   flex justify-center items-center"
+  style={
+    Object {
+      "background": "url(\\"tetris_home_wallpaper.jpg\\") no-repeat",
+      "backgroundPosition": "center",
+      "backgroundSize": "cover",
+    }
+  }
+>
+  <div
+    className="py-10 px-10 bg-white rounded-2xl shadow-xl z-20 "
+    style={
+      Object {
+        "width": "400px",
+      }
+    }
+  >
+    <div>
+      <h1
+        className="text-3xl font-bold text-center mb-4 cursor-pointer"
+      >
+        Welcome to DarkTetris
+      </h1>
+      <p
+        className="w-80 text-center text-sm mb-8 font-semibold text-gray-700 tracking-wide cursor-pointer"
+      >
+        choose a nickname to start playing
+      </p>
+    </div>
+    <div
+      className="space-y-4 "
+    >
+      <input
+        className="block text-2xl py-3 px-4 rounded-lg w-full border outline-none"
+        onChange={[Function]}
+        placeholder="nickname..."
+        type="text"
+        value=""
+      />
+      <p
+        className="text-red-500 text-md p-1 "
+      >
+        
+      </p>
+    </div>
+    <div
+      className="text-center mt-6"
+    >
+      <button
+        className="py-3 w-64 text-xl font-bold  text-2xl text-white  rounded-2xl bg-gray-900"
+        data-testid="play"
+        disabled={false}
+        onClick={[Function]}
+      >
+        PLAY
+      </button>
+    </div>
+  </div>
+</div>
+`;

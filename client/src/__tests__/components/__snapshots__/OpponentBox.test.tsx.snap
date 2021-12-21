@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`_ Opponenets Component test opponents listing render test  1`] = `
+<div
+  className="flex gap-1 flex-wrap"
+>
+  <div
+    className="w-auto p-0"
+  >
+    <div
+      className="bg-white p-0 rounded-md shadow-lg text-center"
+    >
+      <h2
+        className="text-md font-bold text-gray-700"
+      >
+        #
+        botOpponent
+      </h2>
+      <div
+        className="flex flex-row  justify-center items-center"
+      />
+      <span
+        className="font-bold block text-left ml-2 p-0 text-xs"
+      >
+        level : (
+        2
+        ) 
+      </span>
+      <span
+        className="font-bold block text-left ml-2 p-0 text-xs"
+      >
+        Score : (
+        100
+        ) 
+      </span>
+      <span
+        className="font-bold block text-left ml-2 p-0 text-xs"
+      >
+        Rows c. : (
+        3
+        ) 
+      </span>
+    </div>
+  </div>
+</div>
+`;

@@ -1,0 +1,1315 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`_ TetrisV2 Testing ... __Playboard  snapshot test 1`] = `
+<div
+  className="min-h-screen flex justify-center items-center shadow-xl"
+>
+  <div
+    className="mt-0   flex flex-col lg:flex-row w-full justify-center gap-2 p-4 "
+  >
+    <div
+      className="lg:w-9/12 p-4 rounded-md   "
+    >
+      <div
+        className="w-full mx-auto"
+      >
+        <div
+          className="flex flex-col sm:flex-row gap-2 content-center"
+        >
+          <div
+            className="w-full inline-block "
+          >
+            <div
+              className="flex gap-1 flex-wrap"
+            />
+          </div>
+          <div
+            className="w-auto content-endy"
+          >
+            <div
+              className="resource"
+            >
+              <div
+                onKeyDown={[Function]}
+                onKeyUp={[Function]}
+                role="button"
+                tabIndex={0}
+              >
+                <div
+                  className="sc-gsDKAQ fTyBlK"
+                >
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                  <div
+                    className="sc-bdvvtL hygDQU"
+                    color="244, 239, 201"
+                    type={0}
+                  />
+                </div>
+              </div>
+              <div
+                id="overlay"
+              >
+                <img
+                  alt="statPlayer"
+                  className="trohpy-icon"
+                  src="winner.gif"
+                />
+                <h2
+                  className="overlay-message text-center"
+                >
+                  Congrats! you won.
+                </h2>
+              </div>
+            </div>
+          </div>
+          <div
+            className="text-white pl-0 w-1/4 "
+          >
+            <div>
+              <div
+                className="inline-blocks  flex   space-x-2"
+              />
+            </div>
+            <div
+              className="font-bold backdrop-filter backdrop-blur-xs"
+            >
+              <p>
+                <button
+                  className="inline-flex items-center justify-center w-9 h-9 m-1 text-indigo-100 transition-colors duration-150 rounded-lg focus:shadow-outline bg-yellow-300 hover:bg-yellow-500"
+                  data-testid="toggleAudio"
+                  onClick={[Function]}
+                >
+                  <img
+                    alt="sound"
+                    className="h-5"
+                    src="sound.png"
+                  />
+                </button>
+                <i
+                  className="text-sm "
+                >
+                  : 
+                  Sound On
+                </i>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="w-auto   order-1 lg:order-last flex flex-col flex-1 justify-start gap-1"
+    >
+      <div
+        className="bg-white p-1 rounded-md text-center"
+      >
+        <img
+          alt="deflat"
+          className="h-24  w-full object-cover content-center rounded-t-md"
+          src="cover_profile.png"
+        />
+        <div
+          className="flex justify-center"
+        >
+          <img
+            alt="Mr.Abdellah Allali"
+            className="w-14 h-14 rounded-full object-cover content-center -mt-8 border-4 border-white"
+            src="https://ui-avatars.com/api/?background=B82E1F&bold=true&color=fff&name="
+          />
+        </div>
+        <h1
+          className="text-center font-bold tracking-wider text-gray-700   m-0"
+        >
+          
+          
+           
+        </h1>
+        <div
+          className="mt-0 flex justify-between mx-10 mb-1"
+        >
+          <div
+            className="text-left"
+          >
+            <h1
+              className="text-gray-500"
+            >
+              level
+            </h1>
+            <p
+              className="text-xl text-gray-800"
+            >
+              0
+            </p>
+          </div>
+          <div
+            className="text-left"
+          >
+            <h1
+              className="text-gray-500"
+            >
+              Score
+            </h1>
+            <p
+              className="text-xl text-gray-800"
+            >
+              0
+            </p>
+          </div>
+          <div
+            className="text-left"
+          >
+            <h1
+              className="text-gray-500"
+            >
+              rows cleared
+            </h1>
+            <p
+              className="text-xl text-gray-800"
+            >
+              0
+            </p>
+          </div>
+        </div>
+        <div
+          className="w-full mx-auto"
+        >
+          <div
+            className="flex flex-col flex-1 sm:flex-row gap-1"
+          >
+            <button
+              className="bg-red-500 hover:bg-red-400 w-full py-1 px-4 mr-0 rounded-sm text-white text-sm font-semibold"
+              onClick={[Function]}
+            >
+              Leave
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        className="w-auto"
+      >
+        <div
+          className="video-responsive"
+        >
+          <iframe
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen={true}
+            frameBorder="0"
+            height="480"
+            src="https://www.youtube.com/embed/s-Dq5FJEH10"
+            title="Embedded youtube"
+            width="853"
+          />
+        </div>
+      </div>
+      <div>
+        <div
+          className="fixed bottom-0 right-0 flex flex-col items-end ml-6  w-auto "
+        >
+          <div
+            className="chat-modal mr-1 flex flex-col mb-5 shadow-lg w-full"
+            data-testid="chat-modal"
+          >
+            <div
+              className="close-chat bg-red-500 hover:bg-red-600 text-white mb-1 w-10 flex justify-center items-center px-2 py-1 rounded self-end cursor-pointer"
+              data-testid="closeModal"
+              onClick={[Function]}
+            >
+              <svg
+                className="bi bi-x"
+                fill="currentColor"
+                height="1em"
+                viewBox="0 0 16 16"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"
+                  fillRule="evenodd"
+                />
+                <path
+                  d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z"
+                  fillRule="evenodd"
+                />
+              </svg>
+            </div>
+            <div
+              className="flex justify-between items-center text-white p-1 pl-4 bg-black border shadow-lg mr-5 w-full rounded-t-lg"
+            >
+              <div
+                className="flex items-center"
+              >
+                <h2
+                  className="font-semibold tracking-wider"
+                >
+                  
+                </h2>
+              </div>
+            </div>
+            <div
+              className="flex flex-col bg-gray-200 px-2 chat-services overflow-auto "
+              data-testid="chat-services"
+            >
+              <div
+                className="message bg-white text-gray-700 p-1 self-start my-1 rounded-md shadow mr-3"
+              >
+                <b>
+                  [
+                  Team (automated)
+                  ]
+                </b>
+                :
+                Hi 👋! welcome to RED-TETRIS game, 1️⃣ first of all i wish you enjoy the game, 2️⃣ second and lets make it short, you can only write a message under 100 character,when u receive a message, the chatbox icon start an alert animation 🚩 until you open the chatbox, if you notice something to fix feel free to notify me, 3️⃣ third... play 🎮 && have fun  😄
+              </div>
+              <div
+                className="message bg-white text-gray-700 p-1 self-start my-1 rounded-md shadow mr-3"
+              >
+                <b>
+                  [
+                  Team (automated)
+                  ]
+                </b>
+                :
+                Regards ! Abdellah Allali (hi@allali.me)
+              </div>
+            </div>
+            <div
+              className="relative bg-white "
+            >
+              <input
+                className="pl-4 pr-16 py-2 border border-black-500 focus:outline-none w-full"
+                name="message"
+                onChange={[Function]}
+                onKeyDown={[Function]}
+                placeholder="write your message here ..."
+                type="text"
+                value=""
+              />
+              <button
+                className="absolute right-0 bottom-0 text-black bg-white  hover:text-blue-500 m-1 px-3 py-1 w-auto transistion-color duration-100 focus:outline-none"
+                data-testid="send"
+                onClick={[Function]}
+              >
+                Send
+              </button>
+            </div>
+          </div>
+          <div
+            className="show-chat mx-10 mb-6 mt-4 text-white hover:text-gray-500 flex justify-center items-center cursor-pointer "
+            data-testid="show-chat"
+            onClick={[Function]}
+          >
+            <svg
+              className="bi bi-chat-text-fill"
+              fill="currentColor"
+              height="2em"
+              viewBox="0 0 16 16"
+              width="4em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M16 8c0 3.866-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7zM4.5 5a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1h-7zm0 2.5a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1h-7zm0 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4z"
+                fillRule="evenodd"
+              />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
