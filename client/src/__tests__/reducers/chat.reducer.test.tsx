@@ -14,7 +14,7 @@ describe("_ Chat Reducer test", () => {
 	it("_ add msg / chat", () => {
 		expect(
 			ChatReducer({ msgs: [] }, chatActions.ADD_MSG({ from: "", msg: "message without user" }))
-		).toEqual({ "msgs": [] });
+		).toEqual({ "msgs": [{ from: "", msg: "message without user" }] });
 	});
 	it("_ add msg / chat", () => {
 		expect(
