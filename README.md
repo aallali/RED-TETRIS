@@ -38,8 +38,12 @@ the game will be deployed soon to be dispponible online :
 .
 .
 #### Work Process
+
 **start date** : `10-27-2021`
+
 **finish date** : `11-20-2021` 
+
 **total days** : `29` excluding a `6 days off`
+
 **daily working hours** : `1-2 hours`
 
