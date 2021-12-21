@@ -20,12 +20,12 @@ function SocketListerners() {
 			dispatch(SET_WINNER(pyld.winner.name))
 		}
 		if (playerName) {
-			if (!store.getState().game.started) {
+			// if (!store.getState().game.started) {
 				if (playerName === pyld.admin.name)
 					dispatch(SET_PLAYER_ADMIN())
 				else
 					dispatch(UNSET_PLAYER_ADMIN())
-			}
+			// }
 			pyld.players = pyld.players.filter((l: any) => l.name !== playerName)
 			dispatch(UPDATE_PLAYERS(pyld))
 		}
