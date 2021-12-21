@@ -28,7 +28,7 @@ export default function Home() {
 			<div className="py-10 px-10 bg-white rounded-2xl shadow-xl z-20 " style={{ width: "400px" }}>
 				<div>
 					<h1 className="text-3xl font-bold text-center mb-4 cursor-pointer">
-						Welcome to DarkTetris
+						Welcome to RedTetris
 					</h1>
 					<p className="w-80 text-center text-sm mb-8 font-semibold text-gray-700 tracking-wide cursor-pointer">
 						choose a nickname to start playing

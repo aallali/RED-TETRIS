@@ -1,9 +1,262 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`App render test  1`] = `
+exports[`_ NextTetro Component test Next Tetro snaphot  1`] = `
 <div>
   <div
     className="inline-blocks  flex   space-x-2"
-  />
+  >
+    <div
+      className="sc-gsDKAQ jyRyaZ"
+    >
+      <div
+        className="sc-bdvvtL hygDQU"
+        color="244, 239, 201"
+        type={0}
+      />
+      <div
+        className="sc-bdvvtL hygDQU"
+        color="244, 239, 201"
+        type={0}
+      />
+      <div
+        className="sc-bdvvtL hygDQU"
+        color="244, 239, 201"
+        type={0}
+      />
+      <div
+        className="sc-bdvvtL hygDQU"
+        color="244, 239, 201"
+        type={0}
+      />
+      <div
+        className="sc-bdvvtL hygDQU"
+        color="244, 239, 201"
+        type={0}
+      />
+      <div
+        className="sc-bdvvtL imEiLp"
+        color="94, 102, 116"
+        type="Z"
+      />
+      <div
+        className="sc-bdvvtL imEiLp"
+        color="94, 102, 116"
+        type="Z"
+      />
+      <div
+        className="sc-bdvvtL hygDQU"
+        color="244, 239, 201"
+        type={0}
+      />
+      <div
+        className="sc-bdvvtL hygDQU"
+        color="244, 239, 201"
+        type={0}
+      />
+      <div
+        className="sc-bdvvtL hygDQU"
+        color="244, 239, 201"
+        type={0}
+      />
+      <div
+        className="sc-bdvvtL imEiLp"
+        color="94, 102, 116"
+        type="Z"
+      />
+      <div
+        className="sc-bdvvtL imEiLp"
+        color="94, 102, 116"
+        type="Z"
+      />
+      <div
+        className="sc-bdvvtL hygDQU"
+        color="244, 239, 201"
+        type={0}
+      />
+      <div
+        className="sc-bdvvtL hygDQU"
+        color="244, 239, 201"
+        type={0}
+      />
+      <div
+        className="sc-bdvvtL hygDQU"
+        color="244, 239, 201"
+        type={0}
+      />
+      <div
+        className="sc-bdvvtL hygDQU"
+        color="244, 239, 201"
+        type={0}
+      />
+    </div>
+    <div
+      className="sc-gsDKAQ jyRyaZ"
+    >
+      <div
+        className="sc-bdvvtL hygDQU"
+        color="244, 239, 201"
+        type={0}
+      />
+      <div
+        className="sc-bdvvtL hygDQU"
+        color="244, 239, 201"
+        type={0}
+      />
+      <div
+        className="sc-bdvvtL hygDQU"
+        color="244, 239, 201"
+        type={0}
+      />
+      <div
+        className="sc-bdvvtL hygDQU"
+        color="244, 239, 201"
+        type={0}
+      />
+      <div
+        className="sc-bdvvtL imEiLp"
+        color="94, 102, 116"
+        type="T"
+      />
+      <div
+        className="sc-bdvvtL imEiLp"
+        color="94, 102, 116"
+        type="T"
+      />
+      <div
+        className="sc-bdvvtL imEiLp"
+        color="94, 102, 116"
+        type="T"
+      />
+      <div
+        className="sc-bdvvtL hygDQU"
+        color="244, 239, 201"
+        type={0}
+      />
+      <div
+        className="sc-bdvvtL hygDQU"
+        color="244, 239, 201"
+        type={0}
+      />
+      <div
+        className="sc-bdvvtL imEiLp"
+        color="94, 102, 116"
+        type="T"
+      />
+      <div
+        className="sc-bdvvtL hygDQU"
+        color="244, 239, 201"
+        type={0}
+      />
+      <div
+        className="sc-bdvvtL hygDQU"
+        color="244, 239, 201"
+        type={0}
+      />
+      <div
+        className="sc-bdvvtL hygDQU"
+        color="244, 239, 201"
+        type={0}
+      />
+      <div
+        className="sc-bdvvtL hygDQU"
+        color="244, 239, 201"
+        type={0}
+      />
+      <div
+        className="sc-bdvvtL hygDQU"
+        color="244, 239, 201"
+        type={0}
+      />
+      <div
+        className="sc-bdvvtL hygDQU"
+        color="244, 239, 201"
+        type={0}
+      />
+    </div>
+    <div
+      className="sc-gsDKAQ jyRyaZ"
+    >
+      <div
+        className="sc-bdvvtL hygDQU"
+        color="244, 239, 201"
+        type={0}
+      />
+      <div
+        className="sc-bdvvtL hygDQU"
+        color="244, 239, 201"
+        type={0}
+      />
+      <div
+        className="sc-bdvvtL hygDQU"
+        color="244, 239, 201"
+        type={0}
+      />
+      <div
+        className="sc-bdvvtL hygDQU"
+        color="244, 239, 201"
+        type={0}
+      />
+      <div
+        className="sc-bdvvtL hygDQU"
+        color="244, 239, 201"
+        type={0}
+      />
+      <div
+        className="sc-bdvvtL jAbiif"
+        color="134, 138, 147"
+        type="O"
+      />
+      <div
+        className="sc-bdvvtL jAbiif"
+        color="134, 138, 147"
+        type="O"
+      />
+      <div
+        className="sc-bdvvtL hygDQU"
+        color="244, 239, 201"
+        type={0}
+      />
+      <div
+        className="sc-bdvvtL hygDQU"
+        color="244, 239, 201"
+        type={0}
+      />
+      <div
+        className="sc-bdvvtL jAbiif"
+        color="134, 138, 147"
+        type="O"
+      />
+      <div
+        className="sc-bdvvtL jAbiif"
+        color="134, 138, 147"
+        type="O"
+      />
+      <div
+        className="sc-bdvvtL hygDQU"
+        color="244, 239, 201"
+        type={0}
+      />
+      <div
+        className="sc-bdvvtL hygDQU"
+        color="244, 239, 201"
+        type={0}
+      />
+      <div
+        className="sc-bdvvtL hygDQU"
+        color="244, 239, 201"
+        type={0}
+      />
+      <div
+        className="sc-bdvvtL hygDQU"
+        color="244, 239, 201"
+        type={0}
+      />
+      <div
+        className="sc-bdvvtL hygDQU"
+        color="244, 239, 201"
+        type={0}
+      />
+    </div>
+  </div>
 </div>
 `;

@@ -50,7 +50,10 @@ const TetrisV2: React.FC = () => {
 
 	useEffect(() => {
 		if (gameOver)
-			setDroptime(null);
+			{
+				setDroptime(null);
+				dispatch(SET_GAME_OVER())
+			}
 	}, [gameOver])
 	useEffect(() => {
 		if (isGameStarted && tetros.length <= 5) {

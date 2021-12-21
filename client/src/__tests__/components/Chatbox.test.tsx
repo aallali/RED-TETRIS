@@ -2,17 +2,10 @@ import renderer, { act } from "react-test-renderer";
 import Chatbox from "../../components/Chatbox"
 import { Provider } from 'react-redux';
 import * as reactRedux from "react-redux";
-import { render, fireEvent, screen, wrapper as dwrapper } from '../../test-utils'
+import { render, fireEvent, screen } from '../../test-utils'
 import { store } from "../../app/store"
 // so we can import fireEvent and screen here as well
-
-import { shallow, mount } from "enzyme";
-import App from "../../App";
-
-
 jest.setTimeout(10 * 1000)
-
-
 describe("_ ChatBox Component test", () => {
 	const useDispatchMock = jest.spyOn(reactRedux, "useDispatch");
 	beforeEach(() => {
@@ -29,9 +22,9 @@ describe("_ ChatBox Component test", () => {
 
 	it("simulate ENTER button click in chatbox input ", () => {
 		// const renderer = new ShallowRenderer();
-		const wrapper = mount(<Provider store={store}>
-			<Chatbox />
-		</Provider>)
+		// const wrapper = mount(<Provider store={store}>
+		// 	<Chatbox />
+		// </Provider>)
 		// // wrapper.render()
 		// const instance = wrapper.instance();
 		// console.log(instance.handleKeyDown({key:"Enter"}))

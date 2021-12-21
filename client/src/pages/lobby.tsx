@@ -24,7 +24,7 @@ export default function Lobby() {
 					getRooms([
 						{ title: "arena", size: 7, active_players: 5, mode: "multiplayer", started: false },
 						{ title: "league", size: 3, active_players: 1, mode: "multiplayer", started: false },
-						{ title: "bitn3as", size: 2, active_players: 2, mode: "multiplayer", started: true },
+						{ title: "bdroom", size: 2, active_players: 2, mode: "multiplayer", started: true },
 						{ title: "labs", size: 10, active_players: 10, mode: "multiplayer", started: false },
 						{ title: "cluster", size: 10, active_players: 1, mode: "multiplayer", started: false }])
 			})

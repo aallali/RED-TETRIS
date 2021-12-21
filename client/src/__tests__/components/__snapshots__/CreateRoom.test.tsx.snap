@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`_ ChatBox Component test test chatbox rendering  1`] = `
+<div
+  className="flex my-1  rounded-sm pt-3 pb-3 pr-4 pl-4  bg-blue-50 justify-between items-center"
+>
+  <div
+    className="flex flex-justify-start gap-1 items-center"
+  >
+    <div
+      className="relative inline-block w-10 mr-1 align-middle select-none transition duration-200 ease-in"
+    >
+      <input
+        className="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"
+        data-testid="toggle"
+        defaultChecked={true}
+        id="toggle"
+        name="toggle"
+        onChange={[Function]}
+        type="checkbox"
+        value="multiplayer"
+      />
+      <label
+        className="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
+        htmlFor="toggle"
+      />
+    </div>
+    <span
+      className="uppercase font-bold text-gray-700"
+    >
+      <label
+        className=""
+        htmlFor="toggle"
+      >
+        multiplayer
+      </label>
+    </span>
+  </div>
+  <div>
+    <form
+      className="m-0 flex"
+    >
+      <input
+        className="text-xl w-full rounded-l-md p-2 border-t mr-0 border-b border-l text-gray-800 border-gray-200 bg-white"
+        id="roomNameInput"
+        onChange={[Function]}
+        placeholder="room name..."
+        value=""
+      />
+      <button
+        className="text-md w-1/2 font-bold px-1 rounded-r-md bg-blue-400  text-gray-800 font-bold p-1 uppercase border-none"
+        onClick={[Function]}
+      >
+        Create
+      </button>
+    </form>
+    <p
+      className="text-xs text-red-600"
+    >
+      
+    </p>
+  </div>
+</div>
+`;

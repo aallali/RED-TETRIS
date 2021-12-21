@@ -6,21 +6,9 @@ import renderer from "react-test-renderer";
 import * as reactRedux from "react-redux";
 // import { render, screen } from "@testing-library/react";
 
-import { rest } from "msw";
-import { setupServer } from "msw/node";
-
 // import { act } from 'react-test-renderer';
 // import { act } from '@testing-library/react';
 // import { act } from 'react-dom/test-utils';
-
-const server = setupServer(
-	rest.get("http://localhost:4242/rooms", (_, res, ctx) => {
-		return res(ctx.status(200), ctx.json([{ title: "arena", size: 7, active_players: 5, mode: "multiplayer" }]))
-	}),
-	rest.get("http://localhost:4242/top", (_, res, ctx) => {
-		return res(ctx.status(200), ctx.json(`allali,67\nbot2,30\nbotUsername3,27`))
-	})
-);
 
 // const testRooms = [{ title: "arena", size: 7, active_players: 5, mode: "multiplayer" }, { title: "arena2", size: 3, active_players: 1, mode: "multiplayer" }]
 
@@ -30,11 +18,7 @@ describe("_Loby PageXContainer test", () => {
 		useDispatchMock.mockClear();
 		useDispatchMock.mockReturnValue(jest.fn());
 	});
-	beforeAll(() => server.listen());
 
-	afterEach(() => server.resetHandlers());
-
-	afterAll(() => server.close());
 
 	test("_ Loby Snapshot Check", () => {
 		const tree = renderer.create(<Provider store={store}>
