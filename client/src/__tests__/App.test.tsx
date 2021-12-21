@@ -5,26 +5,7 @@ import { store } from '../app/store';
 import App from '../App';
 import * as reactRedux from "react-redux";
 import renderer from "react-test-renderer";
-import { act } from "react-dom/test-utils";
 import { aallaliStore, render, screen } from '../test-utils'
-import { rest } from "msw";
-import { setupServer } from "msw/node";
-// const axios = require('axios');
-
-
-
-const server = setupServer(
-	// rest.get("http://localhost:4242/rooms", (_, res, ctx) => {
-	// 	return res(ctx.status(200),ctx.json([]))
-	// }),
-	// rest.get("http://localhost:4242/top", (_, res, ctx) => {
-	// 	return res(ctx.status(200), ctx.json({ data: `allali,67\nbot2,30\nbotUsername3,27` }))
-	// })
-);
-
-
-
-// jest.mock('axios')
 
 describe("_App Component test", () => {
 	const useDispatchMock = jest.spyOn(reactRedux, "useDispatch");
@@ -33,11 +14,6 @@ describe("_App Component test", () => {
 		useDispatchMock.mockReturnValue(jest.fn());
 
 	});
-	beforeAll(() => server.listen());
-
-	afterEach(() => server.resetHandlers());
-
-	afterAll(() => server.close());
 
 	test('_ welcome message / app', () => {
 		const { getByText } = render(
@@ -46,7 +22,7 @@ describe("_App Component test", () => {
 			</Provider>
 		);
 
-		expect(getByText(/Welcome to DarkTetris/i)).toBeInTheDocument();
+		expect(getByText(/Welcome to RedTetris/i)).toBeInTheDocument();
 	});
 
 	test('_ error message exists / app', () => {
