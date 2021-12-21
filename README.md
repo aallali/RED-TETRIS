@@ -10,7 +10,7 @@ The objective of this project is to develop a networked multiplayer tetrisgame f
 written in Typescript using OOP in core code of backend
 
 #### Incomming ...
-the game will be deployed soon to be dispponible online :
+the game will be deployed soon to be disponible online:
 [https://allali.me/redtetris/](https://allali.me/redtetris/)
 ## Screen Shots of the game :
 #### Tests written :
