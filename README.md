@@ -29,13 +29,21 @@ the game will be deployed soon to be disponible online:
 #### PlayBoard page , 3 :
 ![playboard-chat-open_Page](./docs/playboard-ChatOpen.png)
 .
+
 .
+
 .
+
 .
+
 .
+
 .
+
 .
+
 .
+
 .
 #### Work Process
 
