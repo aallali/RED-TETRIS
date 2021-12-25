@@ -21,6 +21,8 @@ import { PLAYER_LOST, SET_GAME_OVER, SHIFT_TETRO, UPDATE_SCORE } from '../../app
 // Selectors
 import { isGameStarted as isGameStartedS, isGameOver, getTetros, } from "../../reducers/game.reducer"
 import { getRows2Add } from '../../reducers/player.reducer';
+
+// Sound Effects
 import popAudioUrl from "../../assets/audio/pop.mp3";
 
 
