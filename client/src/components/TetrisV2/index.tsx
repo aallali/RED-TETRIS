@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { createStage, isColliding } from '../../helpers/gameHelpers';
 
 // Custom hooks
@@ -21,6 +21,7 @@ import { PLAYER_LOST, SET_GAME_OVER, SHIFT_TETRO, UPDATE_SCORE } from '../../app
 // Selectors
 import { isGameStarted as isGameStartedS, isGameOver, getTetros, } from "../../reducers/game.reducer"
 import { getRows2Add } from '../../reducers/player.reducer';
+import popAudioUrl from "../../assets/audio/pop.mp3";
 
 
 const TetrisV2: React.FC = () => {
@@ -30,6 +31,7 @@ const TetrisV2: React.FC = () => {
 	const gameOver = useAppSelector<boolean>(isGameOver)
 	const rows2add = useAppSelector(getRows2Add)
 	const tetros = useAppSelector(getTetros)
+	const [popAudio] = useState(new Audio(popAudioUrl));
 
 	const [dropTime, setDroptime] = React.useState<null | number>(null);
 	const gameArea = React.useRef<HTMLDivElement>(null);
@@ -40,6 +42,7 @@ const TetrisV2: React.FC = () => {
 
 	useEffect(() => {
 		dispatch(UPDATE_SCORE({ level: level, rows: rows, score: score, stage: stage }))
+		popAudio.play();
 	}, [rowsCleared])
 
 	useEffect(() => {
