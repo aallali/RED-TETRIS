@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import React, {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 // constants
 import { createStage } from '../../helpers/gameHelpers';
 import { TETROMINOS } from '../../helpers/tetrominos';
