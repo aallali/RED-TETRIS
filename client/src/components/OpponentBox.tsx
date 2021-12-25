@@ -2,22 +2,24 @@ import { ComponentProps } from "react"
 import { useAppSelector } from "../app/hooks";
 import Stage from "./TetrisV2/components/Stage/Stage"
 import { getOpponents } from "../reducers/opponent.reducer"
+import { createStage } from "../helpers/gameHelpers"
 import "../pages/playboard.css"
 // import { isGameOver } from "../reducers/game.reducer";
 
 function Opponent(props: ComponentProps<any>) {
 	const { stage, name, admin, score, lost, level, rows } = props.p
+	console.log(stage)
 	return (
 		<div className="w-auto p-0">
 			<div className="bg-white p-0 rounded-md shadow-lg text-center">
 				<h2 className="text-md font-bold text-gray-700">{admin ? '★' : '#'}{name}</h2>
 				<div className="flex flex-row  justify-center items-center">
 					{stage ? (<div className={(lost || props.gameOver ? "resource resourceanimation" : "resource")}
-					data-testid="gameOverOverlay"
+						data-testid="gameOverOverlay"
 					>
 						<Stage stage={stage} STAGE_HEIGHT={20} STAGE_WIDTH={10} CELL_SIZE={9} />
 						<div id="overlay">
-							<span className={" font-bold text-bold block " + (lost ? "text-red-500" : "text-yellow-500")}> {lost ? 'LOST' : ": Winner! :"}</span>
+							<span className={" font-bold text-bold block " + (lost ? "text-red-500" : "text-yellow-500")}> {JSON.stringify(stage) === JSON.stringify(createStage()) ? 'NEW' : lost ? 'LOST' : ": Winner! :"}</span>
 
 						</div>
 					</div>
