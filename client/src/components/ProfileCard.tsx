@@ -5,7 +5,7 @@ import { getPlayer } from "../reducers/player.reducer";
 import { getGameMode, isGameStarted } from "../reducers/game.reducer"
 import { getOpponents } from "../reducers/opponent.reducer";
 // actions
-import { LOGOUT_PLAYER } from "../app/actions";
+import { LOGOUT_PLAYER, RESET_GAME } from "../app/actions";
 //socket
 import { socket } from "../app/hooks";
 // assets
@@ -28,7 +28,10 @@ export default function ProfileCard(props: ComponentProps<any>) {
 		if (props.playboard) {
 			socket.emit("PLAYER_LEFT")
 			window.location.href = window.location.href.split('#')[0]
-		} else dispatch(LOGOUT_PLAYER())
+		} else {
+			dispatch(RESET_GAME())
+			dispatch(LOGOUT_PLAYER())
+		}
 	}
 	return (
 

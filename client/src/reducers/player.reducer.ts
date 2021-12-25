@@ -56,6 +56,8 @@ export const playerSlice = createSlice({
 			state.isAdmin = false
 			state.highestLevel = 0
 			state.rows2add = 0
+			state.stage = []
+			state.lost = false
 			socket.emit("PLAYER_LEFT")
 		},
 		UNSET_PLAYER_ADMIN(state) {
