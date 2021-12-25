@@ -8,7 +8,6 @@ import "../pages/playboard.css"
 
 function Opponent(props: ComponentProps<any>) {
 	const { stage, name, admin, score, lost, level, rows } = props.p
-	console.log(stage)
 	return (
 		<div className="w-auto p-0">
 			<div className="bg-white p-0 rounded-md shadow-lg text-center">
