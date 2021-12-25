@@ -229,7 +229,8 @@ exports[`_Loby PageXContainer test _ Loby Snapshot Check 1`] = `
                   <b>
                     redux
                   </b>
-                  , 
+                  ,
+                   
                   <b>
                     sockets
                   </b>
@@ -237,8 +238,30 @@ exports[`_Loby PageXContainer test _ Loby Snapshot Check 1`] = `
                   <b>
                     express
                   </b>
-                  ] and written in typescript, it provides many features such playing in open/locked room and specify the size of your current room where you are the owner, play the game synchronously with joined members with same pieces, where one of you wins the game at the end, each time you clear a row, your opponents receive a n -1 row in their board, so be fast and clear more rows faster, the game just recently deployed to public so there is more feautures incomming to add and more bugs to fix :)
+                  ] and written in typescript,
+                  <br />
+                  it provides many features such playing in open/locked room and specify the size of your current room where you are the owner,
+                  <br />
+                  play the game synchronously with joined members with same pieces, where one of you wins the game at the end, each time you clear a row, your opponents receive a n -1 row in their board, so be fast and clear more rows faster,
+                  <br />
+                  the game just recently deployed to public so there is more feautures incomming to add and more bugs to fix :)
                 </p>
+                <a
+                  href="https://www.buymeacoffee.com/allali"
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  <img
+                    alt="Buy Me A Coffee"
+                    src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
+                    style={
+                      Object {
+                        "height": "50px",
+                        "width": "180px",
+                      }
+                    }
+                  />
+                </a>
                 <p>
                   if you ever wanted to contact the creator, please feel free to reach me via : 
                   <b>
