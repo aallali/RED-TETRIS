@@ -7,7 +7,16 @@ import * as reactRedux from "react-redux";
 import { render } from '../../../test-utils'
 // import { act } from 'react-test-renderer';
 // import { act } from '@testing-library/react';
+Object.defineProperty(global.window.HTMLMediaElement.prototype, 'play', {
+	configurable: true,
+	// Define the property getter
+	get() {
+		setTimeout(() => (this.onloadeddata && this.onloadeddata()))
+		return () => { }
+	}
+})
 
+// trigger the code that you would expect to call the pause function
 describe("_ TetrisV2 Testing ...", () => {
 	const useDispatchMock = jest.spyOn(reactRedux, "useDispatch");
 	beforeEach(() => {

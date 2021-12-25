@@ -12,6 +12,14 @@ import Playboard from '../../pages/playboard';
 
 // jest.mock('axios')
 
+Object.defineProperty(global.window.HTMLMediaElement.prototype, 'play', {
+	configurable: true,
+	// Define the property getter
+	get() {
+		setTimeout(() => (this.onloadeddata && this.onloadeddata()))
+		return () => { }
+	}
+})
 
 describe("_ TetrisV2 Testing ...", () => {
 	const useDispatchMock = jest.spyOn(reactRedux, "useDispatch");
