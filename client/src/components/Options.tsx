@@ -16,12 +16,13 @@ import "../pages/playboard.css"
 import { UPDATE_GAME_MODE, UPDATE_ROOM_SIZE } from "../app/actions"
 // Selectors
 import { isAdmin as ifAdmin } from "../reducers/player.reducer"
-import { getGameMode } from "../reducers/game.reducer";
+import { getGameMode, isGameStarted } from "../reducers/game.reducer";
 
 
 const Options: React.FC = () => {
 	const dispatch = useAppDispatch()
 	const gameMode = useAppSelector<string>(getGameMode)
+	const gameStarted = useAppSelector<boolean>(isGameStarted)
 	const isAdminS = useAppSelector<boolean>(ifAdmin)
 	const [soundOn, toggleSound] = useState<boolean>(true)
 	const [isLocked, toggleLock] = useState<boolean>(gameMode === "solo" ? true : false)
@@ -48,7 +49,7 @@ const Options: React.FC = () => {
 				</button>
 				<i className="text-sm ">: {soundOn ? "Sound On" : "Sound Off"}</i>
 			</p>
-			{isAdminS ? (
+			{isAdminS && !gameStarted ? (
 				<p>
 					<button
 						className="inline-flex items-center justify-center w-9 h-9 m-1 text-indigo-100 transition-colors duration-150 rounded-lg focus:shadow-outline bg-yellow-300 hover:bg-yellow-500"
@@ -61,7 +62,7 @@ const Options: React.FC = () => {
 				</p>) : null}
 
 
-			{isAdminS ? (<div className="flex flex-row">
+			{isAdminS && !gameStarted ? (<div className="flex flex-row">
 				<div className=" flex flex-row  ml-1 mt-1 h-8 w-20 rounded-lg  relative align-middle">
 					<button
 						className="
