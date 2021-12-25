@@ -56,6 +56,7 @@ export const usePlayer = () => {
 	};
 	const resetPlayer = React.useCallback(
 		(tetro: keyof typeof TETROMINOS): void => {
+			// reset tetro position to center
 			return setPlayer({
 				pos: { x: STAGE_WIDTH / 2 - 2, y: 0 },
 				tetromino: TETROMINOS[tetro].shape,

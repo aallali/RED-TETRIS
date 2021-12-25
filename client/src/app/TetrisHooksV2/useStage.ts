@@ -1,18 +1,19 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+// constants
 import { createStage } from '../../helpers/gameHelpers';
 import { TETROMINOS } from '../../helpers/tetrominos';
-// Types
+// Hooks
 import type { PLAYER } from './usePlayer';
-
+// Types
 export type STAGECELL = [string | number, string];
 export type STAGE = STAGECELL[][];
 
 export const useStage = (player: PLAYER, resetPlayer: (a: keyof typeof TETROMINOS) => void, tetro: keyof typeof TETROMINOS) => {
-	const [stage, setStage] = React.useState(createStage());
-	const [rowsCleared, setRowsCleared] = React.useState(0);
-	React.useEffect(() => {
+	const [stage, setStage] = useState(createStage());
+	const [rowsCleared, setRowsCleared] = useState(0);
+	useEffect(() => {
 		if (!player.pos) return;
 
 		setRowsCleared(0);
@@ -36,17 +37,14 @@ export const useStage = (player: PLAYER, resetPlayer: (a: keyof typeof TETROMINO
 			setRowsCleared(rowsCl);
 			return nstageCleared
 		};
-
 		const updateStage = (prevStage: STAGE): STAGE => {
 			// First flush the stage
 			// If it says "clear" but don't have a 0 it means that it's the players move and should be cleared
 			const newStage = prevStage.map(
 				row => row.map(cell => (cell[1] === 'clear' ? [0, 'clear'] : cell)) as STAGECELL[]
 			);
-
 			// Then draw the tetromino
 			try {
-
 				player.tetromino.forEach((row, y) => {
 					row.forEach((value, x) => {
 						if (value !== 0) {
@@ -65,16 +63,12 @@ export const useStage = (player: PLAYER, resetPlayer: (a: keyof typeof TETROMINO
 				console.log(player.pos)
 				throw error
 			}
-
-
 			if (player.collided) {
 				resetPlayer(tetro);
 				return sweepRows(newStage);
 			}
-
 			return newStage;
 		};
-
 		setStage(prev => updateStage(prev));
 	}, [player.collided, player.pos?.x, player.pos?.y, player.tetromino, tetro]);
 
