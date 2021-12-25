@@ -62,8 +62,7 @@ class App {
 			res.send(this.gameIns.topranked.map(l => l.join(",")).join("\n"))
 		});
 	}
-	private initSocketEvents() {
-	}
+
 	public listen() {
 		console.clear()
 		this.http.listen(this.port, () =>
