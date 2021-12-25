@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 // Hooks, Staters
+import { useEffect, useState } from "react";
 import { useAppSelector } from "../app/hooks";
 // Stylesheets
 import "./playboard.css"
@@ -20,10 +21,26 @@ import { isLost } from "../reducers/player.reducer"
 import { isGameOver } from "../reducers/game.reducer"
 import YoutubeEmbed from "../components/YoutubeBox";
 
+// Sound Effects
+import lostAudioUrl from "../assets/audio/game-over-sound-effect.mp3";
+import wonAudioUrl from "../assets/audio/victory-sound-effect.mp3";
+
 export default function Playboard() {
 
 	const isLostS = useAppSelector<boolean>(isLost)
 	const isGameOverS = useAppSelector<boolean>(isGameOver)
+	const [lostAudio] = useState(new Audio(lostAudioUrl));
+	const [wonAudio] = useState(new Audio(wonAudioUrl));
+
+	useEffect(() => {
+		if (isGameOverS || isLostS) {
+			if (isLostS) {
+				lostAudio.play()
+			} else  {
+				wonAudio.play()
+			}
+		}
+	}, [isLost, isGameOverS])
 	return (
 		// Start of left side of the lobby page
 		<div className="min-h-screen flex justify-center items-center shadow-xl">
