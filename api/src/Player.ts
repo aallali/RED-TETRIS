@@ -41,11 +41,8 @@ export default class Player {
 			this.lost = true
 			resolve(this.lost)
 		})
-
 	}
 	IS_LOST() {
 		return this.lost
 	}
-
-
 }
