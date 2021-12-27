@@ -4,22 +4,8 @@ import * as cors from "cors"
 import { Socket } from "socket.io";
 import Game from "./Game"
 
-import ROOM from "./Room"
-import PLAYER from "./Player"
-import { ROOM_MODE } from "./types"
+// const log = console.log
 
-
-const log = console.log
-interface IPlayer {
-	id: string;
-	nickname: string;
-}
-interface IRoom {
-	id: string;
-	name: string;
-	players: []
-	admin: IPlayer
-}
 class App {
 
 	public app: express.Application;
@@ -27,6 +13,7 @@ class App {
 	public io: Socket
 	private port: number = 4242
 	private gameIns: Game
+
 	constructor() {
 		this.app = express();
 		this.app.use(
@@ -44,19 +31,28 @@ class App {
 		});
 		this.routes()
 		this.gameIns = new Game(this.io)
-
 	}
 	/**
-	 * 
+	 * initiat the routes of our backend app
 	 */
 	private routes() {
+		/**
+		 * get list of all players inst.
+		 */
 		this.app.get("/", (req: any, res: any) => {
 			res.send(Array.from(this.gameIns.players))
 		});
+
+		/**
+		 * get list of all rooms available (non started) in the server
+		 */
 		this.app.get("/rooms", (req: any, res: any) => {
 			res.send(this.gameIns.GET_ROOMS())
 		});
 
+		/**
+		 * get list of top 6 players [name,level] ... (stringified mode, needs to be parsed in the front)
+		 */
 		this.app.get("/top", (req: any, res: any) => {
 			res.send(this.gameIns.topranked.map(l => l.join(",")).join("\n"))
 		});
