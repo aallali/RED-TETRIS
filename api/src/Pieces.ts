@@ -5,6 +5,7 @@ class Pieces {
 		if (pieces)
 			this.pieces = pieces
 	}
+	
 	getRandomTetros = (lngth: number) => {
 		let result = '';
 		const characters = this.pieces.join('');
