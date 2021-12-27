@@ -43,7 +43,6 @@ class App {
 			},
 		});
 		this.routes()
-		this.initSocketEvents()
 		this.gameIns = new Game(this.io)
 
 	}
