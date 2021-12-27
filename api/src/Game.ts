@@ -2,10 +2,11 @@
 import PLAYER from "./Player"
 import ROOM from "./Room"
 import { Socket } from "socket.io"
-const fs = require("fs")
-import { IPlayer, ROOM_MODE } from "./types"
 import Pieces from "./Pieces"
+const fs = require("fs")
+
 const tetrosInst = new Pieces(undefined)
+
 export default class Game {
 	public rooms = new Map()
 	public players = new Map()
