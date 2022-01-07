@@ -7,7 +7,10 @@ export interface Ichat {
 
 }
 const initialState: { msgs: Ichat[] } = {
-	msgs: [{ from: "Team (automated)", msg: "Hi 👋! welcome to RED-TETRIS game, 1️⃣ first of all i wish you enjoy the game, 2️⃣ second and lets make it short, you can only write a message under 100 character,when u receive a message, the chatbox icon start an alert animation 🚩 until you open the chatbox, if you notice something to fix feel free to notify me, 3️⃣ third... play 🎮 && have fun  😄" }, { from: "Team (automated)", msg: `Regards ! Abdellah Allali (hi@allali.me)` }]
+	msgs: [
+		{ from: "Team (automated)", msg: "Hi 👋! welcome to RED-TETRIS game, 1️⃣ first of all i wish you enjoy the game, 2️⃣ second and lets make it short, you can only write a message under 100 character,when u receive a message, the chatbox icon start an alert animation 🚩 until you open the chatbox, if you notice something to fix feel free to notify me, 3️⃣ third... play 🎮 && have fun  😄" }, 
+		{ from: "Team (automated)", msg: "use ARROWS  to move the piece ←↑↓→ , and SPACE bar to verticaly drop the piece"},
+		{ from: "Team (automated)", msg: `Regards ! Abdellah Allali (hi@allali.me)` }]
 };
 
 export const chatSlice = createSlice({
