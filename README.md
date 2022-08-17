@@ -7,6 +7,7 @@ The objective of this project is to develop a networked multiplayer tetrisgame f
 - ExpressJs
 - Socket.IO
 - Jest `for testing`
+
 written in Typescript using OOP in core code of backend
 
 #### Incomming ...
