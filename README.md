@@ -12,7 +12,7 @@ written in Typescript using OOP in core code of backend
 
 #### Incomming ...
 the game will be deployed soon to be disponible online:
-[https://allali.me/redtetris/](https://allali.me/redtetris/)
+[https://allali.me/redtetris/](https://allali.me/redtetris/) (backend offline)
 ## Screen Shots of the game :
 #### Tests written :
 ![_yarn_test](./docs/_yarn_test.png)
